@@ -1,0 +1,6 @@
+host=node1
+protocol=http
+user=admin
+pass=admin
+ml-config=ml-config
+

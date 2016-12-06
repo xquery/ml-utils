@@ -1,0 +1,3 @@
+repository='https://github.com/orbitcowboy/gnuplot-cpp.git'
+module=''
+tag=''

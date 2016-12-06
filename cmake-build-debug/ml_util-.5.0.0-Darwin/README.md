@@ -12,15 +12,6 @@ ml-gradle look alike
 
 retrieve history metrics from cluster/server
 
-```
-./ml-hist -f json -s "2015-03-21T17:38:00" -e "2017-03-21T17:38:00" -o ~/test.jpg -g /Volumes/ml/1_marklogic/projects/ml-util/cmake-build-debug/etc/text.gnuplot
-
-```
-./ml-hist -f json -r forests -m active-fragment-count -o test.txt
-```
-
-to use graphing capabilities install gnuplot (ex. yum install gnuplot)
-
 ## ml-stat
 
 retrieve resource statuses
@@ -38,10 +29,6 @@ ml-js -j 'Date()' -d Documents
 ```
 
 ```
-echo "xdmp.random()" | ./ml-js
-```
-
-```
 ml-js < test.js
 ```
 
@@ -51,10 +38,6 @@ evaluate xquery
 
 ```
 ml-xq -x 'xdmp:random()' -d Documents
-```
-
-```
-echo "1+1" | ./ml-xq
 ```
 
 ```

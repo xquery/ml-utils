@@ -1,0 +1,9 @@
+<xdbc-server-properties xmlns="http://marklogic.com/manage">
+  <server-name>%%NAME%%-xdbc</server-name>
+  <group-name>%%GROUP%%</group-name>
+  <server-type>xdbc</server-type>
+  <root>/</root>
+  <port>%%XDBC_PORT%%</port>
+  <content-database>%%DATABASE%%</content-database>
+  <modules-database>%%MODULES_DATABASE%%</modules-database>
+</xdbc-server-properties>
