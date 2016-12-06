@@ -2,7 +2,7 @@
 
 Small collection of home grown command line tools for working with MarkLogic.
 
-All tools look in your home directory for .ml-utils dotfile for MarkLogic connection details (or supply path with -c option).
+All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
 ## ml-config
 
