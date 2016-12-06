@@ -4,7 +4,7 @@ Command line tools for MarkLogic.
 
 All tools look in home directory for .ml-utils dotfile for MarkLogic connection details.
 
-## ml-configure
+## ml-config
 
 ml-gradle look alike
 
@@ -19,9 +19,9 @@ retrieve history metrics from cluster/server
 ./ml-hist -f json -r forests -m active-fragment-count -o test.txt
 ```
 
-to use graphing capabilities install gnuplot (ex. yum install gnuplot)
+to use graphing capabilities install gnuplot (ex. yum install gnuplot).
 
-## ml-stat
+## ml-status
 
 retrieve resource statuses
 
