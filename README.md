@@ -3,9 +3,9 @@
 Small collection of home grown command line tools for working with MarkLogic.
 
 * ml-config: mutate server configuration
-* ml-hist: retrieve resource metrics
-* ml-status: retrieve resource status
 * ml-log: retrieve server logs
+* ml-hist: retrieve resource metrics (requires gnuplot for graphing)
+* ml-status: retrieve resource status
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
 
@@ -92,19 +92,20 @@ ml-hist [options]
 
 generate jpg graph
 ```
-./ml-hist -f json -r forests -m active-fragment-count -o test.jpg
+>./ml-hist -f json -r forests -m active-fragment-count -o test.jpg
 ```
 
 generate text graph without any data output (-q option)
 ```
-./ml-hist -f json -r forests -m active-fragment-count -o test.txt -q
+>./ml-hist -f json -r forests -m active-fragment-count -o test.txt -q
 ```
 
+use custom gnuplot
 ```
-./ml-hist -f json -s "2015-03-21T17:38:00" -e "2017-03-21T17:38:00" -o ~/test.jpg -g /Volumes/ml/1_marklogic/projects/ml-util/cmake-build-debug/etc/text.gnuplot
+>  ./ml-hist -f json -s "2015-03-21T17:38:00" -e "2017-03-21T17:38:00" -o ~/test.jpg -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
 ```
 
-to use graphing capabilities install gnuplot (ex. yum install gnuplot).
+__NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
 
 ### ml-status
 

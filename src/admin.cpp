@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <map>
 
-#include "configure.hpp"
+#include "admin.hpp"
 
 Admin::Admin() {
 };

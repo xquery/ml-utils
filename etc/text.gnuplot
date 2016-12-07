@@ -1,6 +1,5 @@
+set terminal 'dumb'
+set xdata time
 set grid
-set terminal dumb
-set output /Volumes/ml/1_marklogic/projects/ml-util/cmake-build-debug/build/test.txt
-
-
-
+set timefmt '%Y-%m-%dT%H:%M:%S'
+set timefmt '%Y-%m-%dT%H:%M:%S'
