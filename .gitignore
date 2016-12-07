@@ -39,4 +39,4 @@ CTestTestfile.cmake
 .DS_Store
 Testing
 cmake-build-debug
-.idea/workspace.xml
+.idea
