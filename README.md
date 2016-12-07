@@ -4,6 +4,12 @@ Small collection of home grown command line tools for working with MarkLogic.
 
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
+## Setup
+
+1) Copy .ml-utils-example to ~/.ml-utils
+
+2) edit ~/.ml-utils with your connection details
+
 ## ml-config
 
 ml-gradle look alike
@@ -12,11 +18,11 @@ ml-gradle look alike
 
 retrieve history metrics from cluster/server
 
-
 ```
 >./ml-hist -h
 
-ml-hist resources/{resource-name} [options] - get MarkLogic history metrics
+ml-hist [options]
+    -r    : resources/{resource-name}
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
     -p    : period (raw|hour|day)
@@ -24,7 +30,7 @@ ml-hist resources/{resource-name} [options] - get MarkLogic history metrics
     -e    : end date (ex. 2015-03-22T17:58:00)
     -m    : meter (resource specific)
     -r    : resource (databases|forests|servers|hosts) / resource-name
-    -o    : graph output
+    -o    : graph output destination
     -g    : custom gnuplot script
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
@@ -53,9 +59,60 @@ retrieve resource statuses
 ```
 > ./ml-status -h
 
-ml-status Resources/resource [options] - return resource status
+ml-status [options] 
+    -r    : resources/{resource-name}
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
+    -v    : verbose (show http call)
+    -q    : quiet (suppress banner)
+
+```
+
+cluster status
+```
+> ./ml-status  -c etc/.ml-utils -f json 
+```
+
+all forest status
+```
+> ./ml-status -r forests -c etc/.ml-utils -f json 
+```
+
+forest status
+```
+> ./ml-status -r forests/Documents -c etc/.ml-utils -f json 
+```
+
+database status
+```
+> ./ml-status -r databases/Documents -c etc/.ml-utils -f json 
+```
+
+all server status
+```
+> ./ml-status -r servers -c etc/.ml-utils -f json 
+```
+
+all host status
+```
+> ./ml-status -r hosts -c etc/.ml-utils -f json 
+```
+
+```
+> ./ml-status -r groups/Default -c etc/.ml-utils -f json 
+```
+
+## ml-log
+
+retrieve MarkLogic logs
+
+```
+> ./ml-log -h
+
+ml-log [options]
+    -c    : config file (ex. /home/jfuller/.ml-utils)
+    -f    : format (xml|json)
+    -d    : database
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
 
@@ -68,7 +125,7 @@ load data into MarkLogic
 ```
 > ./ml-load -h
 
-ml-load [options] - insert into database
+ml-load [options] - insert data into database
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
     -d    : database
@@ -92,16 +149,24 @@ ml-js database [options] - query database
     -q    : quiet (suppress banner)
 ```
 
+simple example
 ```
-ml-js -j 'Date()' -d Documents
-```
-
-```
-echo "xdmp.random()" | ./ml-js
+> ./ml-js -j 'xdmp.random()'
 ```
 
+apply against database
 ```
-ml-js < test.js
+> ./ml-js -c etc/.ml-utils -j 1+1 -d Documents
+```
+
+pipe in 
+```
+> echo "1+1" | ./ml-js
+```
+
+evaluate file
+```
+> ./ml-js < text.js
 ```
 
 ## ml-xq
@@ -120,14 +185,22 @@ ml-xq database [options] - query database
 
 ```
 
+simple example
 ```
-ml-xq -x 'xdmp:random()' -d Documents
-```
-
-```
-echo "1+1" | ./ml-xq
+> ./ml-xq -x 'xdmp:random()'
 ```
 
+apply against database
 ```
-ml-xq < text.xq
+> ./ml-xq -c etc/.ml-utils -x 1+1 -d Documents
+```
+
+pipe in 
+```
+> echo "1+1" | ./ml-xq
+```
+
+evaluate file
+```
+> ./ml-xq < text.xq
 ```

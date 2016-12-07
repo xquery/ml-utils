@@ -15,29 +15,6 @@ Load::Load(){//std::cout << "load constructor called\n";
 Load::~Load(){//std::cout << "load destructor called\n";
 };
 
-int Load::usage(const char *progname)
-{
-  const char *name = progname;
-  while(*progname != 0) {
-    if(*progname == '/' || *progname == '\\') {
-      ++progname;
-      name = progname;
-    } else {
-      ++progname;
-    }
-  }
-
-  cerr << "" << name << " [options] - insert into database" << endl;
-  cerr << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-  cerr << "    -f    : format (xml|json)" << endl;
-  cerr << "    -d    : database " << endl;
-  cerr << "    -v    : verbose (show http call)" << endl;
-  cerr << "    -q    : quiet (suppress banner)" << endl;
-  
-  return EXIT_SUCCESS;
-}
-
-
 CommandLineArgs Load::options(int n_opts,char *opts[])
 {
   CommandLineArgs args;
@@ -75,4 +52,28 @@ CommandLineArgs Load::options(int n_opts,char *opts[])
     }
     args.check(opts[0]);
     return args;
+}
+
+int Load::usage(const char *progname)
+{
+    const char *name = progname;
+    while(*progname != 0) {
+        if(*progname == '/' || *progname == '\\') {
+            ++progname;
+            name = progname;
+        } else {
+            ++progname;
+        }
+    }
+
+    cout << "ml-utils: ml-load 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
+    cout << "load data" << endl;
+    cout << ">" << name << " [options] " << endl;
+    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
+    cout << "    -f    : format (xml|json)" << endl;
+    cout << "    -d    : database " << endl;
+    cout << "    -v    : verbose (show http call)" << endl;
+    cout << "    -q    : quiet (suppress banner)" << endl;
+
+    return EXIT_SUCCESS;
 }

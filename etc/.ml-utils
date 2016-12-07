@@ -1,6 +1,9 @@
+# MarkLogic connection details
 host=node1
 protocol=http
 user=admin
 pass=admin
+
+# ml-config properties location
 ml-config=ml-config
 

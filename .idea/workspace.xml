@@ -60,7 +60,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f297601-a739-4c15-b034-757a66d177e0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/.ml-utils" afterPath="$PROJECT_DIR$/etc/.ml-utils" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/command.hpp" afterPath="$PROJECT_DIR$/src/command.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.hpp" afterPath="$PROJECT_DIR$/src/config.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/configure.cpp" afterPath="$PROJECT_DIR$/src/configure.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/history.cpp" afterPath="$PROJECT_DIR$/src/history.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/load.cpp" afterPath="$PROJECT_DIR$/src/load.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log.cpp" afterPath="$PROJECT_DIR$/src/log.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlhistory/main.cpp" afterPath="$PROJECT_DIR$/src/mlhistory/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mljs/main.cpp" afterPath="$PROJECT_DIR$/src/mljs/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlload/main.cpp" afterPath="$PROJECT_DIR$/src/mlload/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlstatus/main.cpp" afterPath="$PROJECT_DIR$/src/mlstatus/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/query.cpp" afterPath="$PROJECT_DIR$/src/query.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/status.cpp" afterPath="$PROJECT_DIR$/src/status.cpp" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,13 +93,16 @@
     <favorites_list name="ml-util" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-              <folding />
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="353">
+                <caret line="205" column="3" lean-forward="true" selection-start-line="205" selection-start-column="3" selection-end-line="205" selection-end-column="3" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -116,6 +135,7 @@
       <find>cout</find>
       <find>test1</find>
       <find>quiet</find>
+      <find>install</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -140,30 +160,31 @@
         <option value="$PROJECT_DIR$/test/unit_test_log.cpp" />
         <option value="$PROJECT_DIR$/src/mllog/main.cpp" />
         <option value="$PROJECT_DIR$/cmake-build-debug/build/.ml-utils" />
-        <option value="$PROJECT_DIR$/src/config.hpp" />
-        <option value="$PROJECT_DIR$/src/configure.cpp" />
-        <option value="$PROJECT_DIR$/src/load.cpp" />
-        <option value="$PROJECT_DIR$/src/query.cpp" />
-        <option value="$PROJECT_DIR$/src/status.cpp" />
         <option value="$PROJECT_DIR$/etc/xquery_example.xq" />
         <option value="$PROJECT_DIR$/etc/js_example.js" />
         <option value="$PROJECT_DIR$/src/mlxq/main.cpp" />
         <option value="$PROJECT_DIR$/test/unit_test_history.cpp" />
         <option value="$PROJECT_DIR$/VERSION" />
         <option value="$PROJECT_DIR$/RELEASE" />
-        <option value="$PROJECT_DIR$/src/log.cpp" />
-        <option value="$PROJECT_DIR$/src/mlload/main.cpp" />
-        <option value="$PROJECT_DIR$/src/mljs/main.cpp" />
         <option value="$PROJECT_DIR$/src/mlconfigure/main.cpp" />
         <option value="$PROJECT_DIR$/etc/text1.gnuplot" />
         <option value="$PROJECT_DIR$/etc/text.gnuplot" />
         <option value="$PROJECT_DIR$/etc/basic.gnuplot" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/history.cpp" />
-        <option value="$PROJECT_DIR$/etc/.ml-utils" />
-        <option value="$PROJECT_DIR$/src/command.hpp" />
-        <option value="$PROJECT_DIR$/src/mlhistory/main.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/etc/.ml-utils" />
+        <option value="$PROJECT_DIR$/src/config.hpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/mljs/main.cpp" />
+        <option value="$PROJECT_DIR$/src/mlload/main.cpp" />
+        <option value="$PROJECT_DIR$/src/mlhistory/main.cpp" />
+        <option value="$PROJECT_DIR$/src/history.cpp" />
+        <option value="$PROJECT_DIR$/src/configure.cpp" />
+        <option value="$PROJECT_DIR$/src/load.cpp" />
+        <option value="$PROJECT_DIR$/src/log.cpp" />
+        <option value="$PROJECT_DIR$/src/status.cpp" />
+        <option value="$PROJECT_DIR$/src/query.cpp" />
+        <option value="$PROJECT_DIR$/src/mlstatus/main.cpp" />
+        <option value="$PROJECT_DIR$/src/command.hpp" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -217,7 +238,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cmake-build-debug" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -231,11 +252,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cmake-build-debug" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
+              <option name="myItemId" value="mlstatus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ml-utils" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ml-utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mlhistory" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ml-utils" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ml-utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mlconfigure" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -260,7 +317,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Google Test.allTests">
+  <component name="RunManager" selected="Application.ml-status">
     <configuration default="false" name="allTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" WORKING_DIR="file://$PROJECT_DIR$/test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="runTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="runTests" TEST_MODE="PATTERN">
       <envs />
       <method />
@@ -440,7 +497,7 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="ml-js" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils -j 1+1" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-js" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-js">
+    <configuration default="false" name="ml-js" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils -j 1+1 -d Documents" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-js" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-js">
       <envs />
       <method />
     </configuration>
@@ -448,23 +505,15 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="ml-status" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-status" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-status">
+    <configuration default="false" name="ml-status" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-r servers -c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils -f json " WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-status" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-status">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="ml-xq" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils -x 1+1;" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-xq" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-xq">
+    <configuration default="false" name="ml-xq" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils -x 1+1; -d Documents" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-xq" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-xq">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="ml-admin" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-admin" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-admin">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="install_ml_util" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="install_ml_util" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="ml-log" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-log" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-log">
+    <configuration default="false" name="ml-log" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h -c /Volumes/ml/1_marklogic/projects/ml-util/etc/.ml-utils" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ml_util" TARGET_NAME="ml-log" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ml_util" RUN_TARGET_NAME="ml-log">
       <envs />
       <method />
     </configuration>
@@ -480,20 +529,18 @@
       <envs />
       <method />
     </configuration>
-    <list size="13">
+    <list size="11">
       <item index="0" class="java.lang.String" itemvalue="Application.check" />
       <item index="1" class="java.lang.String" itemvalue="Application.runTests" />
       <item index="2" class="java.lang.String" itemvalue="Application.ml-js" />
       <item index="3" class="java.lang.String" itemvalue="Application.ml-load" />
       <item index="4" class="java.lang.String" itemvalue="Application.ml-status" />
       <item index="5" class="java.lang.String" itemvalue="Application.ml-xq" />
-      <item index="6" class="java.lang.String" itemvalue="Application.ml-admin" />
-      <item index="7" class="java.lang.String" itemvalue="Application.install_ml_util" />
-      <item index="8" class="java.lang.String" itemvalue="Application.ml-log" />
-      <item index="9" class="java.lang.String" itemvalue="Application.ml-config" />
-      <item index="10" class="java.lang.String" itemvalue="Application.ml-hist" />
-      <item index="11" class="java.lang.String" itemvalue="Application.Build All" />
-      <item index="12" class="java.lang.String" itemvalue="Google Test.allTests" />
+      <item index="6" class="java.lang.String" itemvalue="Application.ml-log" />
+      <item index="7" class="java.lang.String" itemvalue="Application.ml-config" />
+      <item index="8" class="java.lang.String" itemvalue="Application.ml-hist" />
+      <item index="9" class="java.lang.String" itemvalue="Application.Build All" />
+      <item index="10" class="java.lang.String" itemvalue="Google Test.allTests" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -519,7 +566,8 @@
       <workItem from="1480868357236" duration="1082000" />
       <workItem from="1480885339847" duration="17710000" />
       <workItem from="1480962069663" duration="11831000" />
-      <workItem from="1481025573422" duration="298000" />
+      <workItem from="1481025573422" duration="1869000" />
+      <workItem from="1481092418158" duration="3056000" />
     </task>
     <servers />
   </component>
@@ -556,19 +604,20 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48202000" />
+    <option name="totallyTimeSpent" value="52829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="29" width="1379" height="782" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29381442" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.075846836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37048194" sideWeight="0.48821798" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32680723" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32680723" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37048194" sideWeight="0.51178205" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32831326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52259034" sideWeight="0.83505154" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30120483" sideWeight="0.83505154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37349397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -578,7 +627,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32831326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -610,13 +658,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/command.hpp</url>
-          <line>168</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -625,27 +666,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/alert-project/src/main/ml-config/cpf/domains/sample-domain.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/cpf-project/src/test/java/sample/CpfTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/ssl-project/src/main/ml-config/security/certificate-templates/template-1.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -698,39 +718,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/configure.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="76" column="2" lean-forward="false" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.ml-utils" />
     <entry file="file://$PROJECT_DIR$/etc/js_example.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mlxq/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/query.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="61" column="1" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -748,20 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/status.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/status.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-301">
-          <caret line="37" column="1" lean-forward="true" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/unit_test_history.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -770,57 +748,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cmake_install.cmake" />
-    <entry file="file://$PROJECT_DIR$/src/log.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/log.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/load.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="31" column="29" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mljs/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="22" column="26" lean-forward="false" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mllog/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="39" column="16" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mlstatus/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mlload/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/etc/plot.gnu">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -839,13 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mlconfigure/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="25" column="56" lean-forward="false" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -878,27 +798,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/rapidjson-src/include/rapidjson/document.h" />
-    <entry file="file://$PROJECT_DIR$/src/mlhistory/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="35" column="25" lean-forward="false" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DownloadProject.CMakeLists.cmake.in">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,51 +813,202 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/command.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="181" column="44" lean-forward="false" selection-start-line="181" selection-start-column="44" selection-end-line="181" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/etc/basic.gnuplot">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/host.png" />
+    <entry file="file://$PROJECT_DIR$/etc/.ml-utils">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="10" lean-forward="false" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install_manifest_applications.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/status.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mlconfigure/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mljs/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="21" column="6" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mlload/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mllog/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mlxq/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="26" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mlhistory/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/history.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+        <state relative-caret-position="73">
+          <caret line="97" column="30" lean-forward="false" selection-start-line="97" selection-start-column="30" selection-end-line="97" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etc/.ml-utils">
+    <entry file="file://$PROJECT_DIR$/src/configure.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/load.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="70" column="39" lean-forward="false" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/load.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/log.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/query.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/status.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="74" column="57" lean-forward="false" selection-start-line="74" selection-start-column="57" selection-end-line="74" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mlstatus/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/command.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="350" column="17" lean-forward="false" selection-start-line="350" selection-start-column="17" selection-end-line="350" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="133" column="23" lean-forward="true" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="353">
+            <caret line="205" column="3" lean-forward="true" selection-start-line="205" selection-start-column="3" selection-end-line="205" selection-end-column="3" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -20,33 +20,6 @@ History::~History(){
   //std::cout << "history destructor called\n";
 };
 
-int History::usage(const char *progname)
- {
-  const char *name = progname;
-  while(*progname != 0) {
-    if(*progname == '/' || *progname == '\\') {
-      ++progname;
-      name = progname;
-    } else {
-      ++progname;
-    }
-  }
-
-  cerr << "" << name << " resources/{resource-name} [options] - get MarkLogic history metrics" << endl;
-  cerr << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-  cerr << "    -f    : format (xml|json)" << endl;
-  cerr << "    -p    : period (raw|hour|day)" << endl;
-  cerr << "    -s    : start date (ex. 2015-03-21T17:38:00)" << endl;
-  cerr << "    -e    : end date (ex. 2015-03-22T17:58:00)" << endl;
-  cerr << "    -m    : meter (resource specific)" << endl;
-  cerr << "    -r    : resource (databases|forests|servers|hosts) / resource-name" << endl;
-  cerr << "    -o    : graph output" << endl;
-  cerr << "    -g    : custom gnuplot script" << endl;
-  cerr << "    -v    : verbose (show http call)" << endl;
-  cerr << "    -q    : quiet (suppress banner)" << endl;
-  return EXIT_SUCCESS;
-}
-
 CommandLineArgs History::options(int n_opts,char *opts[])
 {
   CommandLineArgs args;
@@ -108,4 +81,33 @@ CommandLineArgs History::options(int n_opts,char *opts[])
     }
     args.check(opts[0]);
     return args;
+}
+
+int History::usage(const char *progname)
+{
+    const char *name = progname;
+    while(*progname != 0) {
+        if(*progname == '/' || *progname == '\\') {
+            ++progname;
+            name = progname;
+        } else {
+            ++progname;
+        }
+    }
+
+    cout << "ml-utils: ml-hist 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
+    cout << "retrieve MarkLogic history metrics" << endl;
+    cout << ">" << name << " resources/{resource-name} [options] " << endl;
+    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
+    cout << "    -f    : format (xml|json)" << endl;
+    cout << "    -p    : period (raw|hour|day)" << endl;
+    cout << "    -s    : start date (ex. 2015-03-21T17:38:00)" << endl;
+    cout << "    -e    : end date (ex. 2015-03-22T17:58:00)" << endl;
+    cout << "    -m    : meter (resource specific)" << endl;
+    cout << "    -r    : resource (databases|forests|servers|hosts) / resource-name" << endl;
+    cout << "    -o    : graph output" << endl;
+    cout << "    -g    : custom gnuplot script" << endl;
+    cout << "    -v    : verbose (show http call)" << endl;
+    cout << "    -q    : quiet (suppress banner)" << endl;
+    return EXIT_SUCCESS;
 }

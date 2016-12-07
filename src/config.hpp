@@ -47,10 +47,11 @@ void loadConfig(Config& config, string path) {
     std::string homepath = getenv("HOME");
     GetCurrentDir(pPath, sizeof(pPath));
     std::string currentpath = pPath;
-
     std::string mlutils;
 
-    if(is_file_exist(currentpath+"/.ml-utils")){
+    if(is_file_exist(path)) {
+        mlutils = (path).c_str();
+    }else if(is_file_exist(currentpath+"/.ml-utils")){
         mlutils = (currentpath + "/.ml-utils").c_str();
     }else if(is_file_exist(homepath+"/.ml-utils")){
         mlutils =(homepath + "/.ml-utils").c_str();

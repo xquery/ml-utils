@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
   CommandLineArgs current = status.getCurrentArgs();
   Config config = status.getConfig();
   
-  if(current.quiet == false){
+  if(!current.quiet){
     cout << "ml-utils: mlstatus 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
   }
     
@@ -35,6 +35,7 @@ int main(int argc, char* argv[]) {
     cout << "format: " << current.format <<endl;
     cout << "resource: " << current.resource <<endl;
     }
+
 
   status.setUrl("8002","/manage/v2",current.resource,"status");
 

@@ -87,10 +87,6 @@ int main(int argc, char* argv[]) {
   CommandLineArgs current = history.getCurrentArgs();
   Config config = history.getConfig();
 
-  if(current.quiet == false){
-    cout << "ml-utils: ml-hist 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
-  }
-    
   if(current.verbose){
     cout << "----------------" << endl;
     cout << "~/.ml-utils" << endl;
@@ -156,7 +152,7 @@ int main(int argc, char* argv[]) {
       }
   }
 
-  if(current.quiet == true) {
+  if(current.quiet) {
 
       if (strcmp(current.output, "csv") == 0) {
           Document doc;

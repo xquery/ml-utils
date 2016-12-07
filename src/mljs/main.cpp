@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   
   Config config = query.getConfig();
 
-  if(current.quiet == false){
+  if(!current.quiet){
     cout << "ml-utils: ml-js 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
   }
     

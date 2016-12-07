@@ -110,23 +110,25 @@ public:
                       string view){
 
     checkConfig();
-    if(view == "metrics"){
-      if(path.find("/") != string::npos){
+    if(view == "metrics") {
+      if (path.find("/") != string::npos) {
         string res1 = path.substr(0, path.find("/"));
-        url="http://"+config.host+":"+port+root+"/"+res1+"?";
-      }else{
-        url="http://"+config.host+":"+port+root+"/"+path+"?";
+        url = "http://" + config.host + ":" + port + root + "/" + res1 + "?";
+      } else {
+        url = "http://" + config.host + ":" + port + root + "/" + path + "?";
       }
+    }else if(view == "status"){
+        url = "http://" + config.host + ":" + port + root + "/" + path +"?";
     }else{
       url="http://"+config.host+":"+port+root+"/"+path+"?";
     }
        
-    if(view != ""){
+    if(!view.empty()){
       url += "view="+view;
     }
 
     string group = current.group;
-    if(group != ""){
+    if(!group.empty() && view != "status"){
       url += "&group-id="+group;
     }
     string format = current.format;
@@ -147,7 +149,7 @@ public:
     }
     
     string metric = current.metric;
-    if(!metric.empty()){
+    if(!metric.empty() && view == "metrics"){
       string resource = current.resource;
       string delimiter = "/";
       string res1 = resource.substr(0, resource.find("/"));
@@ -168,6 +170,7 @@ public:
         url += "&forest-metrics="+ metric;
         if(resource.find("/") != string::npos){
           url += "&forest="+ res2;}}}
+
   }
   
   virtual int execute(){

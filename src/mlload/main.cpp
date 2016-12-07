@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
   CommandLineArgs current = load.getCurrentArgs();
   Config config = load.getConfig();
   
-  if(current.quiet == false){
+  if(!current.quiet){
     cout << "ml-utils: ml-load 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
   }
     

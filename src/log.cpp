@@ -73,13 +73,15 @@ int Log::usage(const char *progname)
     }
   }
 
-  cerr << "" << name << " " << endl;
-  cerr << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-  cerr << "    -f    : format(xml | json)" << endl;
-  cerr << "    -s    : start" << endl;
-  cerr << "    -e    : end" << endl;
-  cerr << "    -r    : regex" << endl;
-  cerr << "    -v    : verbose (show http call)" << endl;
-  cerr << "    -q    : quiet (suppress banner)" << endl;
+  cout << "ml-utils: ml-log 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
+  cout << "retrieve logs" << endl;
+  cout << ">" << name << " " << endl;
+  cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
+  cout << "    -f    : format(xml | json)" << endl;
+  cout << "    -s    : start" << endl;
+  cout << "    -e    : end" << endl;
+  cout << "    -r    : regex" << endl;
+  cout << "    -v    : verbose (show http call)" << endl;
+  cout << "    -q    : quiet (suppress banner)" << endl;
   return EXIT_SUCCESS;
 }

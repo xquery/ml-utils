@@ -73,11 +73,14 @@ int Query::usage(const char *progname)
     }
   }
 
-  cerr << "" << name << " database [options] - query database" << endl;
-  cerr << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-  cerr << "    -f    : format (xml|json)" << endl;
-  cerr << "    -d    : database" << endl;
-  cerr << "    -v    : verbose (show http call)" << endl;
-  cerr << "    -q    : quiet (suppress banner)" << endl;
+  cout << "ml-utils: "<< name <<" 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
+  cout << "evaluate query" << endl;
+
+  cout << ">" << name << " database [options]" << endl;
+  cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
+  cout << "    -f    : format (xml|json)" << endl;
+  cout << "    -d    : database" << endl;
+  cout << "    -v    : verbose (show http call)" << endl;
+  cout << "    -q    : quiet (suppress banner)" << endl;
   return EXIT_SUCCESS;
 }
