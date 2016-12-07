@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <stdexcept>
 #include <map>
 
 #include "../query.cpp"
@@ -16,13 +15,7 @@ int main(int argc, char *argv[]) {
         Query query;
         query.setCurrentArgs(query.options(argc, argv));
         CommandLineArgs current = query.getCurrentArgs();
-
         Config config = query.getConfig();
-
-        if (!current.quiet) {
-            cout << "ml-utils: ml-js 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils"
-                 << endl;
-        }
 
         if (current.verbose) {
             cout << "----------------" << endl;

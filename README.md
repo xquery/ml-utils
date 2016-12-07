@@ -2,6 +2,8 @@
 
 Small collection of home grown command line tools for working with MarkLogic.
 
+__WARNING__- Use these utilities at your own risk, they are not supported in any way.
+
 ## Usage
 
 Download [release](https://github.com/xquery/ml-utils/releases) appropriate for your operating system and run the included install script.

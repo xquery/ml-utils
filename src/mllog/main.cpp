@@ -5,9 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <stdexcept>
 #include <map>
-#include <unistd.h>
 
 #include "../log.cpp"
 
@@ -19,13 +17,7 @@ int main(int argc, char *argv[]) {
         Log log;
         log.setCurrentArgs(log.options(argc, argv));
         CommandLineArgs current = log.getCurrentArgs();
-
         Config config = log.getConfig();
-
-        if (!current.quiet) {
-            cout << "ml-utils: ml-log 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils"
-                 << endl;
-        }
 
         if (current.verbose) {
             cout << "----------------" << endl;

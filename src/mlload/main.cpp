@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <stdexcept>
 #include <map>
 
 #include "../load.cpp"
@@ -17,11 +16,6 @@ int main(int argc, char *argv[]) {
         load.setCurrentArgs(load.options(argc, argv));
         CommandLineArgs current = load.getCurrentArgs();
         Config config = load.getConfig();
-
-        if (!current.quiet) {
-            cout << "ml-utils: ml-load 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils"
-                 << endl;
-        }
 
         if (current.verbose) {
             cout << "----------------" << endl;

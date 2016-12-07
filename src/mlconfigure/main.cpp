@@ -9,7 +9,7 @@
 #include <map>
 #include <unistd.h>
 
-#include "../configure.cpp"
+#include "../admin.cpp"
 
 using namespace std;
 
@@ -19,13 +19,7 @@ int main(int argc, char *argv[]) {
         Admin admin;
         admin.setCurrentArgs(admin.options(argc, argv));
         CommandLineArgs current = admin.getCurrentArgs();
-
         Config config = admin.getConfig();
-
-        if (!current.quiet) {
-            cout << "ml-utils: ml-config 1.0 | copyright (c)2016 Jim Fuller | see https://github.com/xquery/ml-utils"
-                 << endl;
-        }
 
         if (current.verbose) {
             cout << "----------------" << endl;
