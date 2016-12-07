@@ -6,6 +6,8 @@ Small collection of home grown command line tools for working with MarkLogic.
 
 ### Quick Start
 
+Download [release](release) appropriate for your operating system and run the included install script.
+
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
 1) Copy .ml-utils to ~/.ml-utils
