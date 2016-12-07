@@ -83,7 +83,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="150">
-                <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -154,7 +154,6 @@
         <option value="$PROJECT_DIR$/etc/text1.gnuplot" />
         <option value="$PROJECT_DIR$/etc/text.gnuplot" />
         <option value="$PROJECT_DIR$/etc/basic.gnuplot" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/etc/.ml-utils" />
         <option value="$PROJECT_DIR$/src/config.hpp" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
@@ -169,6 +168,7 @@
         <option value="$PROJECT_DIR$/src/query.cpp" />
         <option value="$PROJECT_DIR$/src/mlstatus/main.cpp" />
         <option value="$PROJECT_DIR$/src/command.hpp" />
+        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -551,7 +551,7 @@
       <workItem from="1480885339847" duration="17710000" />
       <workItem from="1480962069663" duration="11831000" />
       <workItem from="1481025573422" duration="1869000" />
-      <workItem from="1481092418158" duration="3768000" />
+      <workItem from="1481092418158" duration="3877000" />
     </task>
     <servers />
   </component>
@@ -588,7 +588,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53541000" />
+    <option name="totallyTimeSpent" value="53650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="29" width="1379" height="782" extended-state="0" />
@@ -804,13 +804,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="19" lean-forward="false" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/host.png" />
     <entry file="file://$PROJECT_DIR$/etc/.ml-utils">
       <provider selected="true" editor-type-id="text-editor">
@@ -979,6 +972,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -989,7 +990,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="150">
-            <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <caret line="10" column="41" lean-forward="false" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
             <folding />
           </first_editor>
           <second_editor />
