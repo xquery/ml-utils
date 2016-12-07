@@ -6,7 +6,7 @@ Small collection of home grown command line tools for working with MarkLogic.
 
 ### Quick Start
 
-Download [release](releases) appropriate for your operating system and run the included install script.
+Download [release](https://github.com/xquery/ml-utils/releases) appropriate for your operating system and run the included install script.
 
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
