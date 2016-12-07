@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with mlhistory" << endl;
+        cout << "Error with ml-xq" << endl;
     }
     return EXIT_SUCCESS;
 }

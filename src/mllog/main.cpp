@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with mlquery" << endl;
+        cout << "Error with ml-log" << endl;
     }
     return EXIT_SUCCESS;
 }

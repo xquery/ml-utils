@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with mlquery" << endl;
+        cout << "Error with ml-js" << endl;
     }
     return EXIT_SUCCESS;
 }

@@ -204,7 +204,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with mlhistory" << endl;
+        cout << "Error with ml-hist" << endl;
     }
     return EXIT_SUCCESS;
 }
