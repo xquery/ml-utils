@@ -2,6 +2,13 @@
 
 Small collection of home grown command line tools for working with MarkLogic.
 
+* ml-config: mutate server configuration
+* ml-hist: retrieve resource metrics
+* ml-status: retrieve resource status
+* ml-log: retrieve server logs
+* ml-xq: evaluate xquery
+* ml-js: evaluate javascript
+
 __WARNING__- Use these utilities at your own risk, they are not supported in any way.
 
 ## Usage
