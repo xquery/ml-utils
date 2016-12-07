@@ -19,9 +19,9 @@
 #include <gnuplot_i.hpp>
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__TOS_WIN__)
- #include <conio.h>   //for getch(), needed in wait_for_key()
- #include <windows.h> //for Sleep()
- void sleep(int i) { Sleep(i*1000); }
+#include <conio.h>   //for getch(), needed in wait_for_key()
+#include <windows.h> //for Sleep()
+void sleep(int i) { Sleep(i*1000); }
 #endif
 
 #define SLEEP_LGTH 2  // sleep time in seconds
@@ -30,7 +30,7 @@
 using namespace rapidjson;
 using namespace std;
 
-void doPlot(string output, string plot, string units, string name, string resource,const Value& entries){
+void doPlot(string output, string plot, string units, string name, string resource, const Value &entries) {
 
     Gnuplot::set_terminal_std("dumb");
     Gnuplot g1("points");
@@ -41,151 +41,151 @@ void doPlot(string output, string plot, string units, string name, string resour
     g1.cmd("set timefmt '%Y-%m-%dT%H:%M:%S'");
     g1.cmd("set xtics rotate");
 
-    vector <string> x;
-    vector <double> y;
-    string firstDT,lastDT;
-    for (SizeType i = 0; i < entries.Size(); i++){
-        const Value& entry = entries[i];
-        if(i==0){
-            firstDT=entry["dt"].GetString();
+    vector<string> x;
+    vector<double> y;
+    string firstDT, lastDT;
+    for (SizeType i = 0; i < entries.Size(); i++) {
+        const Value &entry = entries[i];
+        if (i == 0) {
+            firstDT = entry["dt"].GetString();
         }
-        if(i== entries.Size() - 1 ){
-            lastDT=entry["dt"].GetString();
+        if (i == entries.Size() - 1) {
+            lastDT = entry["dt"].GetString();
         }
         x.push_back(entry["dt"].GetString());
         y.push_back(entry["value"].GetDouble());
     }
-    g1.cmd("set xrange ['"+firstDT+"':'"+lastDT+"']");
-    g1.cmd("set title '" +resource + ":" + name + "'"  );
+    g1.cmd("set xrange ['" + firstDT + "':'" + lastDT + "']");
+    g1.cmd("set title '" + resource + ":" + name + "'");
 
-    if (plot.empty()){
+    if (plot.empty()) {
         // default gnuplot settings
-        if(output.find( string("jpg")) != std::string::npos){
+        if (output.find(string("jpg")) != std::string::npos) {
             g1.cmd("set terminal 'jpeg'");
-        }else if (output.find( string("jpeg")) != std::string::npos){
+        } else if (output.find(string("jpeg")) != std::string::npos) {
             g1.cmd("set terminal 'jpeg'");
-        }else if(output.find( string("png")) != std::string::npos){
+        } else if (output.find(string("png")) != std::string::npos) {
             g1.cmd("set terminal 'png'");
-        }else{
+        } else {
             g1.cmd("set terminal 'dumb'");
         }
-    }else{
+    } else {
         // load custom gnuplot
         g1.cmd(string("load '") + plot + "'");
     }
 
     g1.cmd("set output '" + output + "'");
 
-    g1.plot_xy(x,y);
+    g1.plot_xy(x, y);
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 
-  try{
-  History history;
-  history.setCurrentArgs(history.options(argc,argv));
-  CommandLineArgs current = history.getCurrentArgs();
-  Config config = history.getConfig();
+    try {
+        History history;
+        history.setCurrentArgs(history.options(argc, argv));
+        CommandLineArgs current = history.getCurrentArgs();
+        Config config = history.getConfig();
 
-  if(current.verbose){
-    cout << "----------------" << endl;
-    cout << "~/.ml-utils" << endl;
-    cout << "----------------" << endl;
-    cout << "config: " <<current.config << endl;
-    cout << "----------------" << endl;
-    cout << "user: " <<config.user << endl;
-    cout << "pass: " <<config.pass << endl;
-    cout << "host: " <<config.host << endl;
-    cout << "----------------" << endl;
-    cout << "options" << endl;
-    cout << "----------------" << endl;
-    cout << "format: " << current.format <<endl;
-    cout << "period: " << current.period <<endl;
-    cout << "start: " << current.start <<endl;
-    cout << "end: " << current.end <<endl;
-    cout << "metric: " << current.metric <<endl;
-    cout << "resource: " << current.resource <<endl;
-    cout << "output: " << current.output <<endl;
-    cout << "gnuplot: " << current.gnuplot <<endl;
+        if (current.verbose) {
+            cout << "----------------" << endl;
+            cout << "~/.ml-utils" << endl;
+            cout << "----------------" << endl;
+            cout << "config: " << current.config << endl;
+            cout << "----------------" << endl;
+            cout << "user: " << config.user << endl;
+            cout << "pass: " << config.pass << endl;
+            cout << "host: " << config.host << endl;
+            cout << "----------------" << endl;
+            cout << "options" << endl;
+            cout << "----------------" << endl;
+            cout << "format: " << current.format << endl;
+            cout << "period: " << current.period << endl;
+            cout << "start: " << current.start << endl;
+            cout << "end: " << current.end << endl;
+            cout << "metric: " << current.metric << endl;
+            cout << "resource: " << current.resource << endl;
+            cout << "output: " << current.output << endl;
+            cout << "gnuplot: " << current.gnuplot << endl;
+        }
+
+        history.setUrl("8002", "/manage/v2", current.resource, "metrics");
+
+        history.execute();
+
+        string result = history.getReadBuffer();
+
+        string graph_prefix = "graph";
+        string output = current.output;
+        string plot = string(current.gnuplot);
+        string resource = string(current.resource);
+
+        if (!plot.empty() || !output.empty()) {
+            Document doc;
+            doc.Parse(result.c_str());
+            string res, units, name;
+
+            if (resource.find(string("databases")) != std::string::npos) {
+                res = "database-metrics-list";
+                units = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
+                name = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["name"].GetString();
+                const Value &entries = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["summary"]["data"]["entry"];
+                doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+            } else if (resource.find(string("servers")) != std::string::npos) {
+                res = "server-metrics-list";
+                units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
+                name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
+                const Value &entries = doc[res.c_str()]["metrics-relations"]["server-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
+                doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+            } else if (resource.find(string("forests")) != std::string::npos) {
+                res = "forest-metrics-list";
+                units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
+                name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
+                const Value &entries = doc[res.c_str()]["metrics-relations"]["forest-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
+                doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+            } else if (resource.find(string("hosts")) != std::string::npos) {
+                res = "host-metrics-list";
+                units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
+                name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
+                const Value &entries = doc[res.c_str()]["metrics-relations"]["host-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
+                doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+            }
+        }
+
+        if (current.quiet) {
+
+            if (strcmp(current.output, "csv") == 0) {
+                Document doc;
+
+                doc.Parse(result.c_str());
+
+                string metricslist = "-metrics-list";
+                string res = current.resource + metricslist;
+
+                string units = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
+
+                string name = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["name"].GetString();
+
+                cout << "#mlhistory  " + name << endl;
+
+                const Value &entries = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["summary"]["data"]["entry"];
+                vector<string> x;
+                vector<double> y;
+                for (SizeType i = 0; i < entries.Size(); i++) {
+                    const Value &entry = entries[i];
+                    cout << entry["dt"].GetString() + string(",");
+                    cout << entry["value"].GetDouble() << endl;
+                }
+            } else if (strcmp(current.format, "json") == 0) {
+                cout << result << endl;
+            } else {
+                cout << result << endl;
+            }
+        }
+
+    } catch (std::bad_alloc) {
+        cout << "Error with mlhistory" << endl;
     }
-
-  history.setUrl("8002","/manage/v2",current.resource,"metrics");
-
-  history.execute();
-
-  string result = history.getReadBuffer();
-
-  string graph_prefix = "graph";
-  string output = current.output;
-  string plot = string(current.gnuplot);
-  string resource = string(current.resource);
-
-  if(!plot.empty() || !output.empty()) {
-      Document doc;
-      doc.Parse(result.c_str());
-      string res, units, name;
-
-      if (resource.find( string("databases")) != std::string::npos) {
-          res = "database-metrics-list";
-          units = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
-          name = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["name"].GetString();
-          const Value &entries = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["summary"]["data"]["entry"];
-          doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
-      } else if (resource.find( string("servers")) != std::string::npos) {
-          res = "server-metrics-list";
-          units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
-          name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
-          const Value &entries = doc[res.c_str()]["metrics-relations"]["server-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-          doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
-      } else if (resource.find( string("forests")) != std::string::npos) {
-          res = "forest-metrics-list";
-          units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
-          name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
-          const Value &entries = doc[res.c_str()]["metrics-relations"]["forest-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-          doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
-      } else if (resource.find( string("hosts")) != std::string::npos) {
-          res = "host-metrics-list";
-          units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
-          name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
-          const Value &entries = doc[res.c_str()]["metrics-relations"]["host-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-          doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
-      }
-  }
-
-  if(current.quiet) {
-
-      if (strcmp(current.output, "csv") == 0) {
-          Document doc;
-
-          doc.Parse(result.c_str());
-
-          string metricslist = "-metrics-list";
-          string res = current.resource + metricslist;
-
-          string units = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
-
-          string name = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["name"].GetString();
-
-          cout << "#mlhistory  " + name << endl;
-
-          const Value &entries = doc["database-metrics-list"]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["summary"]["data"]["entry"];
-          vector<string> x;
-          vector<double> y;
-          for (SizeType i = 0; i < entries.Size(); i++) {
-              const Value &entry = entries[i];
-              cout << entry["dt"].GetString() + string(",");
-              cout << entry["value"].GetDouble() << endl;
-          }
-      } else if (strcmp(current.format, "json") == 0) {
-          cout << result << endl;
-      } else {
-          cout << result << endl;
-      }
-  }
-  
-  }catch(std::bad_alloc){
-    cout << "Error with mlhistory" << endl;
-  }
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 

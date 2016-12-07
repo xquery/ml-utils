@@ -20,336 +20,335 @@
 
 #include "config.hpp"
 
-struct CommandLineArgs
-{
-  CommandLineArgs()
-    :config(""),
-     format(""),
-      period(""),
-      start(""),
-      end(""),
-      metric(""),
-      resource(""),
-      database(""),
-      group(""),
-      xquery(""),
-      js(""),
-      output(""),
-      gnuplot(""),
-      quiet(true),
-      verbose(false)
-  {
-  }
-  
-  void check(const char *progname){}
-  
-  const char *config, *format, *period, *start, *end, *metric, *resource, *database, *group, *xquery, *js, *output, *gnuplot;
-  bool quiet, verbose;
+struct CommandLineArgs {
+    CommandLineArgs()
+            : config(""),
+              format(""),
+              period(""),
+              start(""),
+              end(""),
+              metric(""),
+              resource(""),
+              database(""),
+              group(""),
+              xquery(""),
+              js(""),
+              output(""),
+              gnuplot(""),
+              quiet(true),
+              verbose(false) {
+    }
+
+    void check(const char *progname) {}
+
+    const char *config, *format, *period, *start, *end, *metric, *resource, *database, *group, *xquery, *js, *output, *gnuplot;
+    bool quiet, verbose;
 };
 
 // interface for commands
-class Command
-{
+class Command {
 private:
-  Config config;
-  CommandLineArgs current;  
-  string readBuffer;
-  
+    Config config;
+    CommandLineArgs current;
+    string readBuffer;
+
 public:
-  string url;
+    string url;
 
-  Command(){
-    loadConfig(config,current.config);
-  };
-  
-  virtual ~Command(){
-    //std::cout << "Default destructor called\n";
-  };
-  virtual int usage(const char *progname) =0;
-  virtual CommandLineArgs options(int n_opts, char *opts[]) = 0;
+    Command() {
+        loadConfig(config, current.config);
+    };
 
-  virtual string getReadBuffer(){
-    return this->readBuffer;
-  }
-  
-  virtual CommandLineArgs getCurrentArgs(){
-    return this->current;
-    loadConfig(config,this->current.config);
-  }
-  virtual void setCurrentArgs(CommandLineArgs args){
-    this->current=args;
-    loadConfig(config,this->current.config);
-  }
-  
-  virtual Config getConfig(){
-    return this->config;
-  }
-  
-  virtual void setConfig(Config config){
-    this->config=config;
-  }
+    virtual ~Command() {
+        //std::cout << "Default destructor called\n";
+    };
 
-  virtual bool checkConfig(){
-    if(config.host.empty()){
-      cerr << "undefined MarkLogic host." << endl;
-    }
-    if(config.pass.empty()){
-      cerr << "undefined MarkLogic password." << endl;
-    }
-    if(config.protocol.empty()){
-      cerr << "undefined MarkLogic protocol." << endl;
-    }
-    if(config.user.empty()){
-      cerr << "undefined MarkLogic user." << endl;
-    }
-  }
+    virtual int usage(const char *progname) =0;
 
-  virtual void setUrl(string port,
-                      string root,
-                      string path,
-                      string view){
+    virtual CommandLineArgs options(int n_opts, char *opts[]) = 0;
 
-    checkConfig();
-    if(view == "metrics") {
-      if (path.find("/") != string::npos) {
-        string res1 = path.substr(0, path.find("/"));
-        url = "http://" + config.host + ":" + port + root + "/" + res1 + "?";
-      } else {
-        url = "http://" + config.host + ":" + port + root + "/" + path + "?";
-      }
-    }else if(view == "status"){
-        url = "http://" + config.host + ":" + port + root + "/" + path +"?";
-    }else{
-      url="http://"+config.host+":"+port+root+"/"+path+"?";
-    }
-       
-    if(!view.empty()){
-      url += "view="+view;
+    virtual string getReadBuffer() {
+        return this->readBuffer;
     }
 
-    string group = current.group;
-    if(!group.empty() && view != "status"){
-      url += "&group-id="+group;
+    virtual CommandLineArgs getCurrentArgs() {
+        return this->current;
+        loadConfig(config, this->current.config);
     }
-    string format = current.format;
-    if(format != ""){
-      url += "&format="+ format;
-    }     
-    string start = current.start;
-    if(start != ""){
-      url += "&start="+ start;
+
+    virtual void setCurrentArgs(CommandLineArgs args) {
+        this->current = args;
+        loadConfig(config, this->current.config);
     }
-    string end = current.end;
-    if(end != ""){
-      url += "&end="+ end;
+
+    virtual Config getConfig() {
+        return this->config;
     }
-    string period = current.period;
-    if(period != ""){
-      url += "&period="+ period;
+
+    virtual void setConfig(Config config) {
+        this->config = config;
     }
-    
-    string metric = current.metric;
-    if(!metric.empty() && view == "metrics"){
-      string resource = current.resource;
-      string delimiter = "/";
-      string res1 = resource.substr(0, resource.find("/"));
-      string res2 = path.substr(path.find("/") + 1,path.size());
-      if(res1 == "databases"){
-        url += "&database-metrics="+ metric;
-        if(resource.find("/") != string::npos){
-          url += "&database="+ res2;}
-      }else if(res1 == "servers"){
-        url += "&server-metrics="+ metric;        
-        if(resource.find("/") != string::npos){
-          url += "&group-id=Default&server="+ res2;}
-      }else if(res1 == "hosts"){
-        url += "&host-metrics="+ metric;        
-        if(resource.find("/") != string::npos){
-          url += "&host="+ res2;}
-      }else if(res1 == "forests"){
-        url += "&forest-metrics="+ metric;
-        if(resource.find("/") != string::npos){
-          url += "&forest="+ res2;}}}
 
-  }
-  
-  virtual int execute(){
-    
-    CURLM *curlm;
-    int handle_count;
-    curlm = curl_multi_init();
-
-    CURL *curl1 = NULL;
-    curl1 = curl_easy_init();
-
-    curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
-
-    struct curl_slist *headers = NULL; 
-    headers = curl_slist_append(headers, "Accept: text/plain");
-    headers = curl_slist_append(headers, "Accept: application/xml");
-    headers = curl_slist_append(headers, "Accept: application/js");
-    headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
-
-    if(curl1)
-    {
-      curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
-
-      curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());  
-      curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
-      if(current.verbose){
-        curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
-      }else{
-        curl_easy_setopt(curl1, CURLOPT_HEADER,0);}
-
-      curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl/7.19.6");     
-
-      curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY); 
-      curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
-      curl_easy_setopt(curl1, CURLOPT_URL,url.c_str());
-      curl_easy_setopt(curl1, CURLOPT_HTTPGET, 1L);
-      curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
-      curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
-      curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
-
-      curl_multi_add_handle(curlm, curl1);
-
-      CURLMcode code;
-      while(1)
-        {
-          code = curl_multi_perform(curlm, &handle_count);
-          if(handle_count == 0)
-            {
-              curl_global_cleanup();
-              break;
-            }
+    virtual bool checkConfig() {
+        if (config.host.empty()) {
+            cerr << "undefined MarkLogic host." << endl;
+        }
+        if (config.pass.empty()) {
+            cerr << "undefined MarkLogic password." << endl;
+        }
+        if (config.protocol.empty()) {
+            cerr << "undefined MarkLogic protocol." << endl;
+        }
+        if (config.user.empty()) {
+            cerr << "undefined MarkLogic user." << endl;
         }
     }
 
-    curl_global_cleanup();
+    virtual void setUrl(string port,
+                        string root,
+                        string path,
+                        string view) {
 
-  return EXIT_SUCCESS;
+        checkConfig();
+        if (view == "metrics") {
+            if (path.find("/") != string::npos) {
+                string res1 = path.substr(0, path.find("/"));
+                url = "http://" + config.host + ":" + port + root + "/" + res1 + "?";
+            } else {
+                url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+            }
+        } else if (view == "status") {
+            url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+        } else {
+            url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+        }
 
-  };
+        if (!view.empty()) {
+            url += "view=" + view;
+        }
 
-  static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-  {
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
-  }
+        string group = current.group;
+        if (!group.empty() && view != "status") {
+            url += "&group-id=" + group;
+        }
+        string format = current.format;
+        if (format != "") {
+            url += "&format=" + format;
+        }
+        string start = current.start;
+        if (start != "") {
+            url += "&start=" + start;
+        }
+        string end = current.end;
+        if (end != "") {
+            url += "&end=" + end;
+        }
+        string period = current.period;
+        if (period != "") {
+            url += "&period=" + period;
+        }
 
-  
-  virtual int executeQueryPost(string type, string query){
-
-    CURLM *curlm;
-    int handle_count;
-    curlm = curl_multi_init();
-
-    CURL *curl1 = NULL;
-    curl1 = curl_easy_init();
-
-    curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
-
-
-    struct curl_slist *headers=NULL; // init to NULL is important
-    headers = curl_slist_append(headers, "Accept: text/plain");
-    headers = curl_slist_append(headers, "Accept: application/xml");
-    headers = curl_slist_append(headers, "Accept: application/js");
-    headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
-
-    if(curl1)
-    {
-      curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
-
-      curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());  
-      curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
-
-      if(current.verbose){
-        curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
-      }else{
-        curl_easy_setopt(curl1, CURLOPT_VERBOSE,0L);}
-
-      curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
-      curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY); 
-      curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
-      curl_easy_setopt(curl1, CURLOPT_URL,url.c_str());
-
-      char *data = curl_easy_escape(curl1, query.c_str(),strlen(query.c_str()));
-      string xquery = type+"="+data;
-      curl_easy_setopt(curl1, CURLOPT_POST, 1);
-      curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, xquery.c_str());
-      curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
-
-      curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
-      curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
-
-      curl_multi_add_handle(curlm, curl1);
-      CURLMcode code;
-      while(1)
-        {
-          code = curl_multi_perform(curlm, &handle_count);
-
-          if(handle_count == 0)
-            {
-              curl_global_cleanup();
-
-              break;
+        string metric = current.metric;
+        if (!metric.empty() && view == "metrics") {
+            string resource = current.resource;
+            string delimiter = "/";
+            string res1 = resource.substr(0, resource.find("/"));
+            string res2 = path.substr(path.find("/") + 1, path.size());
+            if (res1 == "databases") {
+                url += "&database-metrics=" + metric;
+                if (resource.find("/") != string::npos) {
+                    url += "&database=" + res2;
+                }
+            } else if (res1 == "servers") {
+                url += "&server-metrics=" + metric;
+                if (resource.find("/") != string::npos) {
+                    url += "&group-id=Default&server=" + res2;
+                }
+            } else if (res1 == "hosts") {
+                url += "&host-metrics=" + metric;
+                if (resource.find("/") != string::npos) {
+                    url += "&host=" + res2;
+                }
+            } else if (res1 == "forests") {
+                url += "&forest-metrics=" + metric;
+                if (resource.find("/") != string::npos) {
+                    url += "&forest=" + res2;
+                }
             }
         }
-      //std::cout << readBuffer << std::endl;
+
     }
 
-    curl_global_cleanup();
+    virtual int execute() {
 
-  return EXIT_SUCCESS;
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
 
-  };
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
 
-    
-  virtual int executeLoadPost(){
-    
-    CURLM *curlm;
-    int handle_count;
-    curlm = curl_multi_init();
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
-    CURL *curl1 = NULL;
-    curl1 = curl_easy_init();
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
 
-    curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
-    
-    if(curl1)
-    {
-      curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());  
-      curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
-      if(current.verbose){
-        curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
-      }else{
-        curl_easy_setopt(curl1, CURLOPT_HEADER,0);}
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
 
-      curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_HEADER, 0);
+            }
 
-      curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY); 
-      curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
-      curl_easy_setopt(curl1, CURLOPT_URL,url.c_str());
-      curl_easy_setopt(curl1, CURLOPT_HTTPGET, 1L);
-      curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl/7.19.6");
 
-      curl_multi_add_handle(curlm, curl1);
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl1, CURLOPT_HTTPGET, 1L);
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+            curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
+            curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
 
-      CURLMcode code;
-      while(1)
-        {
-          code = curl_multi_perform(curlm, &handle_count); 
-          if(handle_count == 0)
-            {
-              break;
+            curl_multi_add_handle(curlm, curl1);
+
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
+                if (handle_count == 0) {
+                    curl_global_cleanup();
+                    break;
+                }
             }
         }
+
+        curl_global_cleanup();
+
+        return EXIT_SUCCESS;
+
+    };
+
+    static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+        ((std::string *) userp)->append((char *) contents, size * nmemb);
+        return size * nmemb;
     }
 
-    curl_global_cleanup();
 
-  return EXIT_SUCCESS;
+    virtual int executeQueryPost(string type, string query) {
 
-  };
-  
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
+
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
+
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+
+
+        struct curl_slist *headers = NULL; // init to NULL is important
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
+
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+
+            char *data = curl_easy_escape(curl1, query.c_str(), strlen(query.c_str()));
+            string xquery = type + "=" + data;
+            curl_easy_setopt(curl1, CURLOPT_POST, 1);
+            curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, xquery.c_str());
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+
+            curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
+            curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
+
+            curl_multi_add_handle(curlm, curl1);
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
+
+                if (handle_count == 0) {
+                    curl_global_cleanup();
+
+                    break;
+                }
+            }
+            //std::cout << readBuffer << std::endl;
+        }
+
+        curl_global_cleanup();
+
+        return EXIT_SUCCESS;
+
+    };
+
+
+    virtual int executeLoadPost() {
+
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
+
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
+
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_HEADER, 0);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl1, CURLOPT_HTTPGET, 1L);
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+
+            curl_multi_add_handle(curlm, curl1);
+
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
+                if (handle_count == 0) {
+                    break;
+                }
+            }
+        }
+
+        curl_global_cleanup();
+
+        return EXIT_SUCCESS;
+
+    };
+
 };

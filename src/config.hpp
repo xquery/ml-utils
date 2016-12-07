@@ -20,9 +20,11 @@
 
 #ifdef WINDOWS
 #include <direct.h>
-    #define GetCurrentDir _getcwd
+#define GetCurrentDir _getcwd
 #else
+
 #include <unistd.h>
+
 #define GetCurrentDir getcwd
 #endif
 
@@ -30,40 +32,40 @@ char pPath[FILENAME_MAX];
 
 using namespace std;
 
-bool is_file_exist(string fileName)
-{
+bool is_file_exist(string fileName) {
     std::ifstream infile(fileName);
     return infile.good();
 }
 
 struct Config {
-  string user;
-  string pass;
-  string host;
-  string protocol;
+    string user;
+    string pass;
+    string host;
+    string protocol;
 };
 
-void loadConfig(Config& config, string path) {
+void loadConfig(Config &config, string path) {
     std::string homepath = getenv("HOME");
     GetCurrentDir(pPath, sizeof(pPath));
     std::string currentpath = pPath;
     std::string mlutils;
 
-    if(is_file_exist(path)) {
+    if (is_file_exist(path)) {
         mlutils = (path).c_str();
-    }else if(is_file_exist(currentpath+"/.ml-utils")){
+    } else if (is_file_exist(currentpath + "/.ml-utils")) {
         mlutils = (currentpath + "/.ml-utils").c_str();
-    }else if(is_file_exist(homepath+"/.ml-utils")){
-        mlutils =(homepath + "/.ml-utils").c_str();
-    }else{
-        mlutils =(path).c_str();
+    } else if (is_file_exist(homepath + "/.ml-utils")) {
+        mlutils = (homepath + "/.ml-utils").c_str();
+    } else {
+        mlutils = (path).c_str();
     }
 
     ifstream fin(mlutils);
-    std:string line;
+    std:
+    string line;
 
     while (getline(fin, line)) {
-      istringstream sin(line.substr(line.find("=") + 1));
+        istringstream sin(line.substr(line.find("=") + 1));
         if (line.find("user") != -1)
             sin >> config.user;
         else if (line.find("pass") != -1)
@@ -71,6 +73,6 @@ void loadConfig(Config& config, string path) {
         else if (line.find("host") != -1)
             sin >> config.host;
         else if (line.find("protocol") != -1)
-          sin >> config.protocol;
+            sin >> config.protocol;
     }
 }

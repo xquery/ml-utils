@@ -2,55 +2,55 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
     <generated>
-      <config projectName="ml_util" targetName="mlxq" />
-      <config projectName="ml_util" targetName="ContinuousTest" />
-      <config projectName="ml_util" targetName="NightlyStart" />
-      <config projectName="ml_util" targetName="NightlyBuild" />
-      <config projectName="ml_util" targetName="ExperimentalConfigure" />
-      <config projectName="ml_util" targetName="mlhistory" />
-      <config projectName="ml_util" targetName="ExperimentalCoverage" />
-      <config projectName="ml_util" targetName="ml-js" />
-      <config projectName="ml_util" targetName="NightlyConfigure" />
       <config projectName="ml_util" targetName="ContinuousBuild" />
-      <config projectName="ml_util" targetName="ExperimentalBuild" />
-      <config projectName="ml_util" targetName="NightlyMemCheck" />
-      <config projectName="ml_util" targetName="ml-admin" />
-      <config projectName="ml_util" targetName="gtest_main" />
-      <config projectName="ml_util" targetName="ContinuousUpdate" />
-      <config projectName="ml_util" targetName="gmock" />
-      <config projectName="ml_util" targetName="gtest" />
-      <config projectName="ml_util" targetName="ContinuousMemCheck" />
-      <config projectName="ml_util" targetName="mljs" />
-      <config projectName="ml_util" targetName="ml-load" />
-      <config projectName="ml_util" targetName="ContinuousStart" />
-      <config projectName="ml_util" targetName="runTests" />
-      <config projectName="ml_util" targetName="NightlyMemoryCheck" />
-      <config projectName="ml_util" targetName="ExperimentalMemCheck" />
-      <config projectName="ml_util" targetName="gmock_main" />
-      <config projectName="ml_util" targetName="ml_util" />
-      <config projectName="ml_util" targetName="mlload" />
-      <config projectName="ml_util" targetName="check" />
-      <config projectName="ml_util" targetName="Nightly" />
-      <config projectName="ml_util" targetName="ml-config" />
-      <config projectName="ml_util" targetName="NightlyTest" />
       <config projectName="ml_util" targetName="ml-status" />
-      <config projectName="ml_util" targetName="ExperimentalTest" />
-      <config projectName="ml_util" targetName="NightlyUpdate" />
-      <config projectName="ml_util" targetName="Experimental" />
-      <config projectName="ml_util" targetName="ContinuousCoverage" />
+      <config projectName="ml_util" targetName="ml-js" />
+      <config projectName="ml_util" targetName="runTests" />
+      <config projectName="ml_util" targetName="Nightly" />
       <config projectName="ml_util" targetName="install_ml_util" />
-      <config projectName="ml_util" targetName="NightlySubmit" />
-      <config projectName="ml_util" targetName="Continuous" />
-      <config projectName="ml_util" targetName="ExperimentalSubmit" />
-      <config projectName="ml_util" targetName="ExperimentalStart" />
-      <config projectName="ml_util" targetName="ml-hist" />
-      <config projectName="ml_util" targetName="ExperimentalUpdate" />
-      <config projectName="ml_util" targetName="ml-xq" />
-      <config projectName="ml_util" targetName="ContinuousSubmit" />
+      <config projectName="ml_util" targetName="NightlyTest" />
+      <config projectName="ml_util" targetName="NightlyUpdate" />
       <config projectName="ml_util" targetName="ml-log" />
-      <config projectName="ml_util" targetName="NightlyCoverage" />
+      <config projectName="ml_util" targetName="NightlySubmit" />
+      <config projectName="ml_util" targetName="ExperimentalConfigure" />
+      <config projectName="ml_util" targetName="gmock_main" />
+      <config projectName="ml_util" targetName="check" />
+      <config projectName="ml_util" targetName="NightlyMemoryCheck" />
+      <config projectName="ml_util" targetName="gtest" />
+      <config projectName="ml_util" targetName="gtest_main" />
+      <config projectName="ml_util" targetName="mlxq" />
+      <config projectName="ml_util" targetName="ml-load" />
+      <config projectName="ml_util" targetName="ml-config" />
+      <config projectName="ml_util" targetName="ExperimentalBuild" />
+      <config projectName="ml_util" targetName="ContinuousUpdate" />
+      <config projectName="ml_util" targetName="ExperimentalMemCheck" />
+      <config projectName="ml_util" targetName="ContinuousStart" />
+      <config projectName="ml_util" targetName="ml-hist" />
+      <config projectName="ml_util" targetName="NightlyMemCheck" />
+      <config projectName="ml_util" targetName="ExperimentalUpdate" />
       <config projectName="ml_util" targetName="mlstatus" />
+      <config projectName="ml_util" targetName="ContinuousMemCheck" />
+      <config projectName="ml_util" targetName="ml-xq" />
+      <config projectName="ml_util" targetName="Experimental" />
+      <config projectName="ml_util" targetName="ExperimentalSubmit" />
+      <config projectName="ml_util" targetName="ml-admin" />
+      <config projectName="ml_util" targetName="ContinuousTest" />
+      <config projectName="ml_util" targetName="NightlyConfigure" />
+      <config projectName="ml_util" targetName="ExperimentalTest" />
+      <config projectName="ml_util" targetName="ExperimentalStart" />
+      <config projectName="ml_util" targetName="mljs" />
+      <config projectName="ml_util" targetName="gmock" />
+      <config projectName="ml_util" targetName="ContinuousSubmit" />
+      <config projectName="ml_util" targetName="ExperimentalCoverage" />
+      <config projectName="ml_util" targetName="NightlyBuild" />
+      <config projectName="ml_util" targetName="NightlyCoverage" />
+      <config projectName="ml_util" targetName="Continuous" />
+      <config projectName="ml_util" targetName="mlhistory" />
+      <config projectName="ml_util" targetName="mlload" />
+      <config projectName="ml_util" targetName="NightlyStart" />
+      <config projectName="ml_util" targetName="ContinuousCoverage" />
       <config projectName="ml_util" targetName="ContinuousConfigure" />
+      <config projectName="ml_util" targetName="ml_util" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true" ADDITIONAL_BUILD_OPTIONS="-j 8">
@@ -60,7 +60,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f297601-a739-4c15-b034-757a66d177e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/command.hpp" afterPath="$PROJECT_DIR$/src/command.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.hpp" afterPath="$PROJECT_DIR$/src/config.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/configure.cpp" afterPath="$PROJECT_DIR$/src/configure.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/configure.hpp" afterPath="$PROJECT_DIR$/src/configure.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/history.cpp" afterPath="$PROJECT_DIR$/src/history.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/history.hpp" afterPath="$PROJECT_DIR$/src/history.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/load.cpp" afterPath="$PROJECT_DIR$/src/load.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/load.hpp" afterPath="$PROJECT_DIR$/src/load.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log.cpp" afterPath="$PROJECT_DIR$/src/log.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log.hpp" afterPath="$PROJECT_DIR$/src/log.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlconfigure/main.cpp" afterPath="$PROJECT_DIR$/src/mlconfigure/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlhistory/main.cpp" afterPath="$PROJECT_DIR$/src/mlhistory/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mljs/main.cpp" afterPath="$PROJECT_DIR$/src/mljs/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlload/main.cpp" afterPath="$PROJECT_DIR$/src/mlload/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mllog/main.cpp" afterPath="$PROJECT_DIR$/src/mllog/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlstatus/main.cpp" afterPath="$PROJECT_DIR$/src/mlstatus/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mlxq/main.cpp" afterPath="$PROJECT_DIR$/src/mlxq/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/query.cpp" afterPath="$PROJECT_DIR$/src/query.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/query.hpp" afterPath="$PROJECT_DIR$/src/query.hpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/status.cpp" afterPath="$PROJECT_DIR$/src/status.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/status.hpp" afterPath="$PROJECT_DIR$/src/status.hpp" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,13 +97,13 @@
     <favorites_list name="ml-util" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="272">
-                <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <first_editor relative-caret-position="152">
+                <caret line="27" column="7" lean-forward="false" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -552,6 +572,7 @@
       <workItem from="1480962069663" duration="11831000" />
       <workItem from="1481025573422" duration="1869000" />
       <workItem from="1481092418158" duration="4091000" />
+      <workItem from="1481111249409" duration="28000" />
     </task>
     <servers />
   </component>
@@ -588,20 +609,20 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53864000" />
+    <option name="totallyTimeSpent" value="53892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="29" width="1379" height="782" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1413844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.140648" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37048194" sideWeight="0.48821798" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32680723" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37048194" sideWeight="0.51178205" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32831326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42319277" sideWeight="0.83505154" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42319277" sideWeight="0.83505154" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37349397" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -793,7 +814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="138" column="24" lean-forward="true" selection-start-line="138" selection-start-column="24" selection-end-line="138" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -812,14 +832,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/install_manifest_applications.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/install_manifest_applications.txt" />
     <entry file="file://$PROJECT_DIR$/src/status.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -976,7 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -989,8 +1001,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="272">
-            <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <first_editor relative-caret-position="152">
+            <caret line="27" column="7" lean-forward="false" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
             <folding />
           </first_editor>
           <second_editor />

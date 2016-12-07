@@ -22,13 +22,15 @@
 
 using namespace std;
 
-class Status : public Command
-{
+class Status : public Command {
 public:
-  Status();
-  virtual ~Status();
-  virtual CommandLineArgs options(int n_opts, char *opts[]);
-  virtual int usage(const char *progname);
+    Status();
+
+    virtual ~Status();
+
+    virtual CommandLineArgs options(int n_opts, char *opts[]);
+
+    virtual int usage(const char *progname);
 };
 
 
