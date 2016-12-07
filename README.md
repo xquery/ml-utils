@@ -4,6 +4,7 @@ Small collection of home grown command line tools for working with MarkLogic.
 
 * ml-config: mutate server configuration
 * ml-log: retrieve server logs
+* ml-load: load data
 * ml-hist: retrieve resource metrics (requires gnuplot for graphing)
 * ml-status: retrieve resource status
 * ml-xq: evaluate xquery
