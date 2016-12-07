@@ -90,7 +90,7 @@ ml-hist [options]
     -q    : quiet (suppress banner)
 ```
 
-generate jpg graph
+generate jpg graph (note- must use json format)
 ```
 >./ml-hist -f json -r forests -m active-fragment-count -o test.jpg
 ```
@@ -100,7 +100,7 @@ generate text graph without any data output (-q option)
 >./ml-hist -f json -r forests -m active-fragment-count -o test.txt -q
 ```
 
-use custom gnuplot
+use custom gnuplot 
 ```
 >  ./ml-hist -f json -s "2015-03-21T17:38:00" -e "2017-03-21T17:38:00" -o ~/test.jpg -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
 ```

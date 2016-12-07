@@ -39,91 +39,39 @@ void doPlot(string output, string plot, string units, string name, string resour
     g1.cmd("set xdata time");
     g1.cmd("set timefmt '%Y-%m-%dT%H:%M:%S'");
     g1.cmd("set timefmt '%Y-%m-%dT%H:%M:%S'");
-    g1.cmd("set macro\n"
-                   "red_000 = \"#F9B7B0\"\n"
-                   "red_025 = \"#F97A6D\"\n"
-                   "red_050 = \"#E62B17\"\n"
-                   "red_075 = \"#8F463F\"\n"
-                   "red_100 = \"#6D0D03\"\n"
-                   "\n"
-                   "blue_000 = \"#D2D225\"\n"
-                   "blue_025 = \"#D2D225\"\n"
-                   "blue_050 = \"#D2D225\"\n"
-                   "blue_075 = \"#D2D225\"\n"
-                   "blue_100 = \"#D2D225\" \n"
-                   "\n"
-                   "green_000 = \"#A6EBB5\"\n"
-                   "green_025 = \"#67EB84\"\n"
-                   "green_050 = \"#11AD34\"\n"
-                   "green_075 = \"#2F6C3D\"\n"
-                   "green_100 = \"#025214\"\n"
-                   "\n"
-                   "brown_000 = \"#F9E0B0\"\n"
-                   "brown_025 = \"#F9C96D\"\n"
-                   "brown_050 = \"#E69F17\"\n"
-                   "brown_075 = \"#8F743F\"\n"
-                   "brown_100 = \"#6D4903\"\n"
-                   "\n"
-                   "grid_color = \"#d5e0c9\"\n"
-                   "text_color = \"#6a6a6a\"");
-
-    g1.cmd("my_line_width = \"2\"\n"
-                   "my_axis_width = \"1.5\"\n"
-                   "my_ps = \"1.2\"\n"
-                   "set pointsize my_ps\n"
-                   "\n"
-                   "set style line 1 linecolor rgbcolor blue_025 linewidth @my_line_width pt 7\n"
-                   "set style line 2 linecolor rgbcolor green_025 linewidth @my_line_width pt 5\n"
-                   "set style line 3 linecolor rgbcolor red_025 linewidth @my_line_width pt 9\n"
-                   "set style line 4 linecolor rgbcolor brown_025 linewidth @my_line_width pt 13\n"
-                   "set style line 5 linecolor rgbcolor blue_050 linewidth @my_line_width pt 11\n"
-                   "set style line 6 linecolor rgbcolor green_050 linewidth @my_line_width pt 7\n"
-                   "set style line 7 linecolor rgbcolor red_050 linewidth @my_line_width pt 5\n"
-                   "set style line 8 linecolor rgbcolor brown_050 linewidth @my_line_width pt 9\n"
-                   "set style line 9 linecolor rgbcolor blue_075 linewidth @my_line_width pt 13\n"
-                   "set style line 10 linecolor rgbcolor green_075 linewidth @my_line_width pt 11\n"
-                   "set style line 11 linecolor rgbcolor red_075 linewidth @my_line_width pt 7\n"
-                   "set style line 12 linecolor rgbcolor brown_075 linewidth @my_line_width pt 5\n"
-                   "set style line 13 linecolor rgbcolor blue_100 linewidth @my_line_width pt 9\n"
-                   "set style line 14 linecolor rgbcolor green_100 linewidth @my_line_width pt 13\n"
-                   "set style line 15 linecolor rgbcolor red_100 linewidth @my_line_width pt 11\n"
-                   "set style line 16 linecolor rgbcolor brown_100 linewidth @my_line_width pt 7\n"
-                   "set style line 17 linecolor rgbcolor \"#224499\" linewidth @my_line_width pt 5");
-    g1.cmd("set style increment user");
-    g1.cmd("set xtics textcolor rgb text_color\n"
-                   "set ytics textcolor rgb text_color\n"
-                   "set ztics textcolor rgb text_color");
-    g1.cmd("set xlabel \"Time\" textcolor rgb text_color\n"
-               "set ylabel \""+units+"\" textcolor rgb text_color\n"
-               "set label textcolor rgb text_color\n"
-               "set border 31 lw @my_axis_width lc rgb text_color\n"
-               "set key outside box width 2 height 2 enhanced spacing 2\n"
-               "set grid lc rgb grid_color");
-
-    g1.cmd("set border 0 back ls 11\n"
-                   "unset key\n"
-                   "set mxtics\n"
-                   "set mytics\n"
-                   "set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 ps 1.5   # --- blue\n"
-                  );
 
     if (plot.empty()) {
         // default gnuplot settings
+        g1.cmd("set style line 1 lt 1 lw 3 pt 3 linecolor rgb 'blue'\n"
+                       "set xlabel \"Time\" textcolor'#6a6a6a'\n"
+                       "set ylabel \""+units+"\" textcolor '#6a6a6a'\n"
+                       "set label textcolor '#6a6a6a'\n"
+                       "set border 10 lw 1 lc '#6a6a6a'\n"
+                       "set key outside box width 2 height 2 enhanced spacing 2\n"
+                       "set grid lc '#d5e0c9'");
+        g1.cmd("set border 0 back ls 11\n"
+                 "set grid\n"
+                 "set autoscale y\n"
+                 "set autoscale x\n"
+                 "set xtics rotate by -45 offset -0.1,-0.1\n"
+                 "unset key\n"
+                 "set mxtics\n"
+                 "set mytics\n"
+                 "set style line 1 lt 1 lw 3 pt 3 linecolor rgb \"red\""
+        );
+
         if (output.find(string("jpg")) != std::string::npos) {
-            g1.cmd("set terminal 'jpeg' size 900,500");
+            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
         } else if (output.find(string("jpeg")) != std::string::npos) {
-            g1.cmd("set terminal 'jpeg' size 900,500");
+            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
         } else if (output.find(string("png")) != std::string::npos) {
-            g1.cmd("set terminal 'pngcairo' nocrop enhanced font 'verdana,8' size 900,500 background '#C7C7B6'");
+            g1.cmd("set terminal 'pngcairo' nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
         } else {
             g1.cmd("set terminal 'dumb'");
         }
-        g1.cmd("set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor '#FBFBF7' behind");
 
     } else {
         // load custom gnuplot
-        cout << "loading " << plot << endl;
-        //g1.cmd("load '" + plot + "'");
         g1.set_GNUPlotPath(plot);
     }
 
