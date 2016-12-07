@@ -6,15 +6,59 @@ All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for
 
 ## Setup
 
-1) Copy .ml-utils-example to ~/.ml-utils
+
+## Usage
+
+### Quick Start
+
+1) Copy .ml-utils to ~/.ml-utils
 
 2) edit ~/.ml-utils with your connection details
 
-## ml-config
+3) copy bin/* to your bin directory or amend PATH
+
+4) run utils
+
+configure MarkLogic
+```
+> ml-config
+```
+
+evaluate xquery
+```
+> ml-js
+```
+
+evaluate js
+```
+> ml-xq
+```
+
+load data
+```
+> ml-load
+```
+
+retrieve server logs
+```
+> ml-log
+```
+
+retrieve resource status
+```
+> ml-status
+```
+
+retrieve history metrics
+```
+> ml-hist
+```
+
+### ml-config
 
 ml-gradle look alike
 
-## ml-hist
+### ml-hist
 
 retrieve history metrics from cluster/server
 
@@ -52,7 +96,7 @@ generate text graph without any data output (-q option)
 
 to use graphing capabilities install gnuplot (ex. yum install gnuplot).
 
-## ml-status
+### ml-status
 
 retrieve resource statuses
 
@@ -102,7 +146,7 @@ all host status
 > ./ml-status -r groups/Default -c etc/.ml-utils -f json 
 ```
 
-## ml-log
+### ml-log
 
 retrieve MarkLogic logs
 
@@ -118,7 +162,7 @@ ml-log [options]
 
 ```
 
-## ml-load
+### ml-load
 
 load data into MarkLogic
 
@@ -134,7 +178,7 @@ ml-load [options] - insert data into database
 
 ```
 
-## ml-js
+### ml-js
 
 evaluate javascript
 
@@ -169,7 +213,7 @@ evaluate file
 > ./ml-js < text.js
 ```
 
-## ml-xq
+### ml-xq
 
 evaluate xquery
 
@@ -204,3 +248,24 @@ evaluate file
 ```
 > ./ml-xq < text.xq
 ```
+
+## Build and deploy
+
+This set of utilities should build on linux, osx and windows platforms.
+
+```
+ cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+```
+
+to create release package
+```
+cpack --config CPackConfig.cmake
+```
+
+## Examples
+
+The [examples](examples) folder contains a sample configurations and shellscripts.
+
+## License
+
+[Apache License v2.0](LICENSE)
