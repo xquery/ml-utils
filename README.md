@@ -1,5 +1,4 @@
 # ml-utils
-
 Small collection of home grown command line utilities for working with MarkLogic.
 
 * ml-config: mutate server configuration
@@ -13,11 +12,9 @@ Small collection of home grown command line utilities for working with MarkLogic
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
 ## Usage
-
 Download [release](https://github.com/xquery/ml-utils/releases) appropriate for your operating system and run the included install script.
 
 ### Quick Start
-
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
 1) Copy .ml-utils to ~/.ml-utils
@@ -51,7 +48,7 @@ load data
 
 retrieve server logs
 ```
-> ./ml-log -n ErrorLog.txt -t node1 -r Merged 
+> ./ml-log -n ErrorLog.txt  
 ```
 
 retrieve resource status
@@ -67,11 +64,9 @@ retrieve history metrics
 ## Utilities
 
 ### ml-config
-
 ml-gradle look alike
 
 ### ml-hist
-
 retrieve history metrics from cluster/server
 
 ```
@@ -110,7 +105,6 @@ use custom gnuplot
 __NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
 
 ### ml-status
-
 retrieve resource statuses
 
 ```
@@ -160,7 +154,6 @@ all host status
 ```
 
 ### ml-log
-
 retrieve MarkLogic logs
 
 ```
@@ -204,7 +197,6 @@ search logs with regex 'Merged' with a start and end time range
 ```
 
 ### ml-load
-
 load data into MarkLogic
 
 ```
@@ -220,7 +212,6 @@ ml-load [options] - insert data into database
 ```
 
 ### ml-js
-
 evaluate javascript
 
 ```
@@ -255,7 +246,6 @@ evaluate file
 ```
 
 ### ml-xq
-
 evaluate xquery
 
 ```
@@ -291,7 +281,6 @@ evaluate file
 ```
 
 ## Build and deploy
-
 This set of utilities should build the application on linux, osx and windows platforms.
 
 ```
@@ -304,7 +293,6 @@ cpack --config CPackConfig.cmake
 ```
 
 ### Dependencies
-
 This project uses the following libs: 
 
 * rapidjson: for json munging 
@@ -312,7 +300,6 @@ This project uses the following libs:
 * googletest: for testing
 
 ## Examples
-
 The [examples](examples) folder contains a sample configurations and shellscripts.
 
 ## License
@@ -320,12 +307,10 @@ The [examples](examples) folder contains a sample configurations and shellscript
 [Apache License v2.0](LICENSE)
 
 ## Background
-
 This project was originally an unofficial little prototype to put MarkLogic Management REST API through its paces, to 
 see how easy it would be to leverage. As it has grown in usefulness (to me), I thought I would
-release to wider world. All PR's reviewed and appreciated.
+release to wider world. All PR's reviewed and appreciated. Note to self - write more unit tests!
 
 Additionally, I wanted to try out using cmake in a non trivial project. Using cpack
 to manage releases makes life easier and the DownloadProject pulling in dependencies for building is
-a great tool. It is sufficient for building cross platform apps though 'Makefile muscle memory' makes it hard to 'get off the fence'.  
-
+a great tool. Cmake is sufficient for building cross platform apps in spite of my 'Makefile muscle memory'.
