@@ -17,10 +17,18 @@ Download [release](https://github.com/xquery/ml-utils/releases) appropriate for 
 ### Quick Start
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
 
-1) Copy .ml-utils to ~/.ml-utils
+1) Copy etc/.ml-utils to ~/.ml-utils
 
 2) edit ~/.ml-utils with your connection details
 
+```
+# MarkLogic connection details
+host=localhost
+protocol=http
+user=admin
+pass=admin
+```
+        
 3) copy bin/* to your bin directory or amend PATH
 
 4) run utils
@@ -301,9 +309,9 @@ cpack --config CPackConfig.cmake
 ### Dependencies
 This project uses the following libs: 
 
-* rapidjson: for json munging 
-* gnuplot-cpp: for speaking to gnuplot
-* googletest: for testing
+* [rapidjson](https://github.com/miloyip/rapidjson): for json munging 
+* [gnuplot-cpp](https://github.com/orbitcowboy/gnuplot-cpp): for speaking to gnuplot
+* [googletest](https://github.com/google/googletest): for testing
 
 ## Examples
 The [examples](examples) folder contains a sample configurations and shellscripts.
