@@ -341,6 +341,10 @@ This project was originally an unofficial little prototype to put MarkLogic Mana
 see how easy it would be to leverage. As it has grown in usefulness (to me), I thought I would
 release to wider world. All PR's reviewed and appreciated. Note to self - write more unit tests!
 
-Additionally, I wanted to try out using cmake in a non trivial project. Using cpack
+Additionally, I wanted to try out a few modern twists
+
+* cmake: using cmake in a non trivial project. Using cpack
 to manage releases makes life easier and the DownloadProject pulling in dependencies for building is
 a great tool. Cmake is sufficient for building cross platform apps in spite of my 'Makefile muscle memory'.
+
+* clion: instead of emacs I used clion ... it was 'ok'
