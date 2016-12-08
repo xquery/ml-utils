@@ -115,7 +115,7 @@ public:
     {
         checkConfig();
 
-        url = "http://" + config.host + ":" + port + root+"?" ;
+        url = config.protocol + "://" + config.host + ":" + port + root+"?" ;
         if (!uri.empty()) {
             url += "uri=" + uri;
         }
@@ -135,7 +135,7 @@ public:
     {
         checkConfig();
 
-        url = "http://" + config.host + ":" + port + root+"?" ;
+        url = config.protocol + "://" + config.host + ":" + port + root+"?" ;
         if (!filename.empty() ) {
             url += "filename=" + filename;
         }
@@ -166,14 +166,14 @@ public:
         if (view == "metrics") {
             if (path.find("/") != string::npos) {
                 string res1 = path.substr(0, path.find("/"));
-                url = "http://" + config.host + ":" + port + root + "/" + res1 + "?";
+                url = config.protocol + "://" + config.host + ":" + port + root + "/" + res1 + "?";
             } else {
-                url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+                url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
             }
         } else if (view == "status") {
-            url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+            url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
         } else {
-            url = "http://" + config.host + ":" + port + root + "/" + path + "?";
+            url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
         }
 
         if (!view.empty()) {
