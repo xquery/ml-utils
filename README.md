@@ -321,6 +321,13 @@ and to create a release package
 >cpack3 --config CPackConfig.cmake
 ```
 
+To build you may have to install some additional deps:
+```
+yum install epel-release
+yum install cmake3
+yum install curl-devel
+```
+
 ### Dependencies
 This project uses the following libs: 
 
