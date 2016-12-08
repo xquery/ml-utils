@@ -16,7 +16,7 @@ Download [release](https://github.com/xquery/ml-utils/releases) appropriate for 
 ### Quick Start
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details.
 
-1) Create ~/.ml-utils with connection details, as follows
+1) Copy etc/.ml-utils dotfile to your home directory or create ~/.ml-utils with connection details, as follows
 
 ```
 # MarkLogic connection details
