@@ -205,6 +205,11 @@ search logs with regex 'Merged' with a start and end time range
 > ./ml-log -n ErrorLog.txt -t node1 -r Merged -s 2016-10-27T06:00:00 -e 2016-10-27T06:00:00
 ```
 
+watch (like tail) a log
+```
+ watch "ml-log -n 8002_ErrorLog.txt -t localhost"
+```
+
 ### ml-load
 load data into MarkLogic
 
