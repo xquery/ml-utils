@@ -16,9 +16,7 @@ Download [release](https://github.com/xquery/ml-utils/releases) appropriate for 
 ### Quick Start
 All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details.
 
-1) Copy etc/.ml-utils to ~/.ml-utils
-
-2) edit ~/.ml-utils with your connection details
+1) Create ~/.ml-utils with connection details, as follows
 
 ```
 # MarkLogic connection details
@@ -28,9 +26,9 @@ user=admin
 pass=admin
 ```
         
-3) copy bin/* to your bin directory or amend PATH
+2) copy bin/* to your bin directory or amend PATH
 
-4) run utils
+3) run utils
 
 retrieve history metrics
 ```
@@ -313,14 +311,14 @@ managing sequence output
 This set of utilities should build the application on linux, osx and windows platforms.
 
 ```
- cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+>cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
 ```
 
 Note that running cmake twill pull down dependencies.
 
 and to create a release package
 ```
-cpack --config CPackConfig.cmake
+>cpack3 --config CPackConfig.cmake
 ```
 
 ### Dependencies
