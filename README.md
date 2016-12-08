@@ -15,7 +15,7 @@ __WARNING__- Use these utilities at your own risk they are not supported in any 
 Download [release](https://github.com/xquery/ml-utils/releases) appropriate for your operating system and run the included install script.
 
 ### Quick Start
-All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details (or supply path with -c option).
+All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for MarkLogic connection details.
 
 1) Copy etc/.ml-utils to ~/.ml-utils
 
@@ -68,6 +68,14 @@ load data
 > ./ml-load
 ```
 
+If your .ml-util is not in home directory then you will need to suppy via -c commandline
+option.
+
+```
+> ./ml-xq -c etc/.ml-utils < test.xq
+
+```
+
 ## Utilities
 
 ### ml-config
@@ -104,9 +112,9 @@ generate text graph without any data output (-q option)
 >./ml-hist -f json -r forests -m active-fragment-count -o test.txt -q
 ```
 
-use custom gnuplot 
+use custom gnuplot with start and end time range
 ```
->  ./ml-hist -f json -s "2015-03-21T17:38:00" -e "2017-03-21T17:38:00" -o ~/test.jpg -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
+>  ./ml-hist -f json -s 2015-03-21T17:38:00 -e 2017-03-21T17:38:00 -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
 ```
 
 __NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
@@ -126,7 +134,7 @@ ml-status [options]
 
 ```
 
-cluster status
+cluster status (specifying ml-utils config file with -c option)
 ```
 > ./ml-status  -c etc/.ml-utils -f json 
 ```
@@ -180,27 +188,27 @@ ml-log
 
 get log file list
 ```
-> ./ml-log -c etc/.ml-utils
+> ./ml-log 
 ```
 
 retrieve log file
 ```
-> ./ml-log -c etc/.ml-utils -n ErrorLog.txt
+> ./ml-log -n ErrorLog.txt
 ```
 
 retrieve ErrorLog.txt from specific host node1
 ```
-> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1
+> ./ml-log -n ErrorLog.txt -t node1
 ```
 
 retrieve ErrorLog.txt from specific host node1 searching with regex 'Del*'
 ```
-> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1 -r Del*
+> ./ml-log -n ErrorLog.txt -t node1 -r Del*
 ```
 
 search logs with regex 'Merged' with a start and end time range
 ```
-> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1 -r Merged -s 2016-10-27T06:00:00 -e 2016-10-27T06:00:00
+> ./ml-log -n ErrorLog.txt -t node1 -r Merged -s 2016-10-27T06:00:00 -e 2016-10-27T06:00:00
 ```
 
 ### ml-load
@@ -238,7 +246,7 @@ simple example
 > ./ml-js -j 'xdmp.random()'
 ```
 
-apply against database
+apply against database (specifying where config file resides with -c)
 ```
 > ./ml-js -c etc/.ml-utils -j 1+1 -d Documents
 ```
@@ -276,7 +284,7 @@ simple example
 
 apply against database
 ```
-> ./ml-xq -c etc/.ml-utils -x 1+1 -d Documents
+> ./ml-xq -x 1+1 -d Documents
 ```
 
 pipe in 
