@@ -34,6 +34,7 @@ void doPlot(string output, string plot, string units, string name, string resour
 
     //Gnuplot::set_terminal_std("dumb");
     Gnuplot g1("linespoints");
+    g1.remove_tmpfiles();
     g1.set_ylabel(units);
     g1.set_xlabel("time");
     g1.cmd("set xdata time");
@@ -41,35 +42,31 @@ void doPlot(string output, string plot, string units, string name, string resour
     g1.cmd("set timefmt '%Y-%m-%dT%H:%M:%S'");
 
     if (plot.empty()) {
-        // default gnuplot settings
-        g1.cmd("set style line 1 lt 1 lw 3 pt 3 linecolor rgb 'blue'\n"
-                       "set xlabel \"Time\" textcolor'#6a6a6a'\n"
-                       "set ylabel \""+units+"\" textcolor '#6a6a6a'\n"
-                       "set label textcolor '#6a6a6a'\n"
-                       "set border 10 lw 1 lc '#6a6a6a'\n"
-                       "set key outside box width 2 height 2 enhanced spacing 2\n"
-                       "set grid lc '#d5e0c9'");
-        g1.cmd("set border 0 back ls 11\n"
-                 "set grid\n"
-                 "set autoscale y\n"
-                 "set autoscale x\n"
-                 "set xtics rotate by -45 offset -0.1,-0.1\n"
-                 "unset key\n"
-                 "set mxtics\n"
-                 "set mytics\n"
-                 "set style line 1 lt 1 lw 3 pt 3 linecolor rgb \"red\""
-        );
-
         if (output.find(string("jpg")) != std::string::npos) {
-            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
+            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'Verdana,10' size 900,500 background '#FFFCF5'");
         } else if (output.find(string("jpeg")) != std::string::npos) {
-            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
+            g1.cmd("set terminal 'jpeg' size 900,500 nocrop enhanced font 'Verdana,10' size 900,500 background '#FFFCF5'");
         } else if (output.find(string("png")) != std::string::npos) {
-            g1.cmd("set terminal 'pngcairo' nocrop enhanced font 'verdana,8' size 900,500 background '#f8fbfd'");
+            g1.cmd("set terminal 'pngcairo' nocrop enhanced font 'Verdana,10' size 900,500 background '#FFFCF5'");
         } else {
             g1.cmd("set terminal 'dumb'");
         }
-
+        // default gnuplot settings
+        g1.cmd(
+            "unset key\n"
+            "set xlabel \"Time\" textcolor'#000000'\n"
+            "set ylabel \""+units+"\" textcolor '#000000'\n"
+            "set label textcolor '#000000'\n"
+            "set border 10 lw 1 lc '#038DDD'\n"
+            "set grid lc '#038DDD'\n"
+            "set border 0 back ls 11\n"
+            "set grid\n"
+            "set autoscale y\n"
+            "set autoscale x\n"
+            "set xtics rotate by -45 offset -0.1,-0.1\n"
+            "set mxtics\n"
+            "set mytics\n");
+        g1.set_style("linespoints linetype 1 lw 1 lc '#025072' pt 7 ps .5");
     } else {
         // load custom gnuplot
         g1.set_GNUPlotPath(plot);
@@ -89,8 +86,15 @@ void doPlot(string output, string plot, string units, string name, string resour
         x.push_back(entry["dt"].GetString());
         y.push_back(entry["value"].GetDouble());
     }
-    g1.cmd("set xrange ['" + firstDT + "':'" + lastDT + "']");
-    g1.cmd("set title '{/Verdana:Bold " + resource + ":" + name + "}'  ");
+    g1.cmd("set xrange ['" + firstDT+ "':'" + lastDT + "']");
+
+//    auto maxY = std::max_element(std::begin(y), std::end(y));
+//    auto minY = std::max_element(std::begin(y), std::end(y));
+//    stringstream minV,maxV;
+//    minV << *minY;
+//    maxV << *maxY;
+//    g1.cmd("set yrange ['" + minV.str() + "':'" + maxV.str() + "']");
+    g1.cmd("set title '{/Verdana " + resource + ":" + name + "}'  ");
 
     if(!output.empty()){
         g1.cmd("set output '" + output + "'");

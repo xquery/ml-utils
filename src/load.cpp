@@ -62,8 +62,9 @@ int Load::usage(const char *progname) {
     cout << "load data" << endl;
     cout << ">" << name << " [options] " << endl;
     cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -f    : format (xml|json)" << endl;
     cout << "    -d    : database " << endl;
+    cout << "    -u    : uri " << endl;
+    cout << "    -f    : filename " << endl;
     cout << "    -v    : verbose (show http call)" << endl;
     cout << "    -q    : quiet (suppress banner)" << endl;
 

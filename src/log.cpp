@@ -19,24 +19,33 @@ Log::~Log() {
 CommandLineArgs Log::options(int n_opts, char *opts[]) {
     CommandLineArgs args;
 
-    args.xquery = "";
-    args.js = "";
+    args.start = "";
+    args.end = "";
 
     for (int i = 1; i < n_opts; ++i) {
         if (opts[i][1] == 'f') {
             ++i;
             args.format = opts[i];
+        } else if (opts[i][1] == 'p') {
+            ++i;
+            args.period = opts[i];
+        } else if (opts[i][1] == 's') {
+            ++i;
+            args.start = opts[i];
+        } else if (opts[i][1] == 'e') {
+            ++i;
+            args.end = opts[i];
+        } else if (opts[i][1] == 'n') {
+            ++i;
+            args.resource = opts[i];
+        } else if (opts[i][1] == 't') {
+            ++i;
+            args.host = opts[i];
+        } else if (opts[i][1] == 'r') {
+            ++i;
+            args.regex = opts[i];
         } else if (opts[i][1] == 'q') {
             args.quiet = true;
-        } else if (opts[i][1] == 'd') {
-            ++i;
-            args.database = opts[i];
-        } else if (opts[i][1] == 'x') {
-            ++i;
-            args.xquery = opts[i];
-        } else if (opts[i][1] == 'j') {
-            ++i;
-            args.js = opts[i];
         } else if (opts[i][1] == 'v') {
             args.verbose = true;
         } else if (opts[i][1] == 'h') {
@@ -69,9 +78,11 @@ int Log::usage(const char *progname) {
     cout << ">" << name << " " << endl;
     cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
     cout << "    -f    : format(xml | json)" << endl;
-    cout << "    -s    : start" << endl;
-    cout << "    -e    : end" << endl;
-    cout << "    -r    : regex" << endl;
+    cout << "    -t    : host (ex. localhost)" << endl;
+    cout << "    -n    : filename (ex. ErrorLog.txt)" << endl;
+    cout << "    -s    : start (ex. 2016-10-27T06:00:00)" << endl;
+    cout << "    -e    : end (ex. 2016-10-27T06:00:00)" << endl;
+    cout << "    -r    : regex (ex. Merged) " << endl;
     cout << "    -v    : verbose (show http call)" << endl;
     cout << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;

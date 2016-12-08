@@ -27,10 +27,12 @@ struct CommandLineArgs {
               period(""),
               start(""),
               end(""),
+              regex(""),
               metric(""),
               resource(""),
               database(""),
               group(""),
+              host(""),
               xquery(""),
               js(""),
               output(""),
@@ -41,7 +43,7 @@ struct CommandLineArgs {
 
     void check(const char *progname) {}
 
-    const char *config, *format, *period, *start, *end, *metric, *resource, *database, *group, *xquery, *js, *output, *gnuplot;
+    const char *config, *format, *period, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
     bool quiet, verbose;
 };
 
@@ -101,6 +103,38 @@ public:
         }
         if (config.user.empty()) {
             cerr << "undefined MarkLogic user." << endl;
+        }
+    }
+
+    virtual void setLogUrl(string port,
+                        string root,
+                        string filename,
+                        string start,
+                        string end,
+                        string regex,
+                        string host)
+    {
+        checkConfig();
+
+        url = "http://" + config.host + ":" + port + root+"?" ;
+        if (!filename.empty() ) {
+            url += "filename=" + filename;
+        }
+        if (!start.empty() ) {
+            url += "&start=" + start;
+        }
+        if (!end.empty() ) {
+            url += "&end=" + end;
+        }
+        if (!regex.empty() ) {
+            url += "&regex=" + regex;
+        }
+        if (!host.empty() ) {
+            url += "&host=" + host;
+        }
+        string format = current.format;
+        if (format != "") {
+            url += "&format=" + format;
         }
     }
 
@@ -191,10 +225,11 @@ public:
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
         struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "Accept: text/html");
         headers = curl_slist_append(headers, "Accept: text/plain");
         headers = curl_slist_append(headers, "Accept: application/xml");
         headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
@@ -255,9 +290,10 @@ public:
 
         struct curl_slist *headers = NULL; // init to NULL is important
         headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: text/html");
         headers = curl_slist_append(headers, "Accept: application/xml");
         headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded'");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);

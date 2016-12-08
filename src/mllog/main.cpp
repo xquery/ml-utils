@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         }
 
         log.setUrl("8002", "/manage/v2/logs", "", "");
-
+        log.setLogUrl("8002", "/manage/v2/logs",current.resource,current.start,current.end,current.regex,current.host);
         log.execute();
 
         string result = log.getReadBuffer();

@@ -1,6 +1,6 @@
 # ml-utils
 
-Small collection of home grown command line tools for working with MarkLogic.
+Small collection of home grown command line utilities for working with MarkLogic.
 
 * ml-config: mutate server configuration
 * ml-log: retrieve server logs
@@ -10,7 +10,7 @@ Small collection of home grown command line tools for working with MarkLogic.
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
 
-__WARNING__- Use these utilities at your own risk, they are not supported in any way.
+__WARNING__- Use these utilities at your own risk they are not supported in any way.
 
 ## Usage
 
@@ -28,39 +28,40 @@ All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for
 
 4) run utils
 
-configure MarkLogic
+
+to configure MarkLogic
 ```
 > ml-config
 ```
 
 evaluate xquery
 ```
-> ml-js
+> ./ml-js < test.js
 ```
 
 evaluate js
 ```
-> ml-xq
+> ./ml-xq < test.xq
 ```
 
 load data
 ```
-> ml-load
+> ./ml-load
 ```
 
 retrieve server logs
 ```
-> ml-log
-```
+> ./ml-log -n ErrorLog.txt -t node1 -r Merged 
+
 
 retrieve resource status
 ```
-> ml-status
+> ./ml-status -r forests/Documents
 ```
 
 retrieve history metrics
 ```
-> ml-hist
+> ./ml-hist -r forests -m device-space -f json -p raw
 ```
 
 ## Utilities
@@ -165,13 +166,41 @@ retrieve MarkLogic logs
 ```
 > ./ml-log -h
 
-ml-log [options]
+ml-log 
     -c    : config file (ex. /home/jfuller/.ml-utils)
-    -f    : format (xml|json)
-    -d    : database
+    -f    : format(xml | json)
+    -t    : host (ex. localhost)
+    -n    : filename (ex. ErrorLog.txt)
+    -s    : start (ex. 2016-10-27T06:00:00)
+    -e    : end (ex. 2016-10-27T06:00:00)
+    -r    : regex (ex. Merged)
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
+```
 
+get log file list
+```
+> ./ml-log -c etc/.ml-utils
+```
+
+retrieve log file
+```
+> ./ml-log -c etc/.ml-utils -n ErrorLog.txt
+```
+
+retrieve ErrorLog.txt from specific host node1
+```
+> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1
+```
+
+retrieve ErrorLog.txt from specific host node1 searching with regex 'Del*'
+```
+> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1 -r Del*
+```
+
+search logs with regex 'Merged' with a start and end time range
+```
+> ./ml-log -c etc/.ml-utils -n ErrorLog.txt -t node1 -r Merged -s 2016-10-27T06:00:00 -e 2016-10-27T06:00:00
 ```
 
 ### ml-load
@@ -263,16 +292,24 @@ evaluate file
 
 ## Build and deploy
 
-This set of utilities should build on linux, osx and windows platforms.
+This set of utilities should build the application on linux, osx and windows platforms.
 
 ```
  cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
 ```
 
-to create release package
+and to create a release package
 ```
 cpack --config CPackConfig.cmake
 ```
+
+### Dependencies
+
+This project uses the following libs: 
+
+* rapidjson: for json munging 
+* gnuplot-cpp: for speaking to gnuplot
+* googletest: for testing
 
 ## Examples
 
@@ -281,3 +318,14 @@ The [examples](examples) folder contains a sample configurations and shellscript
 ## License
 
 [Apache License v2.0](LICENSE)
+
+## Background
+
+This project was originally an unofficial little prototype to put MarkLogic Management REST API through its paces, to 
+see how easy it would be to leverage. As it has grown in usefulness (to me), I thought I would
+release to wider world. All PR's reviewed and appreciated.
+
+Additionally, I wanted to try out using cmake in a non trivial project. Using cpack
+to manage releases makes life easier and the DownloadProject pulling in dependencies for building is
+a great tool. It is sufficient for building cross platform apps though 'Makefile muscle memory' makes it hard to 'get off the fence'.  
+
