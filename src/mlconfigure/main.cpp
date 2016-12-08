@@ -38,6 +38,8 @@ int main(int argc, char *argv[]) {
 
     // create, update and delete resources
 
+    cout << "not implemented yet" << endl;
+
     } catch (std::bad_alloc) {
         cout << "Error with ml-config" << endl;
     }

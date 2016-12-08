@@ -29,8 +29,8 @@ struct CommandLineArgs {
               end(""),
               regex(""),
               metric(""),
-              resource(""),
               filename(""),
+              resource(""),
               uri(""),
               database(""),
               group(""),
@@ -39,9 +39,9 @@ struct CommandLineArgs {
               js(""),
               output(""),
               gnuplot(""),
-              raw(false),
               quiet(true),
-              verbose(false) {
+              verbose(false),
+              raw(false) {
     }
 
     void check(const char *progname) {}
@@ -363,7 +363,6 @@ public:
 
     virtual int executeLoadPost(const char* file, string body) {
 
-        double speed_upload, total_time;
         FILE *fd;
 
         fd = fopen(file, "rb"); /* open file to upload */
