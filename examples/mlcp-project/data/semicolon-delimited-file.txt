@@ -1,3 +1,0 @@
-first;second;third
-quick;brown;fox
-jumped;over;the

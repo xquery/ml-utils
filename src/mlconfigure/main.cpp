@@ -36,24 +36,7 @@ int main(int argc, char *argv[]) {
             cout << "xquery: " << current.xquery << endl;
         }
 
-        admin.setUrl("8000", "/v1/eval", "", "");
-
-        if (strcmp(current.xquery, "") == 0) {
-            std::string line, qry;
-            while (std::getline(std::cin, line)) {
-                qry.append(line);
-            }
-            admin.executeQueryPost("xquery", qry);
-        } else {
-            admin.executeQueryPost("xquery", current.xquery);
-        }
-        string result = admin.getReadBuffer();
-
-        if (strcmp(current.format, "json") == 0) {
-            cout << result << endl;
-        } else {
-            cout << result << endl;
-        }
+    // create, update and delete resources
 
     } catch (std::bad_alloc) {
         cout << "Error with ml-config" << endl;

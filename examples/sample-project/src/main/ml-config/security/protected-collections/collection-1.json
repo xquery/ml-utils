@@ -1,9 +1,0 @@
-{
-  "collection": "sample-project-collection",
-  "permission": [
-    {
-      "role-name": "rest-admin",
-      "capability": "read"
-    }
-  ]
-}

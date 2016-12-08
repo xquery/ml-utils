@@ -1,1 +1,0 @@
-A Flexrep config document is very simple - just need to reference a CPF domain. 

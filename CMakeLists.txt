@@ -101,7 +101,7 @@ install(FILES ${CMAKE_SOURCE_DIR}/etc/.ml-utils DESTINATION . COMPONENT applicat
 install(FILES ${CMAKE_SOURCE_DIR}/etc/.ml-utils DESTINATION etc COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/etc/basic.gnuplot DESTINATION etc/basic.gnuplot COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/etc/text.gnuplot DESTINATION etc/text.gnuplot COMPONENT applications)
-install(TARGETS ml-config RUNTIME DESTINATION bin COMPONENT applications)
+#install(TARGETS ml-config RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-hist RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-status RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-xq RUNTIME DESTINATION bin COMPONENT applications)

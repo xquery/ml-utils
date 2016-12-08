@@ -1,1 +1,0 @@
-xdmp:log("Hello world!")

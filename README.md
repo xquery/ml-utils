@@ -6,7 +6,6 @@ Small collection of home grown command line utilities for working with MarkLogic
 * ml-status: retrieve resource status
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
-* ml-config: mutate server configuration
 * ml-load: load data
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
@@ -77,9 +76,6 @@ option.
 ```
 
 ## Utilities
-
-### ml-config
-ml-gradle look alike
 
 ### ml-hist
 retrieve history metrics from cluster/server
@@ -319,6 +315,8 @@ This set of utilities should build the application on linux, osx and windows pla
 ```
  cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
 ```
+
+Note that running cmake twill pull down dependencies.
 
 and to create a release package
 ```
