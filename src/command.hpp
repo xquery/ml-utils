@@ -37,6 +37,7 @@ struct CommandLineArgs {
               js(""),
               output(""),
               gnuplot(""),
+              raw(false),
               quiet(true),
               verbose(false) {
     }
@@ -44,7 +45,7 @@ struct CommandLineArgs {
     void check(const char *progname) {}
 
     const char *config, *format, *period, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
-    bool quiet, verbose;
+    bool quiet, verbose, raw;
 };
 
 // interface for commands

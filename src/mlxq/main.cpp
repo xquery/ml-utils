@@ -53,41 +53,34 @@ int main(int argc, char *argv[]) {
         std::string un;
         int countline = 0;
         while (std::getline(cc, un, '\n')) {
-            countline++;
-        }
+            countline++; }
 
         if (strcmp(current.format, "json") == 0) {
-
-            std::stringstream ss(result);
-            std::string to;
-
-            if (!result.empty()) {
-                int count = 0;
-                while (std::getline(ss, to, '\n')) {
-                    if (count > 4 && count != countline - 1) {
-                        cout << to << endl;
-                    }
-                    count++;
-
-                }
-            }
-
+            if(current.raw){
+                cout<< result << endl;
+            }else {
+                std::stringstream ss(result);
+                std::string to;
+                if (!result.empty()) {
+                    int count = 0
+                    while (std::getline(ss, to, '\n')) {
+                        if (count > 4 && count != countline - 1) {
+                            cout << to << endl;
+                        }
+                        count++; }}}
         } else {
-
-            std::stringstream ss(result);
-            std::string to;
-
-            if (!result.empty()) {
-                int count = 0;
-                while (std::getline(ss, to, '\n')) {
-                    if (count > 4 && count != countline - 1) {
-                        cout << to << endl;
-                    }
-                    count++;
-
-                }
-            }
-        }
+            if(current.raw){
+                cout<< result << endl;
+            }else {
+                std::stringstream ss(result);
+                std::string to;
+                if (!result.empty()) {
+                    int count = 0;
+                    while (std::getline(ss, to, '\n')) {
+                        if (count > 4 && count != countline - 1) {
+                            cout << to << endl;
+                        }
+                        count++; }}}}
 
     } catch (std::bad_alloc) {
         cout << "Error with ml-xq" << endl;

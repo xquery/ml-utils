@@ -1,13 +1,13 @@
 # ml-utils
 Small collection of home grown command line utilities for working with MarkLogic.
 
-* ml-config: mutate server configuration
 * ml-log: retrieve server logs
-* ml-load: load data
 * ml-hist: retrieve resource metrics (requires gnuplot for graphing)
 * ml-status: retrieve resource status
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
+* ml-config: mutate server configuration
+* ml-load: load data
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
@@ -25,25 +25,9 @@ All tools look in your home directory for [.ml-utils](etc/.ml-utils) dotfile for
 
 4) run utils
 
-
-to configure MarkLogic
+retrieve history metrics
 ```
-> ml-config
-```
-
-evaluate xquery
-```
-> ./ml-js < test.js
-```
-
-evaluate js
-```
-> ./ml-xq < test.xq
-```
-
-load data
-```
-> ./ml-load
+> ./ml-hist -r forests -m device-space -f json -p raw
 ```
 
 retrieve server logs
@@ -56,9 +40,24 @@ retrieve resource status
 > ./ml-status -r forests/Documents
 ```
 
-retrieve history metrics
+evaluate xquery
 ```
-> ./ml-hist -r forests -m device-space -f json -p raw
+> ./ml-js < test.js
+```
+
+evaluate js
+```
+> ./ml-xq < test.xq
+```
+
+to configure MarkLogic
+```
+> ml-config
+```
+
+load data
+```
+> ./ml-load
 ```
 
 ## Utilities
@@ -221,6 +220,7 @@ ml-js database [options] - query database
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
     -d    : database
+    -r    : raw output
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
 ```
@@ -255,6 +255,7 @@ ml-xq database [options] - query database
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
     -d    : database
+    -r    : raw output
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
 
@@ -278,6 +279,11 @@ pipe in
 evaluate file
 ```
 > ./ml-xq < text.xq
+```
+
+managing sequence output 
+```
+> echo "(1,2,3,4)" | ./ml-xq -r 
 ```
 
 ## Build and deploy

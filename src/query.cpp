@@ -40,6 +40,8 @@ CommandLineArgs Query::options(int n_opts, char *opts[]) {
         } else if (opts[i][1] == 'c') {
             ++i;
             args.config = opts[i];
+        } else if (opts[i][1] == 'r') {
+            args.raw = true;
         } else if (opts[i][1] == 'v') {
             args.verbose = true;
         } else if (opts[i][1] == 'h') {
@@ -72,6 +74,7 @@ int Query::usage(const char *progname) {
     cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
     cout << "    -f    : format (xml|json)" << endl;
     cout << "    -d    : database" << endl;
+    cout << "    -r    : raw output" << endl;
     cout << "    -v    : verbose (show http call)" << endl;
     cout << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
