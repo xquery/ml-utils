@@ -67,6 +67,7 @@ int Status::usage(const char *progname) {
     cout << ">" << name << " Resources/resource [options]" << endl;
     cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
     cout << "    -f    : format (xml|json)" << endl;
+    cout << "    -r    : resource (databases|forests|servers|hosts) / resource-name" << endl;
     cout << "    -v    : verbose (show http call)" << endl;
     cout << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
