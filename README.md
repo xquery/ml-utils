@@ -52,7 +52,7 @@ load data
 retrieve server logs
 ```
 > ./ml-log -n ErrorLog.txt -t node1 -r Merged 
-
+```
 
 retrieve resource status
 ```
