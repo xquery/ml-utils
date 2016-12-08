@@ -65,7 +65,7 @@ to configure MarkLogic
 
 load data
 ```
-> ./ml-load
+> ./ml-load -u /mytest.json -f /etc/test.json -d Documents
 ```
 
 If your .ml-util is not in home directory then you will need to suppy via -c commandline
@@ -219,11 +219,22 @@ load data into MarkLogic
 
 ml-load [options] - insert data into database
     -c    : config file (ex. /home/jfuller/.ml-utils)
-    -f    : format (xml|json)
+    -u    : uri
+    -f    : filename to upload
     -d    : database
     -v    : verbose (show http call)
     -q    : quiet (suppress banner)
 
+```
+
+load test.json to /mytest.json into Documents database
+```
+> ./ml-load -u /mytest.json -f /etc/test.json -d Documents
+```
+
+load test.xml to /test.xml into Documents database
+```
+>./ml-load -u /test.xml -d Documents -f ../../etc/test.xml  
 ```
 
 ### ml-js

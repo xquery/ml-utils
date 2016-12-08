@@ -30,6 +30,8 @@ struct CommandLineArgs {
               regex(""),
               metric(""),
               resource(""),
+              filename(""),
+              uri(""),
               database(""),
               group(""),
               host(""),
@@ -44,7 +46,7 @@ struct CommandLineArgs {
 
     void check(const char *progname) {}
 
-    const char *config, *format, *period, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
+    const char *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
     bool quiet, verbose, raw;
 };
 
@@ -104,6 +106,22 @@ public:
         }
         if (config.user.empty()) {
             cerr << "undefined MarkLogic user." << endl;
+        }
+    }
+
+    virtual void setLoadUrl(string port,
+                           string root,
+                           string uri)
+    {
+        checkConfig();
+
+        url = "http://" + config.host + ":" + port + root+"?" ;
+        if (!uri.empty()) {
+            url += "uri=" + uri;
+        }
+        string database = current.database;
+        if (!database.empty()) {
+            url += "&database=" + database;
         }
     }
 
@@ -343,7 +361,12 @@ public:
     };
 
 
-    virtual int executeLoadPost() {
+    virtual int executeLoadPost(const char* file, string body) {
+
+        double speed_upload, total_time;
+        FILE *fd;
+
+        fd = fopen(file, "rb"); /* open file to upload */
 
         CURLM *curlm;
         int handle_count;
@@ -354,13 +377,23 @@ public:
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
+        struct curl_slist *headers = NULL; // init to NULL is important
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: text/html");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
+
         if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+
             curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
             curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
             if (current.verbose) {
                 curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
             } else {
-                curl_easy_setopt(curl1, CURLOPT_HEADER, 0);
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
             }
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
@@ -368,18 +401,24 @@ public:
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
-            curl_easy_setopt(curl1, CURLOPT_HTTPGET, 1L);
+
+            curl_easy_setopt(curl1, CURLOPT_UPLOAD, 1L);
+            curl_easy_setopt(curl1, CURLOPT_READDATA, fd);
+
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
 
             curl_multi_add_handle(curlm, curl1);
-
             CURLMcode code;
             while (1) {
                 code = curl_multi_perform(curlm, &handle_count);
+
                 if (handle_count == 0) {
+                    curl_global_cleanup();
+
                     break;
                 }
             }
+            //std::cout << readBuffer << std::endl;
         }
 
         curl_global_cleanup();

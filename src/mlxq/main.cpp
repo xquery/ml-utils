@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
                 std::stringstream ss(result);
                 std::string to;
                 if (!result.empty()) {
-                    int count = 0
+                    int count = 0;
                     while (std::getline(ss, to, '\n')) {
                         if (count > 4 && count != countline - 1) {
                             cout << to << endl;

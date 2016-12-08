@@ -31,12 +31,16 @@ int main(int argc, char *argv[]) {
             cout << "resource: " << current.resource << endl;
         }
 
-        load.setUrl("8000", "/v1/documents", "", "");
-
-        return load.executeLoadPost();
+        load.setLoadUrl("8000", "/v1/documents", current.uri);
+        std::string line, body;
+        if(!current.filename){
+        while (std::getline(std::cin, line)) {
+            body.append(line);
+        }}
+        load.executeLoadPost(current.filename,body);
 
     } catch (std::bad_alloc) {
-        cout << "Error with ml-hist" << endl;
+        cout << "Error with ml-load" << endl;
     }
     return EXIT_SUCCESS;
-}
+};

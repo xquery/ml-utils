@@ -20,15 +20,15 @@ CommandLineArgs Load::options(int n_opts, char *opts[]) {
     CommandLineArgs args;
 
     for (int i = 1; i < n_opts; ++i) {
-        if (opts[i][1] == 'f') {
-            ++i;
-            args.format = opts[i];
-        } else if (opts[i][1] == 'r') {
-            ++i;
-            args.resource = opts[i];
-        } else if (opts[i][1] == 'd') {
+        if (opts[i][1] == 'd') {
             ++i;
             args.database = opts[i];
+        } else if (opts[i][1] == 'u') {
+            ++i;
+            args.uri = opts[i];
+        } else if (opts[i][1] == 'f') {
+            ++i;
+            args.filename = opts[i];
         } else if (opts[i][1] == 'q') {
             args.quiet = true;
         } else if (opts[i][1] == 'v') {
