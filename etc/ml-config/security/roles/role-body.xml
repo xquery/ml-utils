@@ -1,0 +1,27 @@
+<role-properties xmlns="http://marklogic.com/manage">
+  <role-name></role-name>
+  <description></description>
+  <compartment></compartment>
+  <external-names>
+    <external-name></external-name>
+  </external-names>
+  <roles>
+    <role></role>
+  </roles>
+  <privileges>
+    <privilege>
+      <privilege-name></privilege-name>
+      <action></action>
+      <kind/>
+    </privilege>
+  </privileges>
+  <permissions>
+    <permission>
+      <role-name></role-name>
+      <capability></capability>
+    </permission>
+  </permissions>
+  <collections>
+    <collection></collection>
+  </collections>
+</role-properties>

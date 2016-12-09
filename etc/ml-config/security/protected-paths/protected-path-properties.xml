@@ -1,0 +1,10 @@
+<protected-path-properties xmlns="http://marklogic.com/manage/protected-path/properties">
+  <path-expression>//d</path-expression>
+  <path-namspaces/>
+  <permissions>
+    <permission>
+      <role-name>manage-user</role-name>
+      <capability>read</capability>
+    </permission>
+  </permissions>
+</protected-path-properties>

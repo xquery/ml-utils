@@ -1,0 +1,33 @@
+{
+	"keystore": {
+		"data-encryption": "default-off",
+		"data-encryption-key-id": "",
+		"config-encryption": "off",
+		"config-encryption-key-id": "",
+		"logs-encryption": "off",
+		"logs-encryption-key-id": "",
+		"host-name": "LOCALHOST",
+		"port": 9056
+	},
+	"protected-path": [{
+		"path-expression": "/some/path",
+		"path-namespace": [{
+			"prefix": "ml",
+			"namespace-uri": "http://www.example.org/ns"
+		}],
+		"permission": [{
+			"role-name": "user1",
+			"capability": "read"
+		}]
+	}],
+	"query-roleset": [
+		[
+			432232321212123100000,
+			432432534053458200000
+		],
+		[
+			124325333458236346123,
+			124233432432534058213
+		]
+	]
+}

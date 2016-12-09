@@ -1,0 +1,8 @@
+<label xmlns="http://marklogic.com/manage/meters/label">
+    <name>new label</name>  
+    <event>marker</event>         
+    <start_dt>2013-10-08T00:00:00</start_dt>
+    <end_dt>2013-10-09T00:00:00</end_dt>
+    <text>label text</text>
+    <meta><info>more information</info></meta>
+</label>

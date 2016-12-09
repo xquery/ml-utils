@@ -1,0 +1,8 @@
+{
+	"path-expression": "//e",
+	"path-namespace": [],
+	"permission": [{
+		"role-name": ["manage-user"],
+		"capability": "read"
+	}]
+}

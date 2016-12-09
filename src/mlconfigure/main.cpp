@@ -32,13 +32,21 @@ int main(int argc, char *argv[]) {
             cout << "options" << endl;
             cout << "----------------" << endl;
             cout << "format: " << current.format << endl;
-            cout << "database: " << current.database << endl;
-            cout << "xquery: " << current.xquery << endl;
+            cout << "resource: " << current.resource << endl;
         }
 
-    // create, update and delete resources
+        admin.setResourceUrl("8002", "/manage/v2", string(current.resource));
 
-    cout << "not implemented yet" << endl;
+        std::string line, body;
+        while (std::getline(std::cin, line)) {
+                body.append(line);
+        }
+        if(string(current.resource).find("properties") == 0){
+            admin.executeResourcePut(body, string(current.resource));
+
+        }else{
+            admin.executeResourcePost(body, string(current.resource));
+        }
 
     } catch (std::bad_alloc) {
         cout << "Error with ml-config" << endl;

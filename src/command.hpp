@@ -109,6 +109,16 @@ public:
         }
     }
 
+    virtual void setResourceUrl(string port,
+                            string root,
+                            string resource)
+    {
+        checkConfig();
+        url = config.protocol + "://" + config.host + ":" + port + root+ "/" + resource +"" ;
+        cout << "Setting url to: " << url << endl;
+
+    }
+
     virtual void setLoadUrl(string port,
                            string root,
                            string uri)
@@ -177,6 +187,7 @@ public:
         }
 
         if (!view.empty()) {
+
             url += "view=" + view;
         }
 
@@ -410,6 +421,71 @@ public:
             CURLMcode code;
             while (1) {
                 code = curl_multi_perform(curlm, &handle_count);
+                if (handle_count == 0) {
+                    curl_global_cleanup();
+                    break;
+                }
+            }
+            //std::cout << readBuffer << std::endl;
+        }
+
+        curl_global_cleanup();
+
+        return EXIT_SUCCESS;
+
+    };
+
+    virtual int executeResourcePost(string body, string format) {
+
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
+
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
+
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+
+        struct curl_slist *headers = NULL; // init to NULL is important
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: text/html");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
+        if(format == "xml"){
+            headers = curl_slist_append(headers, "Content-Type: application/xml");
+        }else{
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+        }
+
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+
+            curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, body.c_str());
+            curl_easy_setopt(curl1, CURLOPT_POSTFIELDSIZE, body.length());
+            curl_easy_setopt(curl1, CURLOPT_POST, 1);
+
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+
+            curl_multi_add_handle(curlm, curl1);
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
 
                 if (handle_count == 0) {
                     curl_global_cleanup();
@@ -426,4 +502,71 @@ public:
 
     };
 
+    virtual int executeResourcePut(string body, string format) {
+
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
+
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
+
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+
+        struct curl_slist *headers = NULL; // init to NULL is important
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: text/html");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
+        if(format == "xml"){
+            headers = curl_slist_append(headers, "Content-Type: application/xml");
+        }else{
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+        }
+
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+
+            curl_easy_setopt(curl1, CURLOPT_UPLOAD, 1L);
+            curl_easy_setopt(curl1, CURLOPT_PUT, 1L);
+
+            curl_easy_setopt(curl1, CURLOPT_READDATA, body.c_str());
+
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+
+            curl_multi_add_handle(curlm, curl1);
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
+
+                if (handle_count == 0) {
+                    curl_global_cleanup();
+
+                    break;
+                }
+            }
+            //std::cout << readBuffer << std::endl;
+        }
+
+        curl_global_cleanup();
+
+        return EXIT_SUCCESS;
+
+    };
 };

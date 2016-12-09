@@ -1,0 +1,20 @@
+{
+    "role-name": "wwi-flying-ace",
+    "description": "Flies Sopwith Camel, fights Red Baron",
+    "compartment": "aviation",
+    "external-name": [
+        "ace"
+    ],
+    "role": [
+        "xinclude",
+        "rest-reader",
+        "manage-user"
+    ],
+    "permission": [
+        {
+            "role-name": "rest-reader",
+            "capability": "execute"
+        }
+    ]
+
+}

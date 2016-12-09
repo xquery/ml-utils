@@ -1,0 +1,6 @@
+<database-properties xmlns="http://marklogic.com/manage">
+  <database-name>test1</database-name>
+  <forests>
+    <forest>test1</forest>
+  </forests>
+</database-properties>

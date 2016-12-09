@@ -1,0 +1,9 @@
+{
+  "role": [
+    "manage-admin"
+  ],
+  "modules-database": "Modules",
+  "document-uri": "\/module\/path\/name",
+  "local-name": "local",
+  "namespace": "http:\/\/example.com\/uri"
+}

@@ -1,0 +1,7 @@
+<privilege-properties xmlns="http://marklogic.com/manage">
+  <privilege-name></privilege-name>
+  <action></action>
+  <roles>
+    <role></role>
+  </roles>
+</privilege-properties>

@@ -1,0 +1,15 @@
+{
+  "task-enabled":true,
+  "task-path": "/path/to/query.xqy",
+  "task-root": "/",
+  "task-type": "weekly",
+  "task-period": 2,
+  "task-day": [
+    "tuesday"
+  ],
+  "task-start-time": "12:00:00-05:00",
+  "task-timestamp": "2014-08-21T13:57:16.009463-05:00",
+  "task-database": "Documents",
+  "task-modules": "Modules",
+  "task-user": "manageadmin"
+}

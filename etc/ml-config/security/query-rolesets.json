@@ -1,0 +1,7 @@
+{
+	"query-roleset": [{
+		"role-name": ["manage-admin"]
+	}, {
+		"role-name": ["rest-writer"]
+	}]
+}

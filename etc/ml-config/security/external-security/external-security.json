@@ -1,0 +1,13 @@
+{
+  "external-security-name": "LDAP-security2",
+  "description": "Some description",
+  "authentication": "ldap",
+  "cache-timeout": "300",
+  "authorization": "ldap",
+  "ldap-server-uri": "LDAP uri",
+  "ldap-base": "LDAP base for user lookup",
+  "ldap-attribute": "LDAP attribute for user lookup",
+  "ldap-default-user": "default",
+  "ldap-password": "password",
+  "ldap-bind-method": "simple"
+}

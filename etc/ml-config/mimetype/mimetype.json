@@ -1,0 +1,4 @@
+{"name": "application/xml-apitest",
+ "extension": ["apitest", "apitest2" ],
+ "format": "xml"
+}

@@ -1,0 +1,5 @@
+<export-wallet-operation xmlns="http://marklogic.com/manage/security">
+  <operation>export-wallet</operation>
+  <filename>/tmp/mywallet.txt</filename>
+  <password>mypassword</password>
+</export-wallet-operation>

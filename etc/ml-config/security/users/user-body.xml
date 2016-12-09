@@ -1,0 +1,20 @@
+<user-properties xmlns="http://marklogic.com/manage">
+  <user-name></user-name>
+  <password></password>
+  <description></description>
+  <external-names>
+    <external-name></external-name>
+  </external-names>
+  <roles>
+    <role></role>
+  </roles>
+  <permissions>
+    <permission>
+      <role-name></role-name>
+      <capability></capability>
+    </permission>
+  </permissions>
+  <collections>
+    <collection></collection>
+  </collections>
+</user-properties>

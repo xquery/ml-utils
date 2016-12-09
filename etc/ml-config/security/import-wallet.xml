@@ -1,0 +1,5 @@
+<import-wallet-operation xmlns="http://marklogic.com/manage/security">
+  <operation>import-wallet</operation>
+  <filename>/tmp/mywallet.txt</filename>
+  <password>mypassword</password>
+</import-wallet-operation>

@@ -1,0 +1,5 @@
+{
+    "operation":"import-wallet",
+    "filename":"/tmp/mywallet.tmp1",
+    "password":"mypassword"
+}

@@ -1,0 +1,15 @@
+{
+      "task-enabled":true,
+      "task-path": "/MarkLogic/flexrep/tasks/push-local-forests.xqy",
+      "task-root": "Modules/",
+      "task-type": "minutely",
+      "task-period": 1,
+      "task-day": [
+        "monday","tuesday","wednesday","thursday","friday","saturday","sunday"
+      ],
+      "task-start-time": "11:30:00-05:00",
+      "task-timestamp": "2015-11-02T10:27:00.126435",
+      "task-database": "Documents",
+      "task-modules": "Modules",
+      "task-user": "admin"
+    }

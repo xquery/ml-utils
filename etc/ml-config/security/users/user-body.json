@@ -1,0 +1,9 @@
+{
+    "user-name": "Joe",
+    "description": "My Manage Admin User",
+    "password": "mypasswd",
+    "role":
+    [
+        "manage-admin"
+    ]
+}
