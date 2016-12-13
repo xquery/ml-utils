@@ -81,6 +81,8 @@ option.
 ### ml-hist
 retrieve history metrics from cluster/server
 
+__NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
+
 ```
 >./ml-hist -h
 
@@ -113,8 +115,6 @@ use custom gnuplot with start and end time range
 ```
 >  ./ml-hist -f json -s 2015-03-21T17:38:00 -e 2017-03-21T17:38:00 -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
 ```
-
-__NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
 
 ### ml-status
 retrieve resource statuses
