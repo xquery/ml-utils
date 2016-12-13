@@ -7,7 +7,7 @@ Small collection of home grown command line utilities for working with MarkLogic
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
 * ml-load: load data
-* ml-config: manage MarkLogicl
+* ml-config: manage MarkLogic
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
