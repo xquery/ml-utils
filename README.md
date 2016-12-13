@@ -7,6 +7,7 @@ Small collection of home grown command line utilities for working with MarkLogic
 * ml-xq: evaluate xquery
 * ml-js: evaluate javascript
 * ml-load: load data
+* ml-config: manage MarkLogicl
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
@@ -24,6 +25,8 @@ host=localhost
 protocol=http
 user=admin
 pass=admin
+port=8002
+path=/manage/v2
 ```
         
 2) copy bin/* to your bin directory or amend PATH
@@ -55,17 +58,17 @@ evaluate js
 > ./ml-xq < test.xq
 ```
 
-to configure MarkLogic
-```
-> ml-config
-```
-
 load data
 ```
 > ./ml-load -u /mytest.json -f /etc/test.json -d Documents
 ```
 
-If your .ml-util is not in home directory then you will need to suppy via -c commandline
+manage MarkLogic
+```
+> ml-config restart-local-cluster
+```
+
+If your .ml-utils is not in home directory then you will need to suppy via -c commandline
 option.
 
 ```
@@ -311,6 +314,47 @@ managing sequence output
 ```
 > echo "(1,2,3,4)" | ./ml-xq -r 
 ```
+
+### ml-config
+manage MarkLogic
+
+```
+> ./ml-config -h
+
+ml-config commands [options]
+ commands : restart-local-cluster | get | get-properties | create | update | install
+    -c    : config file (ex. /home/jfuller/.ml-utils)
+    -r    : {resources}/{resource-name} directory
+    -v    : verbose (show http call)
+    -q    : quiet (suppress banner)
+
+```
+
+restart MarkLogic cluster
+```
+> ./ml-config restart-local-cluster
+```
+
+get list of databases
+```
+>
+```
+
+create forest
+```
+>
+```
+
+update forest
+```
+>
+```
+
+install set of resources
+```
+>
+```
+
 
 ## Build and deploy
 This set of utilities should build the application on linux, osx and windows platforms.

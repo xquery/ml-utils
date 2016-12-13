@@ -20,22 +20,12 @@ int main(int argc, char *argv[]) {
         Config config = log.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "database: " << current.database << endl;
-            cout << "xquery: " << current.xquery << endl;
+            log.displayargs();
+            log.displayconfig();
         }
 
-        log.setUrl("8002", "/manage/v2/logs", "", "");
-        log.setLogUrl("8002", "/manage/v2/logs",current.resource,current.start,current.end,current.regex,current.host);
+        log.setUrl(config.port, config.path + "/logs", "", "");
+        log.setLogUrl(config.port, config.path + "/logs",current.resource,current.start,current.end,current.regex,current.host);
         log.execute();
 
         string result = log.getReadBuffer();

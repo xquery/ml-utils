@@ -18,21 +18,11 @@ int main(int argc, char *argv[]) {
         Config config = query.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "database: " << current.database << endl;
-            cout << "js: " << current.js << endl;
+            query.displayargs();
+            query.displayconfig();
         }
 
-        query.setUrl("8000", "/v1/eval", "", "");
+        query.setUrl(config.port, "/v1/eval", "", "");
         if (strcmp(current.js, "") == 0) {
             std::string line, qry;
             while (std::getline(std::cin, line)) {

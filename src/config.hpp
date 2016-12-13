@@ -42,6 +42,8 @@ struct Config {
     string pass;
     string host;
     string protocol;
+    string port;
+    string path;
 };
 
 void loadConfig(Config &config, string path) {
@@ -74,5 +76,8 @@ void loadConfig(Config &config, string path) {
             sin >> config.host;
         else if (line.find("protocol") != -1)
             sin >> config.protocol;
-    }
+        else if (line.find("port") != -1)
+            sin >> config.port;
+        else if (line.find("path") != -1)
+            sin >> config.path;    }
 }

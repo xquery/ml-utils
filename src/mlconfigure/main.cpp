@@ -22,30 +22,42 @@ int main(int argc, char *argv[]) {
         Config config = admin.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "resource: " << current.resource << endl;
+            admin.displayargs();
+            admin.displayconfig();
         }
 
-        admin.setResourceUrl("8002", "/manage/v2", string(current.resource));
+        string command = current.command;
+        string resource = current.resource;
 
-        std::string line, body;
-        while (std::getline(std::cin, line)) {
-                body.append(line);
-        }
-        if(string(current.resource).find("properties") == 0){
-            admin.executeResourcePut(body, string(current.resource));
-
+        if (!command.empty()) {
+            cout << command << " " << resource << endl;
+            if (command == "restart-local-cluster") {
+                admin.setResourceUrl(config.port, config.path, "");
+                admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
+            }else if(command == "get"){
+                admin.setUrl(config.port, config.path, current.resource, "default");
+                admin.execute();
+            }else if(command == "get-properties") {
+                admin.setUrl(config.port, config.path, resource + "/properties", "default");
+                admin.execute();
+            }else if(command == "create"){
+                string line, body;
+                while (getline(std::cin, line)) {
+                    body.append(line);
+                }
+                admin.setResourceUrl(config.port, config.path, string(current.resource));
+                admin.executeResourcePost(body,resource);
+            }else if(command == "update"){
+                string line, body;
+                while (getline(std::cin, line)) {
+                    body.append(line);
+                }
+                admin.setResourceUrl(config.port, config.path, resource + "/properties");
+                cout << body << endl;
+                //admin.executeResourcePut(body, resource);
+            }
+            cout << admin.getReadBuffer() << endl;
         }else{
-            admin.executeResourcePost(body, string(current.resource));
         }
 
     } catch (std::bad_alloc) {

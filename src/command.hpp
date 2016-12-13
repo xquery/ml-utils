@@ -22,7 +22,8 @@
 
 struct CommandLineArgs {
     CommandLineArgs()
-            : config(""),
+            : command(""),
+              config(""),
               format(""),
               period(""),
               start(""),
@@ -46,7 +47,7 @@ struct CommandLineArgs {
 
     void check(const char *progname) {}
 
-    const char *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
+    const char *command, *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
     bool quiet, verbose, raw;
 };
 
@@ -57,11 +58,21 @@ private:
     CommandLineArgs current;
     string readBuffer;
 
+    struct curl_slist *headers = NULL;
+
 public:
     string url;
 
     Command() {
+        // set defaults
+        config.user = "admin";
+        config.pass = "admin";
+        config.host = "localhost";
+        config.protocol = "http";
+        config.path = "/manage/v2";
+        config.port = "8002";
         loadConfig(config, current.config);
+        setheaders();
     };
 
     virtual ~Command() {
@@ -243,6 +254,14 @@ public:
 
     }
 
+    void setheaders(){
+        headers = curl_slist_append(headers, "Accept: text/plain");
+        headers = curl_slist_append(headers, "Accept: text/html");
+        headers = curl_slist_append(headers, "Accept: application/xml");
+        headers = curl_slist_append(headers, "Accept: application/js");
+        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
+    };
+
     virtual int execute() {
 
         CURLM *curlm;
@@ -253,13 +272,6 @@ public:
         curl1 = curl_easy_init();
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
-
-        struct curl_slist *headers = NULL;
-        headers = curl_slist_append(headers, "Accept: text/html");
-        headers = curl_slist_append(headers, "Accept: text/plain");
-        headers = curl_slist_append(headers, "Accept: application/xml");
-        headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
@@ -316,14 +328,6 @@ public:
         curl1 = curl_easy_init();
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
-
-
-        struct curl_slist *headers = NULL; // init to NULL is important
-        headers = curl_slist_append(headers, "Accept: text/plain");
-        headers = curl_slist_append(headers, "Accept: text/html");
-        headers = curl_slist_append(headers, "Accept: application/xml");
-        headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
@@ -387,13 +391,6 @@ public:
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
-        struct curl_slist *headers = NULL; // init to NULL is important
-        headers = curl_slist_append(headers, "Accept: text/plain");
-        headers = curl_slist_append(headers, "Accept: text/html");
-        headers = curl_slist_append(headers, "Accept: application/xml");
-        headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
-
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
 
@@ -437,6 +434,8 @@ public:
 
     virtual int executeResourcePost(string body, string format) {
 
+        long http_code = 0;
+
         CURLM *curlm;
         int handle_count;
         curlm = curl_multi_init();
@@ -446,19 +445,14 @@ public:
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
-        struct curl_slist *headers = NULL; // init to NULL is important
-        headers = curl_slist_append(headers, "Accept: text/plain");
-        headers = curl_slist_append(headers, "Accept: text/html");
-        headers = curl_slist_append(headers, "Accept: application/xml");
-        headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
         if(format == "xml"){
-            headers = curl_slist_append(headers, "Content-Type: application/xml");
+            curl_slist_append(headers, "Content-Type: application/xml");
         }else{
-            headers = curl_slist_append(headers, "Content-Type: application/json");
+            curl_slist_append(headers, "Content-Type: application/json");
         }
 
         if (curl1) {
+
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
 
             curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
@@ -480,24 +474,22 @@ public:
             curl_easy_setopt(curl1, CURLOPT_POSTFIELDSIZE, body.length());
             curl_easy_setopt(curl1, CURLOPT_POST, 1);
 
+            curl_easy_getinfo (curl1, CURLINFO_RESPONSE_CODE, &http_code);
+
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
 
             curl_multi_add_handle(curlm, curl1);
             CURLMcode code;
             while (1) {
                 code = curl_multi_perform(curlm, &handle_count);
-
                 if (handle_count == 0) {
                     curl_global_cleanup();
-
                     break;
                 }
             }
-            //std::cout << readBuffer << std::endl;
         }
 
         curl_global_cleanup();
-
         return EXIT_SUCCESS;
 
     };
@@ -513,12 +505,6 @@ public:
 
         curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
-        struct curl_slist *headers = NULL; // init to NULL is important
-        headers = curl_slist_append(headers, "Accept: text/plain");
-        headers = curl_slist_append(headers, "Accept: text/html");
-        headers = curl_slist_append(headers, "Accept: application/xml");
-        headers = curl_slist_append(headers, "Accept: application/js");
-        headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
         if(format == "xml"){
             headers = curl_slist_append(headers, "Content-Type: application/xml");
         }else{
@@ -569,4 +555,35 @@ public:
         return EXIT_SUCCESS;
 
     };
+
+    int displayargs() {
+        cout << "----------------" << endl;
+        cout << "options" << endl;
+        cout << "----------------" << endl;
+        cout << "format: " << current.format << endl;
+        cout << "database: " << current.database << endl;
+        cout << "xquery: " << current.xquery << endl;
+        cout << "format: " << current.format << endl;
+        cout << "period: " << current.period << endl;
+        cout << "start: " << current.start << endl;
+        cout << "end: " << current.end << endl;
+        cout << "metric: " << current.metric << endl;
+        cout << "resource: " << current.resource << endl;
+        cout << "output: " << current.output << endl;
+        cout << "gnuplot: " << current.gnuplot << endl;
+        return EXIT_SUCCESS;
+    };
+
+    int displayconfig() {
+        cout << "----------------" << endl;
+        cout << "config" << endl;
+        cout << "----------------" << endl;
+        cout << "user: " << config.user << endl;
+        cout << "pass: " << config.pass << endl;
+        cout << "host: " << config.host << endl;
+        return EXIT_SUCCESS;
+    };
+
 };
+
+

@@ -31,4 +31,5 @@ public:
     virtual CommandLineArgs options(int n_opts, char *opts[]);
 
     virtual int usage(const char *progname);
+
 };

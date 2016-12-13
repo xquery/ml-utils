@@ -112,28 +112,11 @@ int main(int argc, char *argv[]) {
         Config config = history.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "config: " << current.config << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "period: " << current.period << endl;
-            cout << "start: " << current.start << endl;
-            cout << "end: " << current.end << endl;
-            cout << "metric: " << current.metric << endl;
-            cout << "resource: " << current.resource << endl;
-            cout << "output: " << current.output << endl;
-            cout << "gnuplot: " << current.gnuplot << endl;
+            history.displayargs();
+            history.displayconfig();
         }
 
-        history.setUrl("8002", "/manage/v2", current.resource, "metrics");
+        history.setUrl(config.port, config.path, current.resource, "metrics");
 
         history.execute();
 

@@ -1,0 +1,15 @@
+This set of utilities should build the application on linux, osx and windows platforms.
+
+>cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+
+Note that running cmake twill pull down dependencies.
+
+and to create a release package
+
+>cpack3 --config CPackConfig.cmake
+
+To build you may have to install some additional deps:
+
+yum install epel-release
+yum install cmake3
+yum install curl-devel

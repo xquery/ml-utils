@@ -26,20 +26,11 @@ int main(int argc, char *argv[]) {
         Config config = status.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "resource: " << current.resource << endl;
+            status.displayargs();
+            status.displayconfig();
         }
 
-        status.setUrl("8002", "/manage/v2", current.resource, "status");
+        status.setUrl(config.port, config.path, current.resource, "status");
 
         status.execute();
         string result = status.getReadBuffer();

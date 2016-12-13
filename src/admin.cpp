@@ -37,7 +37,7 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
             usage(opts[0]);
             exit(1);
         } else {
-            //usage(opts[0]);
+            args.command= opts[i];
         }
     }
     args.check(opts[0]);
@@ -57,7 +57,8 @@ int Admin::usage(const char *progname) {
 
     cout << "ml-utils: ml-config 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
     cout << "configure MarkLogic" << endl;
-    cout << ">" << name << " resource directory [options]" << endl;
+    cout << ">" << name << " command [options]" << endl;
+    cout << "   [command]    : restart-local-cluster | get | get-properties | create | update | install" << endl;
     cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
     cout << "    -r    : {resources}/{resource-name} directory" << endl;
     cout << "    -v    : verbose (show http call)" << endl;
