@@ -357,13 +357,13 @@ install set of resources
 
 
 ## Build and deploy
-This set of utilities should build the application on linux, osx and windows platforms.
+To build this set of utilities on linux, osx and windows platforms.
 
 ```
 >cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
 ```
 
-Note that running cmake twill pull down dependencies.
+Note that running cmake will pull down dependencies.
 
 and to create a release package
 ```
