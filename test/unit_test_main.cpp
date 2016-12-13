@@ -2,8 +2,9 @@
 #include "unit_test_load.cpp"
 #include "unit_test_query.cpp"
 #include "unit_test_status.cpp"
-#include "unit_test_configure.cpp"
 #include "unit_test_log.cpp"
+#include "unit_test_configure.cpp"
+#include "unit_test_browse.cpp"
 
 #include <gtest/gtest.h>
 

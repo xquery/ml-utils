@@ -8,6 +8,7 @@ Small collection of home grown command line utilities for working with MarkLogic
 * ml-js: evaluate javascript
 * ml-load: load data
 * ml-config: manage MarkLogic
+* ml-browse: browse resources
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
@@ -318,6 +319,8 @@ managing sequence output
 ### ml-config
 manage MarkLogic
 
+TBD
+
 ```
 > ./ml-config -h
 
@@ -355,6 +358,21 @@ install set of resources
 >
 ```
 
+### ml-browse
+TBD browse resources
+
+```
+> ./ml-browse -h
+
+>ml-browse [options] - browse resources
+    -c    : config file (ex. /home/jfuller/.ml-utils)
+    -u    : uri
+    -f    : filename to upload
+    -r    : resources
+    -v    : verbose (show http call)
+    -q    : quiet (suppress banner)
+
+```
 
 ## Build and deploy
 To build this set of utilities on linux, osx and windows platforms.

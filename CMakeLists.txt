@@ -74,8 +74,9 @@ add_executable(ml-xq src/mlxq/main.cpp)
 add_executable(ml-js src/mljs/main.cpp)
 add_executable(ml-load src/mlload/main.cpp)
 add_executable(ml-status src/mlstatus/main.cpp)
-add_executable(ml-config src/mlconfigure/main.cpp)
 add_executable(ml-log src/mllog/main.cpp)
+add_executable(ml-config src/mlconfigure/main.cpp)
+add_executable(ml-browse src/mlbrowse/main.cpp)
 
 # link curl
 target_link_libraries(ml-hist curl)
@@ -85,6 +86,7 @@ target_link_libraries(ml-load curl)
 target_link_libraries(ml-status curl)
 target_link_libraries(ml-config curl)
 target_link_libraries(ml-log curl)
+target_link_libraries(ml-browse curl)
 
 # define what to include in release
 install(TARGETS ${INS_TARGETS}
@@ -109,6 +111,8 @@ install(TARGETS ml-xq RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-js RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-log RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-load RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS ml-config RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS ml-browse RUNTIME DESTINATION bin COMPONENT applications)
 
 # cpack defs
 include (CPack)
