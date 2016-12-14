@@ -1,4 +1,6 @@
 # ml-utils
+[![Build Status](https://travis-ci.org/xquery/ml-utils.svg?branch=master)](https://travis-ci.org/xquery/ml-utils)
+
 Small collection of home grown command line utilities for working with MarkLogic.
 
 * ml-log: retrieve server logs
