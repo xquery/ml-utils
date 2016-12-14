@@ -24,19 +24,19 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
         if(optstr == "--host"){
             ++i;
             args.chost = opts[i];
-        }else if (opts[i][1] == '--port') {
+        }else if (optstr == "--port") {
             ++i;
             args.format = opts[i];
-        }else if (opts[i][1] == '--user') {
+        }else if (optstr == "--user") {
             ++i;
             args.cuser = opts[i];
-        }else if (opts[i][1] == '--pass') {
+        }else if (optstr == "--pass") {
             ++i;
             args.cpass = opts[i];
-        }else if (opts[i][1] == '--path') {
+        }else if (optstr == "--path") {
             ++i;
             args.cpath = opts[i];
-        }else if (opts[i][1] == '--protocol') {
+        }else if (optstr == "--protocol") {
             ++i;
             args.cprotocol = opts[i];
         }else if (opts[i][1] == 'f') {

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.2.2)
 project(ml_util)
 
 set (ML_UTIL_VERSION_MAJOR 0)
