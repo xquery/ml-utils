@@ -68,7 +68,7 @@ int Admin::usage(const char *progname) {
     cerr << "ml-utils: ml-config 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
          << "configure MarkLogic\n"
          << ">" << name << " command [options]\n"
-         << "   [command] : restart-local-cluster | get | get-properties | create | update | delete | install\n"
+         << "   [command] : restart | get | get-properties | create | update | delete | install\n"
          << "    -c       : config file (ex. /home/jfuller/.ml-utils\n"
          << "    -r       : {resources}/{resource-name} directory\n"
          << "    -v       : verbose (show http call)\n"

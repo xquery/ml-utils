@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
         string resource = current.resource;
 
         if (!command.empty()) {
-            if (command == "restart-local-cluster") {
+            if (command == "restart") {
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             }else if(command == "get"){
