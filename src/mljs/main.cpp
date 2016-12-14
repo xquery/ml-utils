@@ -33,46 +33,48 @@ int main(int argc, char *argv[]) {
             query.executeQueryPost("javascript", current.js);
         }
 
-        string result = query.getReadBuffer();
+        if(!current.quiet) {
 
-        // count number of lines
-        std::stringstream cc(result);
-        std::string un;
-        int countline = 0;
-        while (std::getline(cc, un, '\n')) {
-            countline++;
-        }
+            string result = query.getReadBuffer();
 
-        if (strcmp(current.format, "json") == 0) {
-            std::stringstream ss(result);
-            std::string to;
+            // count number of lines
+            std::stringstream cc(result);
+            std::string un;
+            int countline = 0;
+            while (std::getline(cc, un, '\n')) {
+                countline++;
+            }
 
-            if (!result.empty()) {
-                int count = 0;
-                while (std::getline(ss, to, '\n')) {
-                    if (count > 4 && count != countline - 1) {
-                        cout << to << endl;
+            if (strcmp(current.format, "json") == 0) {
+                std::stringstream ss(result);
+                std::string to;
+
+                if (!result.empty()) {
+                    int count = 0;
+                    while (std::getline(ss, to, '\n')) {
+                        if (count > 4 && count != countline - 1) {
+                            cout << to << endl;
+                        }
+                        count++;
+
                     }
-                    count++;
+                }
+            } else {
+                std::stringstream ss(result);
+                std::string to;
 
+                if (!result.empty()) {
+                    int count = 0;
+                    while (std::getline(ss, to, '\n')) {
+                        if (count > 4 && count != countline - 1) {
+                            cout << to << endl;
+                        }
+                        count++;
+
+                    }
                 }
             }
-        } else {
-            std::stringstream ss(result);
-            std::string to;
-
-            if (!result.empty()) {
-                int count = 0;
-                while (std::getline(ss, to, '\n')) {
-                    if (count > 4 && count != countline - 1) {
-                        cout << to << endl;
-                    }
-                    count++;
-
-                }
-            }
         }
-
     } catch (std::bad_alloc) {
         cout << "Error with ml-js" << endl;
     }

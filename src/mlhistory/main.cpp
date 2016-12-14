@@ -159,7 +159,7 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        if (current.quiet) {
+        if (!current.quiet) {
 
             if (strcmp(current.output, "csv") == 0) {
                 Document doc;

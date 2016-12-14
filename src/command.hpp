@@ -40,7 +40,7 @@ struct CommandLineArgs {
               js(""),
               output(""),
               gnuplot(""),
-              quiet(true),
+              quiet(false),
               verbose(false),
               raw(false) {
     }

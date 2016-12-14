@@ -30,7 +30,6 @@ int main(int argc, char *argv[]) {
         string resource = current.resource;
 
         if (!command.empty()) {
-            cout << command << " " << resource << endl;
             if (command == "restart-local-cluster") {
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
@@ -55,8 +54,12 @@ int main(int argc, char *argv[]) {
                 admin.setResourceUrl(config.port, config.path, resource + "/properties");
                 cout << body << endl;
                 //admin.executeResourcePut(body, resource);
+            }else if(command == "delete"){
+
             }
-            cout << admin.getReadBuffer() << endl;
+            if(!current.quiet) {
+                cout << admin.getReadBuffer() << endl;
+            }
         }else{
         }
 

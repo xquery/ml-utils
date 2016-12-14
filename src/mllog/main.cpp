@@ -28,14 +28,14 @@ int main(int argc, char *argv[]) {
         log.setLogUrl(config.port, config.path + "/logs",current.resource,current.start,current.end,current.regex,current.host);
         log.execute();
 
-        string result = log.getReadBuffer();
-
-        if (strcmp(current.format, "json") == 0) {
-            cout << result << endl;
-        } else {
-            cout << result << endl;
+        if(!current.quiet) {
+            string result = log.getReadBuffer();
+            if (strcmp(current.format, "json") == 0) {
+                cout << result << endl;
+            } else {
+                cout << result << endl;
+            }
         }
-
     } catch (std::bad_alloc) {
         cout << "Error with ml-log" << endl;
     }

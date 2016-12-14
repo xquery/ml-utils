@@ -33,15 +33,16 @@ int main(int argc, char *argv[]) {
         status.setUrl(config.port, config.path, current.resource, "status");
 
         status.execute();
-        string result = status.getReadBuffer();
 
-        if (strcmp(current.format, "json") == 0) {
+        if(!current.quiet) {
+            string result = status.getReadBuffer();
 
-            cout << result << endl;
-        } else {
-            cout << result << endl;
+            if (strcmp(current.format, "json") == 0) {
+                cout << result << endl;
+            } else {
+                cout << result << endl;
+            }
         }
-
     } catch (std::bad_alloc) {
         cout << "Error with ml-status" << endl;
     }

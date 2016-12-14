@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
             cout << "xquery: " << current.xquery << endl;
         }
 
-        query.setUrl("8000", "/v1/eval", "", "");
+        query.setUrl(config.port, "/v1/eval", "", "");
 
         if (strcmp(current.xquery, "") == 0) {
             std::string line, qry;
