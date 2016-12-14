@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 project(ml_util)
 
 set (ML_UTIL_VERSION_MAJOR 0)
-set (ML_UTIL_VERSION_MINOR 1)
-set (ML_UTIL_VERSION_PATCH 2)
+set (ML_UTIL_VERSION_MINOR 2)
+set (ML_UTIL_VERSION_PATCH 0)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 SET (CTEST_ENVIRONMENT "LC_ALL=C")
@@ -97,7 +97,6 @@ install(TARGETS ${INS_TARGETS}
 install(FILES ${CMAKE_SOURCE_DIR}/LICENSE DESTINATION . COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/README.md DESTINATION . COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/VERSION DESTINATION . COMPONENT applications)
-install(FILES ${CMAKE_SOURCE_DIR}/etc/.ml-utils DESTINATION . COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/etc/.ml-utils DESTINATION . COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/etc/.ml-utils DESTINATION etc COMPONENT applications)
 install(FILES ${CMAKE_SOURCE_DIR}/etc/basic.gnuplot DESTINATION etc COMPONENT applications)
