@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 project(ml_util)
 
 set (ML_UTIL_VERSION_MAJOR 0)
-set (ML_UTIL_VERSION_MINOR 9)
-set (ML_UTIL_VERSION_PATCH 0)
+set (ML_UTIL_VERSION_MINOR 1)
+set (ML_UTIL_VERSION_PATCH 2)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 SET (CTEST_ENVIRONMENT "LC_ALL=C")
