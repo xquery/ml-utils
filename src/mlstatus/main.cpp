@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
             }
         }
     } catch (std::bad_alloc) {
-        cout << "Error with ml-status" << endl;
+        cerr << "Error with ml-status" << endl;
     }
     return EXIT_SUCCESS;
 }

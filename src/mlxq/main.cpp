@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
                         count++; }}}}
 
     } catch (std::bad_alloc) {
-        cout << "Error with ml-xq" << endl;
+        cerr << "Error with ml-xq" << endl;
     }
     return EXIT_SUCCESS;
 }

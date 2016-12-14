@@ -40,6 +40,12 @@ struct CommandLineArgs {
               js(""),
               output(""),
               gnuplot(""),
+              chost("localhost"),
+              cport("8002"),
+              cuser("admin"),
+              cpass("admin"),
+              cpath("/manage/v2"),
+              cprotocol("http"),
               quiet(false),
               verbose(false),
               raw(false) {
@@ -47,7 +53,16 @@ struct CommandLineArgs {
 
     void check(const char *progname) {}
 
-    const char *command, *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
+    // config overrides
+    const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass;
+
+    //comand
+    const char *command;
+
+    //options
+    const char *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
+
+    //flags
     bool quiet, verbose, raw;
 };
 
@@ -65,12 +80,12 @@ public:
 
     Command() {
         // set defaults
-        config.user = "admin";
-        config.pass = "admin";
-        config.host = "localhost";
-        config.protocol = "http";
-        config.path = "/manage/v2";
-        config.port = "8002";
+        config.user = current.cuser;
+        config.pass = current.cpass;
+        config.host = current.chost;
+        config.protocol = current.cprotocol;
+        config.path = current.cpath;
+        config.port = current.cport;
         loadConfig(config, current.config);
         setheaders();
     };

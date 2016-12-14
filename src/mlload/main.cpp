@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         load.executeLoadPost(current.filename,body);
 
     } catch (std::bad_alloc) {
-        cout << "Error with ml-load" << endl;
+        cerr << "Error with ml-load" << endl;
     }
     return EXIT_SUCCESS;
 };

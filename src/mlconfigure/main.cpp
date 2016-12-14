@@ -54,17 +54,13 @@ int main(int argc, char *argv[]) {
                 admin.setResourceUrl(config.port, config.path, resource + "/properties");
                 cout << body << endl;
                 //admin.executeResourcePut(body, resource);
-            }else if(command == "delete"){
-
             }
-            if(!current.quiet) {
-                cout << admin.getReadBuffer() << endl;
-            }
+            cout << admin.getReadBuffer() << endl;
         }else{
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with ml-config" << endl;
+        cerr << "Error with ml-config" << endl;
     }
     return EXIT_SUCCESS;
 }

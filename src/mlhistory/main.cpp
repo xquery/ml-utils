@@ -127,6 +127,10 @@ int main(int argc, char *argv[]) {
         string plot = string(current.gnuplot);
         string resource = string(current.resource);
 
+        if(result.empty()){
+            cerr << "no output" << endl;
+        }
+
         if (!plot.empty() || !output.empty()) {
             Document doc;
             doc.Parse(result.c_str());
@@ -191,7 +195,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cout << "Error with ml-hist" << endl;
+        cerr << "Error with ml-hist" << endl;
     }
     return EXIT_SUCCESS;
 }

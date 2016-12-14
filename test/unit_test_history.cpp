@@ -14,7 +14,7 @@ TEST(History,all){
   CommandLineArgs current = hs->getCurrentArgs();
   Config config = hs->getConfig();
   hs->setUrl("8002","/manage/v2","forests","metrics");
-  EXPECT_EQ(hs->getCurrentArgs().quiet,true);
+  EXPECT_EQ(hs->getCurrentArgs().quiet,false);
   hs->execute();
   string result = hs->getReadBuffer();
   EXPECT_FALSE(result.empty());
