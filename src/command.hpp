@@ -584,6 +584,19 @@ public:
         return EXIT_SUCCESS;
     };
 
+    const char* getprogname(const char *progname) {
+        const char *name = progname;
+        while (*progname != 0) {
+            if (*progname == '/' || *progname == '\\') {
+                ++progname;
+                name = progname;
+            } else {
+                ++progname;
+            }
+        }
+        return name;
+    };
+
 };
 
 

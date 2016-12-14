@@ -52,23 +52,14 @@ CommandLineArgs Status::options(int n_opts, char *opts[]) {
 }
 
 int Status::usage(const char *progname) {
-    const char *name = progname;
-    while (*progname != 0) {
-        if (*progname == '/' || *progname == '\\') {
-            ++progname;
-            name = progname;
-        } else {
-            ++progname;
-        }
-    }
-
-    cout << "ml-utils: ml-status 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
-    cout << "retrieve MarkLogic resource status" << endl;
-    cout << ">" << name << " Resources/resource [options]" << endl;
-    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -f    : format (xml|json)" << endl;
-    cout << "    -r    : resource (databases|forests|servers|hosts) / resource-name" << endl;
-    cout << "    -v    : verbose (show http call)" << endl;
-    cout << "    -q    : quiet (suppress banner)" << endl;
+    const char *name =  getprogname(progname);
+    cerr << "ml-utils: ml-status 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
+         << "retrieve MarkLogic resource status\n"
+         << ">" << name << " Resources/resource [options]\n"
+         << "    -c    : config file (ex. /home/jfuller/.ml-utils)\n"
+         << "    -f    : format (xml|json)\n"
+         << "    -r    : resource (databases|forests|servers|hosts) / resource-name\n"
+         << "    -v    : verbose (show http call)\n"
+         << "    -q    : quiet (suppress banner)\n";
     return EXIT_SUCCESS;
 }

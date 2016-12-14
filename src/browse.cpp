@@ -52,23 +52,14 @@ CommandLineArgs Browse::options(int n_opts, char *opts[]) {
 }
 
 int Browse::usage(const char *progname) {
-    const char *name = progname;
-    while (*progname != 0) {
-        if (*progname == '/' || *progname == '\\') {
-            ++progname;
-            name = progname;
-        } else {
-            ++progname;
-        }
-    }
-
-    cout << "ml-utils: ml-browse 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
-    cout << "browse resources" << endl;
-    cout << ">" << name << " [options]" << endl;
-    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -f    : format (xml|json)" << endl;
-    cout << "    -d    : resource (databases|forests|servers|hosts) / resource-name" << endl;
-    cout << "    -v    : verbose (show http call)" << endl;
-    cout << "    -q    : quiet (suppress banner)" << endl;
+    const char *name =  getprogname(progname);
+    cerr << "ml-utils: ml-browse 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
+         << "browse resources\n"
+         << ">" << name << " [options]\n"
+         << "    -c    : config file (ex. /home/jfuller/.ml-utils)\n"
+         << "    -f    : format (xml|json)\n"
+         << "    -d    : resource (databases|forests|servers|hosts) / resource-name\n"
+         << "    -v    : verbose (show http call)\n"
+         << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
 }

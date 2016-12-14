@@ -72,29 +72,20 @@ CommandLineArgs History::options(int n_opts, char *opts[]) {
 }
 
 int History::usage(const char *progname) {
-    const char *name = progname;
-    while (*progname != 0) {
-        if (*progname == '/' || *progname == '\\') {
-            ++progname;
-            name = progname;
-        } else {
-            ++progname;
-        }
-    }
-
-    cout << "ml-utils: ml-hist 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
-    cout << "retrieve MarkLogic history metrics" << endl;
-    cout << ">" << name << " resources/{resource-name} [options] " << endl;
-    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -f    : format (xml|json)" << endl;
-    cout << "    -p    : period (raw|hour|day)" << endl;
-    cout << "    -s    : start date (ex. 2015-03-21T17:38:00)" << endl;
-    cout << "    -e    : end date (ex. 2015-03-22T17:58:00)" << endl;
-    cout << "    -m    : meter (resource specific)" << endl;
-    cout << "    -r    : resource (databases|forests|servers|hosts) / resource-name" << endl;
-    cout << "    -o    : graph output" << endl;
-    cout << "    -g    : custom gnuplot script" << endl;
-    cout << "    -v    : verbose (show http call)" << endl;
-    cout << "    -q    : quiet (suppress banner)" << endl;
+    const char *name =  getprogname(progname);
+    cerr << "ml-utils: ml-hist 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
+         << "retrieve MarkLogic history metrics\n"
+         << ">" << name << " resources/{resource-name} [options]\n"
+         << "    -c    : config file (ex. /home/jfuller/.ml-utils)\n"
+         << "    -f    : format (xml|json)\n"
+         << "    -p    : period (raw|hour|day)\n"
+         << "    -s    : start date (ex. 2015-03-21T17:38:00)\n"
+         << "    -e    : end date (ex. 2015-03-22T17:58:00)\n"
+         << "    -m    : meter (resource specific)\n"
+         << "    -r    : resource (databases|forests|servers|hosts) / resource-name\n"
+         << "    -o    : graph output\n"
+         << "    -g    : custom gnuplot script\n"
+         << "    -v    : verbose (show http call)\n"
+         << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
 }

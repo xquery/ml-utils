@@ -56,26 +56,15 @@ CommandLineArgs Query::options(int n_opts, char *opts[]) {
 }
 
 int Query::usage(const char *progname) {
-    const char *name = progname;
-    while (*progname != 0) {
-        if (*progname == '/' || *progname == '\\') {
-            ++progname;
-            name = progname;
-        } else {
-            ++progname;
-        }
-    }
-
-    cout << "ml-utils: " << name << " 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils"
-         << endl;
-    cout << "evaluate query" << endl;
-
-    cout << ">" << name << " database [options]" << endl;
-    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -f    : format (xml|json)" << endl;
-    cout << "    -d    : database" << endl;
-    cout << "    -r    : raw output" << endl;
-    cout << "    -v    : verbose (show http call)" << endl;
-    cout << "    -q    : quiet (suppress banner)" << endl;
+    const char *name =  getprogname(progname);
+    cerr << "ml-utils: " << name << " 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
+         << "evaluate query\n"
+         << ">" << name << " database [options]\n"
+         << "    -c    : config file (ex. /home/jfuller/.ml-utils)\n"
+         << "    -f    : format (xml|json)\n"
+         << "    -d    : database\n"
+         << "    -r    : raw output\n"
+         << "    -v    : verbose (show http call)\n"
+         << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
 }

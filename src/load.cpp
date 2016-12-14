@@ -48,25 +48,15 @@ CommandLineArgs Load::options(int n_opts, char *opts[]) {
 }
 
 int Load::usage(const char *progname) {
-    const char *name = progname;
-    while (*progname != 0) {
-        if (*progname == '/' || *progname == '\\') {
-            ++progname;
-            name = progname;
-        } else {
-            ++progname;
-        }
-    }
-
-    cout << "ml-utils: ml-load 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils" << endl;
-    cout << "load data" << endl;
-    cout << ">" << name << " [options] " << endl;
-    cout << "    -c    : config file (ex. /home/jfuller/.ml-utils)" << endl;
-    cout << "    -d    : database " << endl;
-    cout << "    -u    : uri " << endl;
-    cout << "    -f    : filename " << endl;
-    cout << "    -v    : verbose (show http call)" << endl;
-    cout << "    -q    : quiet (suppress banner)" << endl;
-
+    const char *name =  getprogname(progname);
+    cerr << "ml-utils: ml-load 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
+         << "load data\n"
+         << ">" << name << " [options]\n"
+         << "    -c    : config file (ex. /home/jfuller/.ml-utils)\n"
+         << "    -d    : database\n"
+         << "    -u    : uri\n"
+         << "    -f    : filename\n"
+         << "    -v    : verbose (show http call)\n"
+         << "    -q    : quiet (suppress banner)" << endl;
     return EXIT_SUCCESS;
 }
