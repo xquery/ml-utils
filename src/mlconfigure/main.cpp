@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 
         string command = current.command;
         string resource = current.resource;
+        string name = current.name;
 
         if (!command.empty()) {
             if (command == "restart") {
@@ -40,12 +41,31 @@ int main(int argc, char *argv[]) {
                 admin.setUrl(config.port, config.path, resource + "/properties", "default");
                 admin.execute();
             }else if(command == "create"){
+
                 string line, body;
-                while (getline(std::cin, line)) {
-                    body.append(line);
+                if(name.empty()){
+                    while (getline(std::cin, line)) {
+                        body.append(line);
+                    }
                 }
-                admin.setResourceUrl(config.port, config.path, string(current.resource));
-                admin.executeResourcePost(body,resource);
+                admin.setResourceUrl(config.port, config.path, resource);
+                if(body.empty()){
+                    string payload;
+                    if(resource == "forests"){
+                        payload="{\"forest-name\":\""+name+"\"}";
+                    }else if(resource=="databases"){
+                        payload="{\"database-name\":\""+name+"\"}";
+                    }else if(resource=="servers"){
+                        payload="{\"server-name\":\""+name+"\"}";
+                    }else if(resource=="groups"){
+                        payload="{\"group-name\":\""+name+"\"}";
+                    }
+
+                    admin.executeResourcePost(payload,resource);
+
+                }else{
+                    admin.executeResourcePost(body,resource);
+                }
             }else if(command == "update"){
                 string line, body;
                 while (getline(std::cin, line)) {
@@ -54,9 +74,13 @@ int main(int argc, char *argv[]) {
                 admin.setResourceUrl(config.port, config.path, resource + "/properties");
                 cout << body << endl;
                 //admin.executeResourcePut(body, resource);
+            }else if(command == "install"){
+
             }
             cout << admin.getReadBuffer() << endl;
         }else{
+            cout << "test2" << endl;
+
         }
 
     } catch (std::bad_alloc) {

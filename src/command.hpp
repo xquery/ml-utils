@@ -48,6 +48,7 @@ struct CommandLineArgs {
               regex(""),
               metric(""),
               filename(""),
+              name(""),
               resource(""),
               uri(""),
               database(""),
@@ -55,6 +56,7 @@ struct CommandLineArgs {
               host(""),
               xquery(""),
               js(""),
+              payload(""),
               output(""),
               gnuplot(""),
               chost("localhost"),
@@ -74,7 +76,7 @@ struct CommandLineArgs {
     const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass;
 
     //comand
-    const char *command;
+    const char *command, *payload, *name;
 
     //options
     const char *config, *format, *period, *filename, *uri, *start, *end, *regex, *metric, *resource, *database, *group, *host, *xquery, *js, *output, *gnuplot;
@@ -405,7 +407,6 @@ public:
 
     };
 
-
     virtual int executeLoadPost(const char* file, string body) {
 
         FILE *fd;
@@ -518,10 +519,8 @@ public:
                 }
             }
         }
-
         curl_global_cleanup();
         return EXIT_SUCCESS;
-
     };
 
     virtual int executeResourcePut(string body, string format) {

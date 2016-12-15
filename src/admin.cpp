@@ -39,20 +39,26 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
         }else if (optstr == "--protocol") {
             ++i;
             args.cprotocol = opts[i];
-        }else if (opts[i][1] == 'f') {
+        }else if (optstr == "-f") {
             ++i;
             args.format = opts[i];
-        } else if (opts[i][1] == 'q') {
+        }else if (optstr == "-n") {
+            ++i;
+            args.name = opts[i];
+        } else if (optstr == "-q") {
             args.quiet = true;
-        } else if (opts[i][1] == 'r') {
+        } else if (optstr == "-r") {
             ++i;
             args.resource = opts[i];
-        } else if (opts[i][1] == 'c') {
+        } else if (optstr == "-c") {
             ++i;
             args.config = opts[i];
-        } else if (opts[i][1] == 'v') {
+        } else if (optstr == "-p") {
+            ++i;
+            args.payload = opts[i];
+        } else if (optstr == "-v") {
             args.verbose = true;
-        } else if (opts[i][1] == 'h') {
+        } else if (optstr == "-h") {
             usage(opts[0]);
             exit(1);
         } else {
@@ -70,6 +76,8 @@ int Admin::usage(const char *progname) {
          << ">" << name << " command [options]\n"
          << "   [command] : restart | get | get-properties | create | update | delete | install\n"
          << "    -c       : config file (ex. /home/jfuller/.ml-utils\n"
+         << "    -p       : payload path \n"
+         << "    -n       : name \n"
          << "    -r       : {resources}/{resource-name} directory\n"
          << "    -v       : verbose (show http call)\n"
          << "    -q       : quiet (suppress banner)" << endl;
