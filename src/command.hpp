@@ -585,6 +585,73 @@ public:
 
     };
 
+    virtual int executeInstallPost(string filename, string format) {
+        std::ifstream ifs(filename);
+        string body = string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+        CURLM *curlm;
+        int handle_count;
+        curlm = curl_multi_init();
+
+        CURL *curl1 = NULL;
+        curl1 = curl_easy_init();
+
+        struct curl_httppost *post = NULL;
+        struct curl_httppost *last = NULL;
+
+        if (current.verbose) {
+            curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+        } else {
+            curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+        }
+        if(format == "xml"){
+            headers = curl_slist_append(headers, "Content-Type: application/xml");
+        }else{
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+        }
+
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+
+        if (curl1) {
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
+
+            curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, body.c_str());
+            curl_easy_setopt(curl1, CURLOPT_POST, 1L);
+
+            curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
+
+            curl_multi_add_handle(curlm, curl1);
+            CURLMcode code;
+            while (1) {
+                code = curl_multi_perform(curlm, &handle_count);
+                if (handle_count == 0) {
+                    curl_global_cleanup();
+                    break;
+                }
+            }
+            //std::cout << readBuffer << std::endl;
+        }
+
+        curl_global_cleanup();
+        return EXIT_SUCCESS;
+
+    };
+
     int displayargs() {
         cout << "----------------" << endl;
         cout << "options" << endl;

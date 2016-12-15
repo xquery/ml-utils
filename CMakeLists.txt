@@ -56,7 +56,6 @@ endif()
 include_directories(${rapidjson_SOURCE_DIR}/include)
 include_directories(${gnuplot-cpp_SOURCE_DIR})
 
-
 # setup testing
 enable_testing()
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -68,7 +67,6 @@ endif()
 add_executable(runAllTests test/unit_test_main.cpp)
 target_link_libraries(runAllTests gtest gmock_main pthread curl)
 add_test( runTests build/runAllTests )
-
 add_executable(runHistTests test/unit_test_history.cpp)
 target_link_libraries(runHistTests gtest gmock_main pthread curl)
 add_test( runHistTests build/runHistTests )
@@ -118,7 +116,6 @@ install(TARGETS ml-config RUNTIME DESTINATION bin COMPONENT applications)
 install(TARGETS ml-browse RUNTIME DESTINATION bin COMPONENT applications)
 
 # cpack defs
-include (CPack)
 set(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 set(CPACK_COMPONENTS_ALL applications)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MarkLogic commandline utilities")
@@ -129,3 +126,5 @@ set (CPACK_PACKAGE_VERSION_MAJOR "${ML_UTIL_VERSION_MAJOR}")
 set (CPACK_PACKAGE_VERSION_MINOR "${ML_UTIL_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${ML_UTIL_VERSION_PATCH}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
+set(CPACK_SOURCE_GENERATOR "RPM")
+include(CPack)

@@ -1,6 +1,6 @@
 {
-	"database-name": "Documents",
-	"forest": ["Documents", "2012-0001", "2012-0002", "2012-0003"],
+	"database-name": "myDocuments",
+	"forest": [],
 	"security-database": "Security",
 	"schema-database": "Schemas",
 	"triggers-database": "Triggers",

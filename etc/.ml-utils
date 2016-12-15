@@ -7,5 +7,5 @@ port=8002
 path=/manage/v2
 
 # ml-config properties location
-ml-config=ml-config
+ml-config=etc/ml-config
 
