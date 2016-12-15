@@ -158,8 +158,6 @@ public:
     {
         checkConfig();
         url = config.protocol + "://" + config.host + ":" + port + root+ "/" + resource +"" ;
-        cout << "Setting url to: " << url << endl;
-
     }
 
     virtual void setLoadUrl(string port,

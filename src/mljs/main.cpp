@@ -55,10 +55,7 @@ int main(int argc, char *argv[]) {
                         if (count > 4 && count != countline - 1) {
                             cout << to << endl;
                         }
-                        count++;
-
-                    }
-                }
+                        count++; }}
             } else {
                 std::stringstream ss(result);
                 std::string to;
@@ -69,10 +66,7 @@ int main(int argc, char *argv[]) {
                         if (count > 4 && count != countline - 1) {
                             cout << to << endl;
                         }
-                        count++;
-
-                    }
-                }
+                        count++; }}
             }
         }
     } catch (std::bad_alloc) {

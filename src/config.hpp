@@ -52,8 +52,6 @@ void loadConfig(Config &config, string path) {
     std::string currentpath = pPath;
     std::string mlutils;
 
-    cout << path << endl;
-
     if (is_file_exist(path)) {
         mlutils = (path).c_str();
     } else if (is_file_exist(currentpath + "/.ml-utils")) {

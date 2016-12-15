@@ -21,18 +21,8 @@ int main(int argc, char *argv[]) {
         Config config = query.getConfig();
 
         if (current.verbose) {
-            cout << "----------------" << endl;
-            cout << "~/.ml-utils" << endl;
-            cout << "----------------" << endl;
-            cout << "user: " << config.user << endl;
-            cout << "pass: " << config.pass << endl;
-            cout << "host: " << config.host << endl;
-            cout << "----------------" << endl;
-            cout << "options" << endl;
-            cout << "----------------" << endl;
-            cout << "format: " << current.format << endl;
-            cout << "database: " << current.database << endl;
-            cout << "xquery: " << current.xquery << endl;
+            query.displayargs();
+            query.displayconfig();
         }
 
         query.setUrl(config.port, "/v1/eval", "", "");
