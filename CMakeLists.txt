@@ -43,12 +43,6 @@ download_project(PROJ                gnuplot-cpp
         ${UPDATE_DISCONNECTED_IF_AVAILABLE}
         )
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-if(NOT DISABLE_TESTS)
-    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
-endif()
-
 # When using CMake 2.8.11 or later, header path dependencies
 # are automatically added to the gtest and gmock targets.
 # For earlier CMake versions, we have to explicitly add the
@@ -62,11 +56,22 @@ endif()
 include_directories(${rapidjson_SOURCE_DIR}/include)
 include_directories(${gnuplot-cpp_SOURCE_DIR})
 
-# tests
-add_executable(runTests test/unit_test_main.cpp)
+
+# setup testing
 enable_testing()
-target_link_libraries(runTests gtest gmock_main pthread curl)
-add_test( runTests build/runTests )
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+if(NOT DISABLE_TESTS)
+    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+endif()
+
+# tests
+add_executable(runAllTests test/unit_test_main.cpp)
+target_link_libraries(runAllTests gtest gmock_main pthread curl)
+add_test( runTests build/runAllTests )
+
+add_executable(runHistTests test/unit_test_history.cpp)
+target_link_libraries(runHistTests gtest gmock_main pthread curl)
+add_test( runHistTests build/runHistTests )
 
 # build executables
 add_executable(ml-hist src/mlhistory/main.cpp)

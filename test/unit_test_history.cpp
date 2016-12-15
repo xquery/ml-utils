@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "../src/history.cpp"
+#include <gtest/gtest.h>
 
 TEST(History,Constructor){
   EXPECT_TRUE(new History());
@@ -19,4 +19,6 @@ TEST(History,all){
   string result = hs->getReadBuffer();
   EXPECT_FALSE(result.empty());
 }
+
+
 
