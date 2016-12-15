@@ -4,3 +4,8 @@
 TEST(StatusTest,TestAllStatusMethods){
   EXPECT_TRUE(new Status());
 }
+
+TEST(StatusTest,TestUsage){
+  Status* status = new Status();
+  status->usage("ml-status");
+}

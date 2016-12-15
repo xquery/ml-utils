@@ -4,3 +4,8 @@
 TEST(LogTest,TestAllLogMethods){
   EXPECT_TRUE(new Log());
 }
+
+TEST(LogTest,TestUsage){
+  Log* log = new Log();
+  log->usage("ml-log");
+}
