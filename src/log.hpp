@@ -25,10 +25,7 @@ using namespace std;
 class Log : public Command {
 public:
     Log();
-
     virtual ~Log();
-
     virtual CommandLineArgs options(int n_opts, char *opts[]);
-
     virtual int usage(const char *progname);
 };

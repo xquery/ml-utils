@@ -25,11 +25,9 @@ using namespace std;
 class Admin : public Command {
 public:
     Admin();
-
     virtual ~Admin();
-
     virtual CommandLineArgs options(int n_opts, char *opts[]);
-
     virtual int usage(const char *progname);
 
+    virtual int walkInstallConfig(Admin admin, Config config, string path);
 };

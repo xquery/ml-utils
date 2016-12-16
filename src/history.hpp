@@ -23,10 +23,7 @@
 class History : public Command {
 public:
     History();
-
     virtual ~History();
-
     virtual int usage(const char *progname);
-
     virtual CommandLineArgs options(int n_opts, char *opts[]);
 };

@@ -65,6 +65,7 @@ struct CommandLineArgs {
               cpass("admin"),
               cpath("/manage/v2"),
               cprotocol("http"),
+              cmlconfig(""),
               quiet(false),
               verbose(false),
               raw(false) {
@@ -73,7 +74,7 @@ struct CommandLineArgs {
     void check(const char *progname) {}
 
     // config overrides
-    const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass;
+    const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass, *cmlconfig;
 
     //comand
     const char *command, *payload, *name;
@@ -99,13 +100,14 @@ public:
 
     Command() {
         // set defaults
+        loadConfig(config, current.config);
         config.user = current.cuser;
         config.pass = current.cpass;
         config.host = current.chost;
         config.protocol = current.cprotocol;
         config.path = current.cpath;
         config.port = current.cport;
-        loadConfig(config, current.config);
+        config.mlconfig = current.cmlconfig;
         setheaders();
     };
 
