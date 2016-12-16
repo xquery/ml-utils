@@ -101,13 +101,27 @@ public:
     Command() {
         // set defaults
         loadConfig(config, current.config);
-        config.user = current.cuser;
-        config.pass = current.cpass;
-        config.host = current.chost;
-        config.protocol = current.cprotocol;
-        config.path = current.cpath;
-        config.port = current.cport;
-        config.mlconfig = current.cmlconfig;
+        if(config.user.empty()) {
+            config.user = current.cuser;
+        }
+        if(config.pass.empty()) {
+            config.pass = current.cpass;
+        }
+        if(config.host.empty()) {
+            config.host = current.chost;
+        }
+        if(config.protocol.empty()) {
+            config.protocol = current.cprotocol;
+        }
+        if(config.path.empty()) {
+            config.path = current.cpath;
+        }
+        if(config.port.empty()) {
+            config.port = current.cport;
+        }
+        if(config.mlconfig.empty()){
+            config.mlconfig = current.cmlconfig;
+        }
         setheaders();
     };
 
@@ -562,7 +576,6 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_UPLOAD, 1L);
             curl_easy_setopt(curl1, CURLOPT_PUT, 1L);
-
             curl_easy_setopt(curl1, CURLOPT_READDATA, body.c_str());
 
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);

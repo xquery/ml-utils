@@ -66,9 +66,14 @@ load data
 > ./ml-load -u /mytest.json -f /etc/test.json -d Documents
 ```
 
-manage MarkLogic
+restart MarkLogic
 ```
 > ml-config restart-local-cluster
+```
+
+install MarkLogic (require defining ml-config directory path)
+```
+> ml-config install
 ```
 
 If your .ml-utils is not in home directory then you will need to suppy via -c commandline
@@ -321,7 +326,6 @@ managing sequence output
 ### ml-config
 manage MarkLogic
 
-TBD
 
 ```
 > ./ml-config -h
@@ -342,22 +346,28 @@ restart MarkLogic cluster
 
 get list of databases
 ```
->
+>./ml-config get -r databases
+
 ```
 
-create forest
+create forest with name 'myForest'
 ```
->
+>./ml-config create -r forests -n myForest 
 ```
 
 update forest
 ```
->
+> ./ml-config update -r forests/myForest < etc/ml-config/forests/forest.json
 ```
 
-install set of resources
+get forest 'myForest' properties
 ```
->
+>./ml-config get-properties -r forests/myForest  
+```
+
+install set of resources based on ml-config directory containing properties
+```
+>./ml-config install
 ```
 
 ### ml-browse

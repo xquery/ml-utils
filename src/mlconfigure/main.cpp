@@ -78,6 +78,9 @@ int main(int argc, char *argv[]) {
                 admin.executeResourcePut(body, resource);
             }else if(command == "install" || command == "reinstall"){
                 string path = config.mlconfig;
+
+                cout << path << endl;
+
                 admin.walkInstallConfig(admin,config,path);
             }
             cout << admin.getReadBuffer() << endl;
