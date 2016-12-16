@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         }
 
         log.setUrl(config.port, config.path + "/logs", "", "");
-        log.setLogUrl(config.port, config.path + "/logs",current.resource,current.start,current.end,current.regex,current.host);
+        log.setLogUrl(config.port, config.path + "/logs",current.name,current.start,current.end,current.regex,current.host);
         log.execute();
 
         if(!current.quiet) {

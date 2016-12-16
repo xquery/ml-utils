@@ -656,6 +656,7 @@ public:
         cout << "----------------" << endl;
         cout << "options" << endl;
         cout << "----------------" << endl;
+
         cout << "format: " << current.format << endl;
         cout << "database: " << current.database << endl;
         cout << "xquery: " << current.xquery << endl;
@@ -665,6 +666,8 @@ public:
         cout << "end: " << current.end << endl;
         cout << "metric: " << current.metric << endl;
         cout << "resource: " << current.resource << endl;
+        cout << "name: " << current.name << endl;
+        cout << "ml-config: " << current.config << endl;
         cout << "output: " << current.output << endl;
         cout << "gnuplot: " << current.gnuplot << endl;
         return EXIT_SUCCESS;

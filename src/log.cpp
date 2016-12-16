@@ -37,7 +37,7 @@ CommandLineArgs Log::options(int n_opts, char *opts[]) {
             args.end = opts[i];
         } else if (opts[i][1] == 'n') {
             ++i;
-            args.resource = opts[i];
+            args.name = opts[i];
         } else if (opts[i][1] == 't') {
             ++i;
             args.host = opts[i];
