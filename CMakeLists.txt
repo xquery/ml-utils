@@ -42,17 +42,22 @@ download_project(PROJ                gnuplot-cpp
         GIT_TAG             master
         ${UPDATE_DISCONNECTED_IF_AVAILABLE}
         )
+#
+#download_project(PROJ                log4cplus
+#        GIT_REPOSITORY      https://github.com/log4cplus/log4cplus.git
+#        GIT_TAG             master
+#        ${UPDATE_DISCONNECTED_IF_AVAILABLE})
 
-# When using CMake 2.8.11 or later, header path dependencies
-# are automatically added to the gtest and gmock targets.
-# For earlier CMake versions, we have to explicitly add the
-# required directories to the header search path ourselves.
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-    include_directories("${gtest_SOURCE_DIR}/include"
-            "${gmock_SOURCE_DIR}/include")
-endif()
+#download_project(PROJ                curl
+#        GIT_REPOSITORY      https://github.com/curl/curl.git
+#        GIT_TAG             master
+#        ${UPDATE_DISCONNECTED_IF_AVAILABLE})
 
 # runtime deps
+#add_subdirectory(${curl_SOURCE_DIR})
+
+#include_directories(${curl_SOURCE_DIR}/include)
+#include_directories(${log4cplus_SOURCE_DIR}/include)
 include_directories(${rapidjson_SOURCE_DIR}/include)
 include_directories(${gnuplot-cpp_SOURCE_DIR})
 

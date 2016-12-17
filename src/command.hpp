@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include <stdio.h>
-#include <curl/curl.h>
 #include <sstream>
 #include <fstream>
 #include <string.h>
@@ -17,6 +16,7 @@
 #include <vector>
 #include <map>
 #include <cassert>
+#include <curl/curl.h>
 
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
@@ -25,7 +25,6 @@
 #include <rapidjson/pointer.h>
 
 #include "config.hpp"
-
 
 #include <gnuplot_i.hpp>
 
@@ -37,6 +36,7 @@ void sleep(int i) { Sleep(i*1000); }
 
 using namespace rapidjson;
 using namespace std;
+
 struct CommandLineArgs {
     CommandLineArgs()
             : command(""),
@@ -92,13 +92,14 @@ private:
     Config config;
     CommandLineArgs current;
     string readBuffer;
-
+    
     struct curl_slist *headers = NULL;
 
 public:
     string url;
 
     Command() {
+
         // set defaults
         loadConfig(config, current.config);
         if(config.user.empty()) {

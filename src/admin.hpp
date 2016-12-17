@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include <stdio.h>
-#include <curl/curl.h>
 #include <sstream>
 #include <fstream>
 #include <string.h>
