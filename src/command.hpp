@@ -527,13 +527,9 @@ public:
                     break;
                 }
             }
-            //std::cout << readBuffer << std::endl;
         }
-
         curl_global_cleanup();
-
         return EXIT_SUCCESS;
-
     };
 
     virtual int executeResourcePost(string body, string format) {
