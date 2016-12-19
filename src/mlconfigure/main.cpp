@@ -35,9 +35,8 @@ int main(int argc, char *argv[]) {
         string name = current.name;
 
         if (!command.empty()) {
-            if (command == "restart" || command =="restart-local-cluster") {
+            if (command == "restart") {
                 LOG_S(INFO) << "restarting server.";
-
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             }else if(command == "get"){
