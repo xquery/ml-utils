@@ -35,9 +35,7 @@ int main(int argc, char *argv[]) {
         }
 
         if(!current.quiet) {
-
             string result = query.getReadBuffer();
-
             // count number of lines
             std::stringstream cc(result);
             std::string un;
@@ -49,7 +47,6 @@ int main(int argc, char *argv[]) {
             if (strcmp(current.format, "json") == 0) {
                 std::stringstream ss(result);
                 std::string to;
-
                 if (!result.empty()) {
                     int count = 0;
                     while (std::getline(ss, to, '\n')) {
@@ -60,7 +57,6 @@ int main(int argc, char *argv[]) {
             } else {
                 std::stringstream ss(result);
                 std::string to;
-
                 if (!result.empty()) {
                     int count = 0;
                     while (std::getline(ss, to, '\n')) {
@@ -71,7 +67,8 @@ int main(int argc, char *argv[]) {
             }
         }
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-js" << endl;
+        LOG_S(ERROR) << "Error with ml-js.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }

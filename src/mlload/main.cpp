@@ -17,12 +17,10 @@ int main(int argc, char *argv[]) {
         load.setCurrentArgs(load.options(argc, argv));
         CommandLineArgs current = load.getCurrentArgs();
         Config config = load.getConfig();
-
         if (current.verbose) {
             load.displayargs();
             load.displayconfig();
         }
-
         load.setLoadUrl(config.port, "/v1/documents", current.uri);
         std::string line, body;
         if(!current.filename){
@@ -30,9 +28,9 @@ int main(int argc, char *argv[]) {
             body.append(line);
         }}
         load.executeLoadPost(current.filename,body);
-
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-load" << endl;
+        LOG_S(ERROR) << "Error with ml-load.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 };

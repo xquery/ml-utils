@@ -107,7 +107,6 @@ public:
     string url;
 
     Command() {
-
         // set defaults
         loadConfig(config, current.config);
         if(config.user.empty()) {
@@ -135,10 +134,6 @@ public:
             config.mllog = current.cmllog;
         }
         setheaders();
-
-        //loguru::add_file(config.mllog.c_str(), loguru::Append, loguru::Verbosity_MAX);
-        //loguru::g_stderr_verbosity = loguru::Verbosity_OFF;
-
     };
 
     virtual ~Command() {
@@ -155,7 +150,6 @@ public:
 
     virtual CommandLineArgs getCurrentArgs() {
         return this->current;
-        loadConfig(config, this->current.config);
     }
 
     virtual void setCurrentArgs(CommandLineArgs args) {
@@ -246,7 +240,6 @@ public:
                         string root,
                         string path,
                         string view) {
-
         checkConfig();
         if (view == "metrics") {
             if (path.find("/") != string::npos) {
@@ -315,7 +308,6 @@ public:
                 }
             }
         }
-
     }
 
     void setheaders(){
@@ -327,9 +319,9 @@ public:
     };
 
     static
-    int my_trace(CURL *handle, curl_infotype type,
-                 char *data, size_t size,
-                 void *userp) {
+    int log_trace(CURL *handle, curl_infotype type,
+                  char *data, size_t size,
+                  void *userp) {
         const char *text;
         (void) handle; /* prevent compiler warning */
         (void) userp;
@@ -341,22 +333,28 @@ public:
                 return 0;
 
             case CURLINFO_HEADER_OUT:
-                LOG_S(INFO) << "=> Send header";
+                LOG_S(INFO) << "=> Send ";
+                LOG_S(INFO) << data;
                 break;
             case CURLINFO_DATA_OUT:
                 LOG_S(INFO) << "=> Send data";
+                LOG_S(INFO) << data;
                 break;
             case CURLINFO_SSL_DATA_OUT:
                 LOG_S(INFO) << "=> Send SSL data";
+                LOG_S(INFO) << data;
                 break;
             case CURLINFO_HEADER_IN:
                 LOG_S(INFO) << "<= Recv header";
+                LOG_S(INFO) << data;
                 break;
             case CURLINFO_DATA_IN:
                 LOG_S(INFO) << "<= Recv data";
+                LOG_S(INFO) << data;
                 break;
             case CURLINFO_SSL_DATA_IN:
                 LOG_S(INFO) << "<= Recv SSL data";
+                LOG_S(INFO) << data;
                 break;
         }
     }
@@ -392,7 +390,7 @@ public:
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
             curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
             curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
 
             curl_multi_add_handle(curlm, curl1);
 
@@ -443,7 +441,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
@@ -509,7 +507,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -568,7 +566,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -627,7 +625,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -698,7 +696,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
@@ -726,33 +724,33 @@ public:
     };
 
     int displayargs() {
-        cout << "----------------" << endl;
-        cout << "options" << endl;
-        cout << "----------------" << endl;
+        LOG_S(INFO) << "----------------";
+        LOG_S(INFO) << "options" << endl;
+        LOG_S(INFO) << "----------------";
 
-        cout << "format: " << current.format << endl;
-        cout << "database: " << current.database << endl;
-        cout << "xquery: " << current.xquery << endl;
-        cout << "format: " << current.format << endl;
-        cout << "period: " << current.period << endl;
-        cout << "start: " << current.start << endl;
-        cout << "end: " << current.end << endl;
-        cout << "metric: " << current.metric << endl;
-        cout << "resource: " << current.resource << endl;
-        cout << "name: " << current.name << endl;
-        cout << "ml-config: " << current.config << endl;
-        cout << "output: " << current.output << endl;
-        cout << "gnuplot: " << current.gnuplot << endl;
+        LOG_S(INFO) << "format: " << current.format;
+        LOG_S(INFO) << "database: " << current.database;
+        LOG_S(INFO) << "xquery: " << current.xquery;
+        LOG_S(INFO) << "format: " << current.format;
+        LOG_S(INFO) << "period: " << current.period;
+        LOG_S(INFO) << "start: " << current.start;
+        LOG_S(INFO) << "end: " << current.end;
+        LOG_S(INFO) << "metric: " << current.metric;
+        LOG_S(INFO) << "resource: " << current.resource;
+        LOG_S(INFO) << "name: " << current.name;
+        LOG_S(INFO) << "ml-config: " << current.config;
+        LOG_S(INFO) << "output: " << current.output;
+        LOG_S(INFO) << "gnuplot: " << current.gnuplot;
         return EXIT_SUCCESS;
     };
 
     int displayconfig() {
-        cout << "----------------" << endl;
-        cout << "config" << endl;
-        cout << "----------------" << endl;
-        cout << "user: " << config.user << endl;
-        cout << "pass: " << config.pass << endl;
-        cout << "host: " << config.host << endl;
+        LOG_S(INFO) << "----------------";
+        LOG_S(INFO) << "config";
+        LOG_S(INFO) << "----------------";
+        LOG_S(INFO) << "user: " << config.user;
+        LOG_S(INFO) << "pass: " << config.pass;
+        LOG_S(INFO) << "host: " << config.host;
         return EXIT_SUCCESS;
     };
 

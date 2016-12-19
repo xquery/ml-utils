@@ -32,12 +32,10 @@ int main(int argc, char *argv[]) {
         }
 
         status.setUrl(config.port, config.path, current.resource, "status");
-
         status.execute();
 
         if(!current.quiet) {
             string result = status.getReadBuffer();
-
             if (strcmp(current.format, "json") == 0) {
                 cout << result << endl;
             } else {
@@ -45,7 +43,8 @@ int main(int argc, char *argv[]) {
             }
         }
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-status" << endl;
+        LOG_S(ERROR) << "Error with ml-status.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }

@@ -19,37 +19,28 @@ int main(int argc, char *argv[]) {
 
     try {
         //loguru::init(argc, argv);
-
         Admin admin;
         admin.setCurrentArgs(admin.options(argc, argv));
         CommandLineArgs current = admin.getCurrentArgs();
         Config config = admin.getConfig();
-
         if (current.verbose) {
             admin.displayargs();
             admin.displayconfig();
         }
-
         string command = current.command;
         string resource = current.resource;
         string name = current.name;
-
         if (!command.empty()) {
             if (command == "restart") {
-                LOG_S(INFO) << "restarting server.";
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             }else if(command == "get"){
-                LOG_F(INFO, "get");
                 admin.setUrl(config.port, config.path, current.resource, "default");
                 admin.execute();
             }else if(command == "get-properties") {
-                LOG_F(INFO, "get properties");
                 admin.setUrl(config.port, config.path, resource + "/properties", "default");
                 admin.execute();
             }else if(command == "create"){
-                LOG_F(INFO, "create ");
-
                 string line, body;
                 if(name.empty()){
                     while (getline(std::cin, line)) {
@@ -68,33 +59,30 @@ int main(int argc, char *argv[]) {
                     }else if(resource=="groups"){
                         payload="{\"group-name\":\""+name+"\"}";
                     }
-
                     admin.executeResourcePost(payload,resource);
-
                 }else{
                     admin.executeResourcePost(body,resource);
                 }
             }else if(command == "update"){
-                LOG_F(INFO, "update");
                 string line, body;
                 while (getline(std::cin, line)) {
                     body.append(line);
                 }
                 admin.setResourceUrl(config.port, config.path, resource + "/properties");
-                cout << body << endl;
                 admin.executeResourcePut(body, resource);
             }else if(command == "install" || command == "reinstall"){
-                LOG_F(INFO, "install");
                 string path = config.mlconfig;
                 cout << path << endl;
                 admin.walkInstallConfig(admin,config,path);
+            }else{
+                LOG_S(ERROR) << "invalid command.";
+                return EXIT_FAILURE;
             }
             cout << admin.getReadBuffer() << endl;
         }else{
-            cerr << "no command" << endl;
+            LOG_S(ERROR) << "no command supplied.";
             return EXIT_FAILURE;
         }
-
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "problem with ml-config.";
         return EXIT_FAILURE;

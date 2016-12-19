@@ -32,9 +32,7 @@ int main(int argc, char *argv[]) {
             history.displayargs();
             history.displayconfig();
         }
-
         history.setUrl(config.port, config.path, current.resource, "metrics");
-
         history.execute();
 
         string result = history.getReadBuffer();
@@ -45,14 +43,13 @@ int main(int argc, char *argv[]) {
         string resource = string(current.resource);
 
         if(result.empty()){
-            cerr << "no output" << endl;
+            LOG_S(ERROR) << "no output.";
         }
 
         if (!plot.empty() || !output.empty()) {
             Document doc;
             doc.Parse(result.c_str());
             string res, units, name;
-
             if (resource.find(string("databases")) != std::string::npos) {
                 res = "database-metrics-list";
                 units = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
@@ -81,12 +78,9 @@ int main(int argc, char *argv[]) {
         }
 
         if (!current.quiet) {
-
             if (strcmp(current.output, "csv") == 0) {
                 Document doc;
-
                 doc.Parse(result.c_str());
-
                 string metricslist = "-metrics-list";
                 string res = current.resource + metricslist;
 
@@ -110,9 +104,9 @@ int main(int argc, char *argv[]) {
                 cout << result << endl;
             }
         }
-
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-hist" << endl;
+        LOG_S(ERROR) << "Error with ml-hist.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }

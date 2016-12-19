@@ -38,7 +38,8 @@ int main(int argc, char *argv[]) {
             }
         }
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-log" << endl;
+        LOG_S(ERROR) << "Error with ml-log.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }

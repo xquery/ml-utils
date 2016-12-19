@@ -145,7 +145,7 @@ int Admin::walkInstallConfig(Admin admin, Config config, string path){
         closedir (dir);
     } else {
         /* could not open directory */
-        cerr << "problem installing" << endl;
+        LOG_S(ERROR) << "problem installing";
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;

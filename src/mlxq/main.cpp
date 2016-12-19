@@ -27,7 +27,6 @@ int main(int argc, char *argv[]) {
         }
 
         query.setUrl(config.port, "/v1/eval", "", "");
-
         if (strcmp(current.xquery, "") == 0) {
             std::string line, qry;
             while (std::getline(std::cin, line)) {
@@ -72,9 +71,9 @@ int main(int argc, char *argv[]) {
                             cout << to << endl;
                         }
                         count++; }}}}
-
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-xq" << endl;
+        LOG_S(ERROR) << "Error with ml-xq.";
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }
