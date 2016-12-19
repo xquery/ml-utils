@@ -35,6 +35,10 @@ void sleep(int i) { Sleep(i*1000); }
 #endif
 
 #define LOGURU_IMPLEMENTATION 1
+#define LOGURU_WITH_STREAMS 1
+#define LOGURU_FILENAME_WIDTH 16
+#define LOGURU_REDEFINE_ASSERT 1
+
 #include <loguru.hpp>
 
 using namespace rapidjson;
@@ -69,6 +73,7 @@ struct CommandLineArgs {
               cpath("/manage/v2"),
               cprotocol("http"),
               cmlconfig(""),
+              cmllog("/var/log/ml-util.log"),
               quiet(false),
               verbose(false),
               raw(false) {
@@ -77,7 +82,7 @@ struct CommandLineArgs {
     void check(const char *progname) {}
 
     // config overrides
-    const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass, *cmlconfig;
+    const char *chost, *cport, *cpath, *cprotocol, *cuser, *cpass, *cmlconfig, *cmllog;
 
     //comand
     const char *command, *payload, *name;
@@ -103,9 +108,6 @@ public:
 
     Command() {
 
-        // Put every log message in "everything.log":
-        loguru::add_file("ml-util.log", loguru::Append, loguru::Verbosity_MAX);
-
         // set defaults
         loadConfig(config, current.config);
         if(config.user.empty()) {
@@ -129,7 +131,14 @@ public:
         if(config.mlconfig.empty()){
             config.mlconfig = current.cmlconfig;
         }
+        if(config.mllog.empty()){
+            config.mllog = current.cmllog;
+        }
         setheaders();
+
+        //loguru::add_file(config.mllog.c_str(), loguru::Append, loguru::Verbosity_MAX);
+        //loguru::g_stderr_verbosity = loguru::Verbosity_OFF;
+
     };
 
     virtual ~Command() {
@@ -317,6 +326,41 @@ public:
         headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
     };
 
+    static
+    int my_trace(CURL *handle, curl_infotype type,
+                 char *data, size_t size,
+                 void *userp) {
+        const char *text;
+        (void) handle; /* prevent compiler warning */
+        (void) userp;
+
+        switch (type) {
+            case CURLINFO_TEXT:
+                LOG_S(INFO) << data;
+            default: /* in case a new one is introduced to shock us */
+                return 0;
+
+            case CURLINFO_HEADER_OUT:
+                LOG_S(INFO) << "=> Send header";
+                break;
+            case CURLINFO_DATA_OUT:
+                LOG_S(INFO) << "=> Send data";
+                break;
+            case CURLINFO_SSL_DATA_OUT:
+                LOG_S(INFO) << "=> Send SSL data";
+                break;
+            case CURLINFO_HEADER_IN:
+                LOG_S(INFO) << "<= Recv header";
+                break;
+            case CURLINFO_DATA_IN:
+                LOG_S(INFO) << "<= Recv data";
+                break;
+            case CURLINFO_SSL_DATA_IN:
+                LOG_S(INFO) << "<= Recv SSL data";
+                break;
+        }
+    }
+
     virtual int execute() {
 
         CURLM *curlm;
@@ -348,6 +392,7 @@ public:
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
             curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
             curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
 
             curl_multi_add_handle(curlm, curl1);
 
@@ -398,6 +443,8 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
+
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
@@ -462,6 +509,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -524,6 +572,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -582,6 +631,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -652,6 +702,7 @@ public:
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, my_trace);
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());

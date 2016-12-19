@@ -12,6 +12,7 @@
 int main(int argc, char *argv[]) {
 
     try {
+        //loguru::init(argc, argv);
         Browse browse;
         browse.setCurrentArgs(browse.options(argc, argv));
         CommandLineArgs current = browse.getCurrentArgs();

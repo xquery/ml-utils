@@ -11,15 +11,15 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-#include <loguru.hpp>
 #include "../admin.cpp"
-
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
 
     try {
+        //loguru::init(argc, argv);
+
         Admin admin;
         admin.setCurrentArgs(admin.options(argc, argv));
         CommandLineArgs current = admin.getCurrentArgs();
@@ -36,7 +36,8 @@ int main(int argc, char *argv[]) {
 
         if (!command.empty()) {
             if (command == "restart" || command =="restart-local-cluster") {
-                LOG_F(INFO, "restarting server ...");
+                LOG_S(INFO) << "restarting server.";
+
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             }else if(command == "get"){
@@ -96,7 +97,7 @@ int main(int argc, char *argv[]) {
         }
 
     } catch (std::bad_alloc) {
-        cerr << "Error with ml-config" << endl;
+        LOG_S(ERROR) << "problem with ml-config.";
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;

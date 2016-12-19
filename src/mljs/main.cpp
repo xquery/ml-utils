@@ -12,6 +12,7 @@
 int main(int argc, char *argv[]) {
 
     try {
+        //loguru::init(argc, argv);
         Query query;
         query.setCurrentArgs(query.options(argc, argv));
         CommandLineArgs current = query.getCurrentArgs();

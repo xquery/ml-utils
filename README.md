@@ -412,6 +412,7 @@ This project uses the following libs:
 
 * [curl](https://curl.haxx.se/): for http communication
 * [rapidjson](https://github.com/miloyip/rapidjson): for json munging 
+* [loguru](https://github.com/emilk/loguru): for logging
 * [gnuplot-cpp](https://github.com/orbitcowboy/gnuplot-cpp): for speaking to gnuplot
 * [googletest](https://github.com/google/googletest): for testing
 

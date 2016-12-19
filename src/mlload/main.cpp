@@ -12,6 +12,7 @@
 int main(int argc, char *argv[]) {
 
     try {
+        //loguru::init(argc, argv);
         Load load;
         load.setCurrentArgs(load.options(argc, argv));
         CommandLineArgs current = load.getCurrentArgs();

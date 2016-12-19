@@ -22,6 +22,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     try {
+        //loguru::init(argc, argv);
         History history;
         history.setCurrentArgs(history.options(argc, argv));
         CommandLineArgs current = history.getCurrentArgs();

@@ -44,6 +44,7 @@ struct Config {
     string port;
     string path;
     string mlconfig;
+    string mllog;
 };
 
 void loadConfig(Config &config, string path) {
@@ -80,6 +81,8 @@ void loadConfig(Config &config, string path) {
             sin >> config.port;
         else if (line.find("ml-config") != -1)
             sin >> config.mlconfig;
+        else if (line.find("ml-log") != -1)
+            sin >> config.mllog;
         else if (line.find("path") != -1)
             sin >> config.path;    }
 }
