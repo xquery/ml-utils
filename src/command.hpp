@@ -34,6 +34,9 @@
 void sleep(int i) { Sleep(i*1000); }
 #endif
 
+#define LOGURU_IMPLEMENTATION 1
+#include <loguru.hpp>
+
 using namespace rapidjson;
 using namespace std;
 
@@ -99,6 +102,10 @@ public:
     string url;
 
     Command() {
+
+        // Put every log message in "everything.log":
+        loguru::add_file("ml-util.log", loguru::Append, loguru::Verbosity_MAX);
+
         // set defaults
         loadConfig(config, current.config);
         if(config.user.empty()) {

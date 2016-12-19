@@ -11,21 +11,13 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-#define LOGURU_IMPLEMENTATION 1
 #include <loguru.hpp>
-
 #include "../admin.cpp"
 
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-
-    loguru::init(argc, argv);
-
-    // Put every log message in "everything.log":
-    loguru::add_file("ml-util.log", loguru::Append, loguru::Verbosity_MAX);
-
 
     try {
         Admin admin;
@@ -43,16 +35,20 @@ int main(int argc, char *argv[]) {
         string name = current.name;
 
         if (!command.empty()) {
-            if (command == "restart") {
+            if (command == "restart" || command =="restart-local-cluster") {
+                LOG_F(INFO, "restarting server ...");
                 admin.setResourceUrl(config.port, config.path, "");
                 admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             }else if(command == "get"){
+                LOG_F(INFO, "get");
                 admin.setUrl(config.port, config.path, current.resource, "default");
                 admin.execute();
             }else if(command == "get-properties") {
+                LOG_F(INFO, "get properties");
                 admin.setUrl(config.port, config.path, resource + "/properties", "default");
                 admin.execute();
             }else if(command == "create"){
+                LOG_F(INFO, "create ");
 
                 string line, body;
                 if(name.empty()){
@@ -79,6 +75,7 @@ int main(int argc, char *argv[]) {
                     admin.executeResourcePost(body,resource);
                 }
             }else if(command == "update"){
+                LOG_F(INFO, "update");
                 string line, body;
                 while (getline(std::cin, line)) {
                     body.append(line);
@@ -87,10 +84,9 @@ int main(int argc, char *argv[]) {
                 cout << body << endl;
                 admin.executeResourcePut(body, resource);
             }else if(command == "install" || command == "reinstall"){
+                LOG_F(INFO, "install");
                 string path = config.mlconfig;
-
                 cout << path << endl;
-
                 admin.walkInstallConfig(admin,config,path);
             }
             cout << admin.getReadBuffer() << endl;
@@ -105,5 +101,3 @@ int main(int argc, char *argv[]) {
     }
     return EXIT_SUCCESS;
 }
-
-
