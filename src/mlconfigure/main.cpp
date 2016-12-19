@@ -11,11 +11,21 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
+#define LOGURU_IMPLEMENTATION 1
+#include <loguru.hpp>
+
 #include "../admin.cpp"
+
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
+    loguru::init(argc, argv);
+
+    // Put every log message in "everything.log":
+    loguru::add_file("ml-util.log", loguru::Append, loguru::Verbosity_MAX);
+
 
     try {
         Admin admin;

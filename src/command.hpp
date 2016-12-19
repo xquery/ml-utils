@@ -92,14 +92,13 @@ private:
     Config config;
     CommandLineArgs current;
     string readBuffer;
-    
+
     struct curl_slist *headers = NULL;
 
 public:
     string url;
 
     Command() {
-
         // set defaults
         loadConfig(config, current.config);
         if(config.user.empty()) {
@@ -316,17 +315,17 @@ public:
         CURLM *curlm;
         int handle_count;
         curlm = curl_multi_init();
+        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
         CURL *curl1 = NULL;
         curl1 = curl_easy_init();
-
-        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
 
             curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
             curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
             if (current.verbose) {
                 curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
             } else {
@@ -334,7 +333,7 @@ public:
             }
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl/7.19.6");
-
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
@@ -391,6 +390,7 @@ public:
             }
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
@@ -454,6 +454,7 @@ public:
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -515,6 +516,7 @@ public:
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -572,6 +574,7 @@ public:
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
@@ -641,7 +644,7 @@ public:
             }
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
-
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
