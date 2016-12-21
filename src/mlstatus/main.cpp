@@ -20,7 +20,6 @@ using namespace rapidjson;
 int main(int argc, char *argv[]) {
 
     try {
-        //loguru::init(argc, argv);
         Status status;
         status.setCurrentArgs(status.options(argc, argv));
         CommandLineArgs current = status.getCurrentArgs();

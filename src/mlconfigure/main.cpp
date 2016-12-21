@@ -18,7 +18,6 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     try {
-        //loguru::init(argc, argv);
         Admin admin;
         admin.setCurrentArgs(admin.options(argc, argv));
         CommandLineArgs current = admin.getCurrentArgs();

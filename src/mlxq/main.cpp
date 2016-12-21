@@ -7,6 +7,7 @@
 #include <sstream>
 #include <map>
 #include <unistd.h>
+#include <wordexp.h>
 
 #include "../query.cpp"
 
@@ -15,7 +16,6 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     try {
-        //loguru::init(argc, argv);
         Query query;
         query.setCurrentArgs(query.options(argc, argv));
         CommandLineArgs current = query.getCurrentArgs();
