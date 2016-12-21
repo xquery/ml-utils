@@ -310,6 +310,19 @@ public:
         }
     }
 
+    virtual void setQueryUrl(string port,
+                        string root,
+                        string path,
+                        string view) {
+        checkConfig();
+        url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
+
+        string database = current.database;
+        if (!database.empty()) {
+            url += "&database=" + database;
+        }
+    };
+
     void setheaders(){
         headers = curl_slist_append(headers, "Accept: text/plain");
         headers = curl_slist_append(headers, "Accept: text/html");

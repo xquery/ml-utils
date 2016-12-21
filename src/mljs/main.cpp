@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
             query.displayconfig();
         }
 
-        query.setUrl(config.port, "/v1/eval", "", "");
+        query.setQueryUrl(config.port, "/v1/eval", "", "");
         if (strcmp(current.js, "") == 0) {
             std::string line, qry;
             while (std::getline(std::cin, line)) {
