@@ -25,4 +25,4 @@ before_install:
 
 script:
   - cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
-  - cpack --config CPackConfig.cmake
+  #- cpack --config CPackConfig.cmake
