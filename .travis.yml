@@ -15,6 +15,7 @@ addons:
     - llvm-toolchain-precise-3.6
     packages:
     # install toolchains
+    - cmake3
     - gcc-5
     - g++-5
     - clang-3.6
@@ -25,4 +26,4 @@ before_install:
 
 script:
   - cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
-  #- cpack --config CPackConfig.cmake
+  - cpack --config CPackConfig.cmake
