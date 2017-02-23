@@ -410,6 +410,7 @@ yum install curl-devel
 ### Dependencies
 This project uses the following libs: 
 
+* [MarkLogic](https://developer.marklogic.com): requires MarkLogic 8 or greater
 * [curl](https://curl.haxx.se/): for http communication
 * [rapidjson](https://github.com/miloyip/rapidjson): for json munging 
 * [loguru](https://github.com/emilk/loguru): for logging
