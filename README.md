@@ -31,7 +31,7 @@ pass=admin
 port=8002
 path=/manage/v2
 ```
-        
+
 2) copy bin/* to your bin directory or amend PATH
 
 3) run utils
@@ -43,7 +43,7 @@ retrieve history metrics
 
 retrieve server logs
 ```
-> ./ml-log -n ErrorLog.txt  
+> ./ml-log -n ErrorLog.txt
 ```
 
 retrieve resource status
@@ -130,7 +130,7 @@ retrieve resource statuses
 ```
 > ./ml-status -h
 
-ml-status [options] 
+ml-status [options]
     -r    : resources/{resource-name}
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format (xml|json)
@@ -141,36 +141,36 @@ ml-status [options]
 
 cluster status (specifying ml-utils config file with -c option)
 ```
-> ./ml-status  -c etc/.ml-utils -f json 
+> ./ml-status  -c etc/.ml-utils -f json
 ```
 
 all forest status
 ```
-> ./ml-status -r forests -c etc/.ml-utils -f json 
+> ./ml-status -r forests -c etc/.ml-utils -f json
 ```
 
 forest status
 ```
-> ./ml-status -r forests/Documents -c etc/.ml-utils -f json 
+> ./ml-status -r forests/Documents -c etc/.ml-utils -f json
 ```
 
 database status
 ```
-> ./ml-status -r databases/Documents -c etc/.ml-utils -f json 
+> ./ml-status -r databases/Documents -c etc/.ml-utils -f json
 ```
 
 all server status
 ```
-> ./ml-status -r servers -c etc/.ml-utils -f json 
+> ./ml-status -r servers -c etc/.ml-utils -f json
 ```
 
 all host status
 ```
-> ./ml-status -r hosts -c etc/.ml-utils -f json 
+> ./ml-status -r hosts -c etc/.ml-utils -f json
 ```
 
 ```
-> ./ml-status -r groups/Default -c etc/.ml-utils -f json 
+> ./ml-status -r groups/Default -c etc/.ml-utils -f json
 ```
 
 ### ml-log
@@ -179,7 +179,7 @@ retrieve MarkLogic logs
 ```
 > ./ml-log -h
 
-ml-log 
+ml-log
     -c    : config file (ex. /home/jfuller/.ml-utils)
     -f    : format(xml | json)
     -t    : host (ex. localhost)
@@ -193,7 +193,7 @@ ml-log
 
 get log file list
 ```
-> ./ml-log 
+> ./ml-log
 ```
 
 retrieve log file
@@ -244,7 +244,7 @@ load test.json to /mytest.json into Documents database
 
 load test.xml to /test.xml into Documents database
 ```
->./ml-load -u /test.xml -d Documents -f ../../etc/test.xml  
+>./ml-load -u /test.xml -d Documents -f ../../etc/test.xml
 ```
 
 ### ml-js
@@ -272,7 +272,7 @@ apply against database (specifying where config file resides with -c)
 > ./ml-js -c etc/.ml-utils -j 1+1 -d Documents
 ```
 
-pipe in 
+pipe in
 ```
 > echo "1+1" | ./ml-js
 ```
@@ -308,7 +308,7 @@ apply against database
 > ./ml-xq -x 1+1 -d Documents
 ```
 
-pipe in 
+pipe in
 ```
 > echo "1+1" | ./ml-xq
 ```
@@ -318,9 +318,9 @@ evaluate file
 > ./ml-xq < text.xq
 ```
 
-managing sequence output 
+managing sequence output
 ```
-> echo "(1,2,3,4)" | ./ml-xq -r 
+> echo "(1,2,3,4)" | ./ml-xq -r
 ```
 
 ### ml-config
@@ -352,7 +352,7 @@ get list of databases
 
 create forest with name 'myForest'
 ```
->./ml-config create -r forests -n myForest 
+>./ml-config create -r forests -n myForest
 ```
 
 update forest
@@ -362,7 +362,7 @@ update forest
 
 get forest 'myForest' properties
 ```
->./ml-config get-properties -r forests/myForest  
+>./ml-config get-properties -r forests/myForest
 ```
 
 install set of resources based on ml-config directory containing properties
@@ -387,18 +387,6 @@ TBD browse resources
 ```
 
 ## Build and deploy
-To build this set of utilities on linux, osx and windows platforms.
-
-```
->cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
-```
-
-Note that running cmake will pull down dependencies.
-
-and to create a release package
-```
->cpack3 --config CPackConfig.cmake
-```
 
 To build you may have to install some additional deps:
 ```
@@ -407,12 +395,27 @@ yum install cmake3
 yum install curl-devel
 ```
 
+To build this set of utilities on linux, osx and windows platforms.
+
+```
+>cmake3 -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles"
+```
+
+Note that running cmake will pull down dependencies.
+
+then run make, make install.
+
+and to create a release package
+```
+>cpack3 --config CPackConfig.cmake
+```
+
 ### Dependencies
-This project uses the following libs: 
+This project uses the following libs:
 
 * [MarkLogic](https://developer.marklogic.com): requires MarkLogic 8 or greater
 * [curl](https://curl.haxx.se/): for http communication
-* [rapidjson](https://github.com/miloyip/rapidjson): for json munging 
+* [rapidjson](https://github.com/miloyip/rapidjson): for json munging
 * [loguru](https://github.com/emilk/loguru): for logging
 * [gnuplot-cpp](https://github.com/orbitcowboy/gnuplot-cpp): for speaking to gnuplot
 * [googletest](https://github.com/google/googletest): for testing
@@ -425,7 +428,7 @@ The [examples](examples) folder contains a sample configurations and shellscript
 [Apache License v2.0](LICENSE)
 
 ## Background
-This project was originally an unofficial little prototype to put MarkLogic Management REST API through its paces, to 
+This project was originally an unofficial little prototype to put MarkLogic Management REST API through its paces, to
 see how easy it would be to leverage. As it has grown in usefulness (to me), I thought I would
 release to wider world. All PR's reviewed and appreciated. Note to self - write more unit tests!
 

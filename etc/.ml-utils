@@ -1,5 +1,5 @@
 # MarkLogic connection details
-host=node1
+host=localhost
 protocol=http
 user=admin
 pass=admin

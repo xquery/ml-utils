@@ -210,7 +210,8 @@ public:
                         string start,
                         string end,
                         string regex,
-                        string host)
+                        string host,
+                        string format)
     {
         checkConfig();
 
@@ -230,7 +231,7 @@ public:
         if (!host.empty() ) {
             url += "&host=" + host;
         }
-        string format = current.format;
+        //string format = current.format;
         if (format != "") {
             url += "&format=" + format;
         }

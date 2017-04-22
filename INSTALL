@@ -4,6 +4,8 @@ To build this set of utilities on linux, osx and windows platforms.
 
 Note that running cmake will pull down dependencies.
 
+Then run make, make install
+
 and to create a release package
 
 >cpack3 --config CPackConfig.cmake

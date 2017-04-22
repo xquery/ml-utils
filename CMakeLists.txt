@@ -70,7 +70,7 @@ if(NOT DISABLE_TESTS)
 endif()
 
 # tests
-add_executable(runAllTests test/unit_test_main.cpp)
+add_executable(runAllTests test/unit_test_main.cpp test/test1.cpp)
 target_link_libraries(runAllTests gtest gmock_main pthread curl)
 add_test( runTests build/runAllTests )
 add_executable(runHistTests test/unit_test_history.cpp)

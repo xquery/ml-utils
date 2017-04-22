@@ -25,16 +25,11 @@ int main(int argc, char *argv[]) {
         }
 
         log.setUrl(config.port, config.path + "/logs", "", "");
-        log.setLogUrl(config.port, config.path + "/logs",current.name,current.start,current.end,current.regex,current.host);
+        log.setLogUrl(config.port, config.path + "/logs",current.name,current.start,current.end,current.regex,current.host,"text");
         log.execute();
 
         if(!current.quiet) {
-            string result = log.getReadBuffer();
-            if (strcmp(current.format, "json") == 0) {
-                cout << result << endl;
-            } else {
-                cout << result << endl;
-            }
+            cout << log.getReadBuffer() << endl;
         }
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-log.";
