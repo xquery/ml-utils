@@ -3,14 +3,15 @@
 
 Small collection of home grown command line utilities for working with MarkLogic.
 
-* ml-log: retrieve server logs
-* ml-hist: retrieve resource metrics (requires gnuplot for graphing)
-* ml-status: retrieve resource status
-* ml-xq: evaluate xquery
-* ml-js: evaluate javascript
-* ml-load: load data
-* ml-config: manage MarkLogic
-* ml-browse: browse resources
+
+* [ml-log](#ml-log): retrieve server logs
+* [ml-hist](#ml-hist): retrieve resource metrics (requires gnuplot for graphing)
+* [ml-status](#ml-status): retrieve resource status
+* [ml-xq](#ml-xq): evaluate xquery
+* [ml-js](#ml-js): evaluate javascript
+* [ml-load](#ml-load): load data
+* [ml-config](#ml-config): manage MarkLogic
+* [ml-browse](#ml-browse): browse resources
 
 __WARNING__- Use these utilities at your own risk they are not supported in any way.
 
@@ -86,7 +87,7 @@ option.
 
 ## Utilities
 
-### ml-hist
+### ml-hist<a name="ml-hist"></a>
 retrieve history metrics from cluster/server
 
 __NOTE__ - To use graphing capabilities you must install gnuplot (ex. yum install gnuplot).
@@ -124,7 +125,7 @@ use custom gnuplot with start and end time range
 >  ./ml-hist -f json -s 2015-03-21T17:38:00 -e 2017-03-21T17:38:00 -g ../../etc/basic.gnuplot -r servers/Manage -m request-time -o test.png
 ```
 
-### ml-status
+### ml-status<a name="ml-status"></a>
 retrieve resource statuses
 
 ```
@@ -173,7 +174,7 @@ all host status
 > ./ml-status -r groups/Default -c etc/.ml-utils -f json
 ```
 
-### ml-log
+### ml-log<a name="ml-log"></a>
 retrieve MarkLogic logs
 
 ```
@@ -221,7 +222,7 @@ watch (like tail) a log
  watch "ml-log -n 8002_ErrorLog.txt -t localhost"
 ```
 
-### ml-load
+### ml-load<a name="ml-load"></a>
 load data into MarkLogic
 
 ```
@@ -247,7 +248,7 @@ load test.xml to /test.xml into Documents database
 >./ml-load -u /test.xml -d Documents -f ../../etc/test.xml
 ```
 
-### ml-js
+### ml-js<a name="ml-js"></a>
 evaluate javascript
 
 ```
@@ -282,7 +283,7 @@ evaluate file
 > ./ml-js < text.js
 ```
 
-### ml-xq
+### ml-xq<a name="ml-xq"></a>
 evaluate xquery
 
 ```
@@ -323,7 +324,7 @@ managing sequence output
 > echo "(1,2,3,4)" | ./ml-xq -r
 ```
 
-### ml-config
+### ml-config<a name="ml-config"></a>
 manage MarkLogic
 
 
@@ -370,7 +371,7 @@ install set of resources based on ml-config directory containing properties
 >./ml-config install
 ```
 
-### ml-browse
+### ml-browse<a name="ml-browse"></a>
 TBD browse resources
 
 ```
