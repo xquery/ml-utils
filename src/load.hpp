@@ -21,10 +21,16 @@
 
 using namespace std;
 
-class Load : public Command {
-public:
-    Load();
-    virtual ~Load();
-    virtual CommandLineArgs options(int n_opts, char *opts[]);
-    virtual int usage(const char *progname);
-};
+namespace mlutil {
+
+    class Load : public Command {
+    public:
+        Load();
+
+        virtual ~Load();
+
+        virtual CommandLineArgs options(int n_opts, char *opts[]);
+
+        virtual int usage(const char *progname);
+    };
+}

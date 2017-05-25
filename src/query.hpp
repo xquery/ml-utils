@@ -21,10 +21,16 @@
 
 using namespace std;
 
-class Query : public Command {
-public:
-    Query();
-    virtual ~Query();
-    virtual CommandLineArgs options(int n_opts, char *opts[]);
-    virtual int usage(const char *progname);
-};
+namespace mlutil {
+
+    class Query : public Command {
+    public:
+        Query();
+
+        virtual ~Query();
+
+        virtual CommandLineArgs options(int n_opts, char *opts[]);
+
+        virtual int usage(const char *progname);
+    };
+}

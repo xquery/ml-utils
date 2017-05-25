@@ -9,6 +9,9 @@
 
 #include "../browse.cpp"
 
+using namespace std;
+using namespace mlutil;
+
 int main(int argc, char *argv[]) {
     try {
         Browse browse;

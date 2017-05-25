@@ -11,6 +11,8 @@
 
 #include "admin.hpp"
 
+namespace mlutil {
+
 Admin::Admin() {
 };
 
@@ -22,31 +24,31 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
 
     for (int i = 1; i < n_opts; ++i) {
         string optstr = opts[i];
-        if(optstr == "--host"){
+        if (optstr == "--host") {
             ++i;
             args.chost = opts[i];
-        }else if (optstr == "--port") {
+        } else if (optstr == "--port") {
             ++i;
             args.format = opts[i];
-        }else if (optstr == "--user") {
+        } else if (optstr == "--user") {
             ++i;
             args.cuser = opts[i];
-        }else if (optstr == "--pass") {
+        } else if (optstr == "--pass") {
             ++i;
             args.cpass = opts[i];
-        }else if (optstr == "--path") {
+        } else if (optstr == "--path") {
             ++i;
             args.cpath = opts[i];
-        }else if (optstr == "--protocol") {
+        } else if (optstr == "--protocol") {
             ++i;
             args.cprotocol = opts[i];
-        }else if (optstr == "--ml-config") {
+        } else if (optstr == "--ml-config") {
             ++i;
             args.cmlconfig = opts[i];
-        }else if (optstr == "-f") {
+        } else if (optstr == "-f") {
             ++i;
             args.format = opts[i];
-        }else if (optstr == "-n") {
+        } else if (optstr == "-n") {
             ++i;
             args.name = opts[i];
         } else if (optstr == "-q") {
@@ -66,7 +68,7 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
             usage(opts[0]);
             exit(1);
         } else {
-            args.command= opts[i];
+            args.command = opts[i];
         }
     }
     args.check(opts[0]);
@@ -74,7 +76,7 @@ CommandLineArgs Admin::options(int n_opts, char *opts[]) {
 }
 
 int Admin::usage(const char *progname) {
-    const char *name =  getprogname(progname);
+    const char *name = getprogname(progname);
     cerr << "ml-utils: ml-config 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
          << "configure MarkLogic\n"
          << ">" << name << " command [options]\n"
@@ -89,11 +91,11 @@ int Admin::usage(const char *progname) {
     return EXIT_SUCCESS;
 }
 
-int Admin::walkInstallConfig(Admin admin, Config config, string path){
+int Admin::walkInstallConfig(Admin admin, Config config, string path) {
     DIR *dir;
     struct dirent *ent;
-    if ((dir = opendir (path.c_str())) != NULL) {
-        while ((ent = readdir (dir)) != NULL) {
+    if ((dir = opendir(path.c_str())) != NULL) {
+        while ((ent = readdir(dir)) != NULL) {
             string name = ent->d_name;
             string fullpath = path + "/" + name;
             if (name != "." && name != ".." && name != ".DS_Store") {
@@ -110,43 +112,45 @@ int Admin::walkInstallConfig(Admin admin, Config config, string path){
                         cout << "installing server" << endl;
                         admin.setResourceUrl(config.port, config.path, "servers");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("amps") != std::string::npos) {
+                    } else if (fullpath.find("amps") != std::string::npos) {
                         cout << "installing amps" << endl;
                         admin.setResourceUrl(config.port, config.path, "amps");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("external-securities") != std::string::npos) {
+                    } else if (fullpath.find("external-securities") != std::string::npos) {
                         cout << "installing external-securities" << endl;
                         admin.setResourceUrl(config.port, config.path, "external-security");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("privileges") != std::string::npos) {
+                    } else if (fullpath.find("privileges") != std::string::npos) {
                         cout << "installing privileges" << endl;
                         admin.setResourceUrl(config.port, config.path, "privileges");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("security/roles") != std::string::npos) {
+                    } else if (fullpath.find("security/roles") != std::string::npos) {
                         cout << "installing roles" << endl;
                         admin.setResourceUrl(config.port, config.path, "roles");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("users") != std::string::npos) {
+                    } else if (fullpath.find("users") != std::string::npos) {
                         cout << "installing users" << endl;
                         admin.setResourceUrl(config.port, config.path, "users");
                         admin.executeInstallPost(fullpath, "json");
-                    }else if (fullpath.find("protected-paths") != std::string::npos) {
+                    } else if (fullpath.find("protected-paths") != std::string::npos) {
                         cout << "installing protected-paths" << endl;
                         admin.setResourceUrl(config.port, config.path, "protected-paths");
                         admin.executeInstallPost(fullpath, "json");
                     }
-                }else if (name.find(".xml") != std::string::npos) {
+                } else if (name.find(".xml") != std::string::npos) {
                     cout << "ignoring xml properties" << endl;
-                }else{
+                } else {
                     walkInstallConfig(admin, config, fullpath);
                 }
             }
         }
-        closedir (dir);
+        closedir(dir);
     } else {
         /* could not open directory */
         LOG_S(ERROR) << "problem installing";
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
+}
+
 }

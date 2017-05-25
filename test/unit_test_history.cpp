@@ -1,5 +1,7 @@
 #include "../src/history.cpp"
 #include <gtest/gtest.h>
+using namespace std;
+using namespace mlutil;
 
 TEST(History,Constructor){
   EXPECT_TRUE(new History());

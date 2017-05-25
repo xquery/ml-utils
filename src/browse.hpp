@@ -21,12 +21,17 @@
 
 using namespace std;
 
-class Browse : public Command {
-public:
-    Browse();
-    virtual ~Browse();
-    virtual CommandLineArgs options(int n_opts, char *opts[]);
-    virtual int usage(const char *progname);
-};
+namespace mlutil {
 
+    class Browse : public Command {
+    public:
+        Browse();
 
+        virtual ~Browse();
+
+        virtual CommandLineArgs options(int n_opts, char *opts[]);
+
+        virtual int usage(const char *progname);
+    };
+
+}

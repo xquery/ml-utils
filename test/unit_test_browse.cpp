@@ -2,6 +2,9 @@
 
 #include <gtest/gtest.h>
 
+using namespace std;
+using namespace mlutil;
+
 TEST(BrowseTest,TestAllBrowseMethods){
   EXPECT_TRUE(new Browse());
 }
