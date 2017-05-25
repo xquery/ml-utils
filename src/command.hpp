@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 James Fuller
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #pragma once
 
 #include <stdio.h>
@@ -108,6 +124,9 @@ namespace mlutil {
     public:
         string url;
 
+        /*!
+         *
+         */
         Command() {
             // set defaults
             loadConfig(config, current.config);
@@ -138,6 +157,9 @@ namespace mlutil {
             setheaders();
         };
 
+        /*!
+         *
+         */
         virtual ~Command() {
             //std::cout << "Default destructor called\n";
         };
@@ -167,6 +189,10 @@ namespace mlutil {
             this->config = config;
         }
 
+        /*!
+         *
+         * @return
+         */
         virtual bool checkConfig() {
             if (config.host.empty()) {
                 cerr << "undefined MarkLogic host." << endl;
@@ -182,6 +208,12 @@ namespace mlutil {
             }
         }
 
+        /*!
+         *
+         * @param port
+         * @param root
+         * @param resource
+         */
         virtual void setResourceUrl(string port,
                                     string root,
                                     string resource) {
@@ -189,6 +221,12 @@ namespace mlutil {
             url = config.protocol + "://" + config.host + ":" + port + root + "/" + resource + "";
         }
 
+        /*!
+         *
+         * @param port
+         * @param root
+         * @param uri
+         */
         virtual void setLoadUrl(string port,
                                 string root,
                                 string uri) {
@@ -204,6 +242,17 @@ namespace mlutil {
             }
         }
 
+        /*!
+         *
+         * @param port
+         * @param root
+         * @param filename
+         * @param start
+         * @param end
+         * @param regex
+         * @param host
+         * @param format
+         */
         virtual void setLogUrl(string port,
                                string root,
                                string filename,
@@ -236,6 +285,13 @@ namespace mlutil {
             }
         }
 
+        /*!
+         *
+         * @param port
+         * @param root
+         * @param path
+         * @param view
+         */
         virtual void setUrl(string port,
                             string root,
                             string path,
@@ -251,6 +307,7 @@ namespace mlutil {
             } else if (view == "status") {
                 url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
             } else {
+                // identical to status for now
                 url = config.protocol + "://" + config.host + ":" + port + root + "/" + path + "?";
             }
 
@@ -310,6 +367,13 @@ namespace mlutil {
             }
         }
 
+        /*!
+         *
+         * @param port
+         * @param root
+         * @param path
+         * @param view
+         */
         virtual void setQueryUrl(string port,
                                  string root,
                                  string path,
@@ -323,6 +387,9 @@ namespace mlutil {
             }
         };
 
+        /*!
+         *
+         */
         void setheaders() {
             headers = curl_slist_append(headers, "Accept: text/plain");
             headers = curl_slist_append(headers, "Accept: text/html");
@@ -331,6 +398,15 @@ namespace mlutil {
             headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
         };
 
+        /*!
+         *
+         * @param handle
+         * @param type
+         * @param data
+         * @param size
+         * @param userp
+         * @return
+         */
         static
         int log_trace(CURL *handle, curl_infotype type,
                       char *data, size_t size,
@@ -372,6 +448,10 @@ namespace mlutil {
             }
         }
 
+        /*!
+         *
+         * @return
+         */
         virtual int execute() {
 
             CURLM *curlm;
@@ -423,12 +503,25 @@ namespace mlutil {
 
         };
 
+        /*!
+         *
+         * @param contents
+         * @param size
+         * @param nmemb
+         * @param userp
+         * @return
+         */
         static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
             ((std::string *) userp)->append((char *) contents, size * nmemb);
             return size * nmemb;
         }
 
-
+        /*!
+         *
+         * @param type
+         * @param query
+         * @return
+         */
         virtual int executeQueryPost(string type, string query) {
 
             CURLM *curlm;
@@ -489,6 +582,12 @@ namespace mlutil {
 
         };
 
+        /*!
+         *
+         * @param file
+         * @param body
+         * @return
+         */
         virtual int executeLoadPost(const char *file, string body) {
 
             FILE *fd;
@@ -543,6 +642,12 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
+        /*!
+         *
+         * @param body
+         * @param format
+         * @return
+         */
         virtual int executeResourcePost(string body, string format) {
 
             long http_code = 0;
@@ -605,6 +710,12 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
+        /*!
+         *
+         * @param body
+         * @param format
+         * @return
+         */
         virtual int executeResourcePut(string body, string format) {
 
             CURLM *curlm;
@@ -668,6 +779,12 @@ namespace mlutil {
 
         };
 
+        /*!
+         *
+         * @param filename
+         * @param format
+         * @return
+         */
         virtual int executeInstallPost(string filename, string format) {
             std::ifstream ifs(filename);
             string body = string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
@@ -736,6 +853,10 @@ namespace mlutil {
 
         };
 
+        /*!
+         *
+         * @return
+         */
         int displayargs() {
             LOG_S(INFO) << "----------------";
             LOG_S(INFO) << "options" << endl;
@@ -767,6 +888,11 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
+        /*!
+         *
+         * @param progname
+         * @return
+         */
         const char *getprogname(const char *progname) {
             const char *name = progname;
             while (*progname != 0) {
@@ -780,6 +906,15 @@ namespace mlutil {
             return name;
         };
 
+        /*!
+         *
+         * @param output
+         * @param plot
+         * @param units
+         * @param name
+         * @param resource
+         * @param entries
+         */
         void doPlot(string output, string plot, string units, string name, string resource, const Value &entries) {
 
             //Gnuplot::set_terminal_std("dumb");

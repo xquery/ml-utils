@@ -1,3 +1,19 @@
+/*
+ * Copyright 2017 James Fuller
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <cstring>
 #include <string>
 #include <vector>
@@ -23,6 +39,12 @@ namespace mlutil {
         //std::cout << "history destructor called\n";
     };
 
+    /*!
+     *
+     * @param n_opts
+     * @param opts
+     * @return
+     */
     CommandLineArgs History::options(int n_opts, char *opts[]) {
         CommandLineArgs args;
 
@@ -73,6 +95,11 @@ namespace mlutil {
         return args;
     }
 
+    /*!
+     *
+     * @param progname
+     * @return
+     */
     int History::usage(const char *progname) {
         const char *name = getprogname(progname);
         cerr << "ml-utils: ml-hist 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"

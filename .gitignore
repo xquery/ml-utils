@@ -40,3 +40,9 @@ CTestTestfile.cmake
 Testing
 cmake-build-debug
 .idea
+
+gnuplot*
+googletest*
+loguru*
+rapidjson*
+

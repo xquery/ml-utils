@@ -5,6 +5,18 @@
     <excludeRoots>
       <file path="$PROJECT_DIR$/CMakeFiles" />
       <file path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles" />
+      <file path="$PROJECT_DIR$/gnuplot-cpp-build" />
+      <file path="$PROJECT_DIR$/gnuplot-cpp-download" />
+      <file path="$PROJECT_DIR$/gnuplot-cpp-src" />
+      <file path="$PROJECT_DIR$/googletest-build" />
+      <file path="$PROJECT_DIR$/googletest-download" />
+      <file path="$PROJECT_DIR$/googletest-src" />
+      <file path="$PROJECT_DIR$/loguru-build" />
+      <file path="$PROJECT_DIR$/loguru-download" />
+      <file path="$PROJECT_DIR$/loguru-src" />
+      <file path="$PROJECT_DIR$/rapidjson-build" />
+      <file path="$PROJECT_DIR$/rapidjson-download" />
+      <file path="$PROJECT_DIR$/rapidjson-src" />
     </excludeRoots>
   </component>
 </project>
