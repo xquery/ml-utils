@@ -28,13 +28,19 @@
 
 namespace mlutil {
 
+    /* Load::Load
+     *
+     */
     Load::Load() {//std::cout << "load constructor called\n";
     };
 
+    /* Load::~Load
+     *
+     */
     Load::~Load() {//std::cout << "load destructor called\n";
     };
 
-    /*!
+    /*! Load::options
      *
      * @param n_opts
      * @param opts
@@ -71,7 +77,7 @@ namespace mlutil {
         return args;
     }
 
-    /*!
+    /*! Load::usage
      *
      * @param progname
      * @return

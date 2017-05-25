@@ -31,15 +31,21 @@ using namespace std;
 
 namespace mlutil {
 
+    /* History::History
+     *
+     */
     History::History() {
         //std::cout << "history constructor called\n";
     };
 
+    /* History::~History
+     *
+     */
     History::~History() {
         //std::cout << "history destructor called\n";
     };
 
-    /*!
+    /*! History::options
      *
      * @param n_opts
      * @param opts
@@ -95,7 +101,7 @@ namespace mlutil {
         return args;
     }
 
-    /*!
+    /*! History::usage
      *
      * @param progname
      * @return

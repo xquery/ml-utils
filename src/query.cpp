@@ -28,13 +28,19 @@
 
 namespace mlutil {
 
+    /* Query::Query
+     *
+     */
     Query::Query() {
     };
 
+    /* Query::~Query
+     *
+     */
     Query::~Query() {
     };
 
-    /*!
+    /*! Query::options
      *
      * @param n_opts
      * @param opts
@@ -79,7 +85,7 @@ namespace mlutil {
         return args;
     }
 
-    /*!
+    /*! Query::usage
      *
      * @param progname
      * @return

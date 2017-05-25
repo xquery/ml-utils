@@ -28,13 +28,19 @@
 
 namespace mlutil {
 
+    /* Log::Log
+     *
+     */
     Log::Log() {
     };
 
+    /* Log::~Log
+     *
+     */
     Log::~Log() {
     };
 
-    /*!
+    /*! Log::options
      *
      * @param n_opts
      * @param opts
@@ -86,7 +92,7 @@ namespace mlutil {
         return args;
     }
 
-    /*!
+    /*! Log::usage
      *
      * @param progname
      * @return

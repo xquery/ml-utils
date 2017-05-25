@@ -28,15 +28,21 @@
 
 namespace mlutil {
 
+    /* Status::Status
+     *
+     */
     Status::Status() {
         //std::cout << "status constructor called\n";
     };
 
+    /* Status::~Status
+     *
+     */
     Status::~Status() {
         //std::cout << "status destructor called\n";
     };
 
-    /*!
+    /*! Status::options
      *
      * @param n_opts
      * @param opts
@@ -75,7 +81,7 @@ namespace mlutil {
         return args;
     }
 
-    /*!
+    /*! Status::usage
      *
      * @param progname
      * @return

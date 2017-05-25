@@ -112,7 +112,7 @@ namespace mlutil {
         bool quiet, verbose, raw;
     };
 
-// interface for commands
+    // interface for commands
     class Command {
     private:
         Config config;
@@ -124,7 +124,7 @@ namespace mlutil {
     public:
         string url;
 
-        /*!
+        /*! Command
          *
          */
         Command() {
@@ -157,7 +157,7 @@ namespace mlutil {
             setheaders();
         };
 
-        /*!
+        /*! ~Command
          *
          */
         virtual ~Command() {
@@ -189,7 +189,7 @@ namespace mlutil {
             this->config = config;
         }
 
-        /*!
+        /*! checkConfig
          *
          * @return
          */
@@ -208,7 +208,7 @@ namespace mlutil {
             }
         }
 
-        /*!
+        /*! setResourceUrl
          *
          * @param port
          * @param root
@@ -221,7 +221,7 @@ namespace mlutil {
             url = config.protocol + "://" + config.host + ":" + port + root + "/" + resource + "";
         }
 
-        /*!
+        /*! setLoadUrl
          *
          * @param port
          * @param root
@@ -242,7 +242,7 @@ namespace mlutil {
             }
         }
 
-        /*!
+        /*! setLogUrl
          *
          * @param port
          * @param root
@@ -285,7 +285,7 @@ namespace mlutil {
             }
         }
 
-        /*!
+        /*! setUrl
          *
          * @param port
          * @param root
@@ -367,7 +367,7 @@ namespace mlutil {
             }
         }
 
-        /*!
+        /*! setQueryUrl
          *
          * @param port
          * @param root
@@ -387,7 +387,7 @@ namespace mlutil {
             }
         };
 
-        /*!
+        /*! setheaders
          *
          */
         void setheaders() {
@@ -398,7 +398,7 @@ namespace mlutil {
             headers = curl_slist_append(headers, "Accept: application/x-www-form-urlencoded");
         };
 
-        /*!
+        /*! log_trace
          *
          * @param handle
          * @param type
@@ -448,7 +448,7 @@ namespace mlutil {
             }
         }
 
-        /*!
+        /*! execute
          *
          * @return
          */
@@ -503,7 +503,7 @@ namespace mlutil {
 
         };
 
-        /*!
+        /*! WriteCallback
          *
          * @param contents
          * @param size
@@ -516,7 +516,7 @@ namespace mlutil {
             return size * nmemb;
         }
 
-        /*!
+        /*! executeQueryPost
          *
          * @param type
          * @param query
@@ -582,7 +582,7 @@ namespace mlutil {
 
         };
 
-        /*!
+        /*! executeLoadPost
          *
          * @param file
          * @param body
@@ -642,7 +642,7 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
-        /*!
+        /*! executeResourcePost
          *
          * @param body
          * @param format
@@ -710,7 +710,7 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
-        /*!
+        /*! executeResourcePut
          *
          * @param body
          * @param format
@@ -779,7 +779,7 @@ namespace mlutil {
 
         };
 
-        /*!
+        /*! executeInstallPost
          *
          * @param filename
          * @param format
@@ -853,7 +853,7 @@ namespace mlutil {
 
         };
 
-        /*!
+        /*! displayargs
          *
          * @return
          */
@@ -888,7 +888,7 @@ namespace mlutil {
             return EXIT_SUCCESS;
         };
 
-        /*!
+        /*! getprogname
          *
          * @param progname
          * @return
@@ -906,7 +906,7 @@ namespace mlutil {
             return name;
         };
 
-        /*!
+        /*! doPlot
          *
          * @param output
          * @param plot

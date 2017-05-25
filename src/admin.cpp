@@ -29,24 +29,24 @@
 
 namespace mlutil {
 
-/*!
- *
- */
+    /*!
+     *
+     */
     Admin::Admin() {
     };
 
-/*!
- *
- */
+    /*!
+     *
+     */
     Admin::~Admin() {
     };
 
-/*!
- *
- * @param n_opts
- * @param opts
- * @return
- */
+    /*! Admin::options
+     *
+     * @param n_opts
+     * @param opts
+     * @return
+     */
     CommandLineArgs Admin::options(int n_opts, char *opts[]) {
         CommandLineArgs args;
 
@@ -103,11 +103,11 @@ namespace mlutil {
         return args;
     }
 
-/*!
- *
- * @param progname
- * @return
- */
+    /*! Admin::usage
+     *
+     * @param progname
+     * @return
+     */
     int Admin::usage(const char *progname) {
         const char *name = getprogname(progname);
         cerr << "ml-utils: ml-config 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
@@ -124,13 +124,13 @@ namespace mlutil {
         return EXIT_SUCCESS;
     }
 
-/*!
- *
- * @param admin
- * @param config
- * @param path
- * @return
- */
+    /*! Admin::walkInstallConfig
+     *
+     * @param admin
+     * @param config
+     * @param path
+     * @return
+     */
     int Admin::walkInstallConfig(Admin admin, Config config, string path) {
         DIR *dir;
         struct dirent *ent;

@@ -28,21 +28,21 @@
 
 namespace mlutil {
 
-    /*!
+    /*! Browse::Browse
      *
      */
     Browse::Browse() {
         //std::cout << "status constructor called\n";
     };
 
-    /*!
+    /*! BRowse::~Browse
      *
      */
     Browse::~Browse() {
         //std::cout << "status destructor called\n";
     };
 
-    /*!
+    /*! Browse::options
      *
      * @param n_opts
      * @param opts
@@ -81,11 +81,11 @@ namespace mlutil {
         return args;
     }
 
-/*!
- *
- * @param progname
- * @return
- */
+    /*! Browse::usagee
+     *
+     * @param progname
+     * @return
+     */
     int Browse::usage(const char *progname) {
         const char *name = getprogname(progname);
         cerr << "ml-utils: ml-browse 1.0 | copyright (c)2015 Jim Fuller | see https://github.com/xquery/ml-utils\n"
