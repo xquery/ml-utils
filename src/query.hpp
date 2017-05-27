@@ -48,5 +48,9 @@ namespace mlutil {
         virtual CommandLineArgs options(int n_opts, char *opts[]);
 
         virtual int usage(const char *progname);
+
+        virtual void setQueryUrl(string port, string root, string path, string view);
+
+        virtual int executeQueryPost(string type, string query);
     };
 }

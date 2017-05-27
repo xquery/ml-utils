@@ -50,5 +50,11 @@ namespace mlutil {
         virtual int usage(const char *progname);
 
         virtual int walkInstallConfig(Admin admin, Config config, string path);
+
+        virtual int executeResourcePut(string body, string format);
+
+        virtual int executeResourcePost(string body, string format);
+
+        virtual int executeInstallPost(string filename, string format);
     };
 }

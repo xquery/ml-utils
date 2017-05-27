@@ -48,5 +48,9 @@ namespace mlutil {
         virtual CommandLineArgs options(int n_opts, char *opts[]);
 
         virtual int usage(const char *progname);
+
+        virtual void setLoadUrl(string port, string root, string uri);
+
+        virtual int executeLoadPost(const char *file, string body);
     };
 }

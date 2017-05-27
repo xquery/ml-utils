@@ -113,4 +113,48 @@ namespace mlutil {
              << "    -q    : quiet (suppress banner)" << endl;
         return EXIT_SUCCESS;
     }
+
+
+    /*! setLogUrl
+     *
+     * @param port
+     * @param root
+     * @param filename
+     * @param start
+     * @param end
+     * @param regex
+     * @param host
+     * @param format
+     */
+     void Log::setLogUrl(string port,
+                           string root,
+                           string filename,
+                           string start,
+                           string end,
+                           string regex,
+                           string host,
+                           string format) {
+        checkConfig();
+
+        url = config.protocol + "://" + config.host + ":" + port + root + "?";
+        if (!filename.empty()) {
+            url += "filename=" + filename;
+        }
+        if (!start.empty()) {
+            url += "&start=" + start;
+        }
+        if (!end.empty()) {
+            url += "&end=" + end;
+        }
+        if (!regex.empty()) {
+            url += "&regex=" + regex;
+        }
+        if (!host.empty()) {
+            url += "&host=" + host;
+        }
+        //string format = current.format;
+        if (format != "") {
+            url += "&format=" + format;
+        }
+    }
 }

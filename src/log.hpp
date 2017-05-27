@@ -48,5 +48,9 @@ namespace mlutil {
         virtual CommandLineArgs options(int n_opts, char *opts[]);
 
         virtual int usage(const char *progname);
+
+        virtual void setLogUrl(string port, string root, string filename,
+                            string start, string end, string regex,
+                            string host, string format);
     };
 }
