@@ -132,33 +132,11 @@ namespace mlutil {
      */
      int Query::executeQueryPost(string type, string query) {
 
-        CURLM *curlm;
         int handle_count;
-        curlm = curl_multi_init();
-
-        CURL *curl1 = NULL;
-        curl1 = curl_easy_init();
-
-        curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+        setCurlOpts();
 
         if (curl1) {
-            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
-
-            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
-            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
-
-            if (current.verbose) {
-                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
-            } else {
-                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
-            }
-
-            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
-            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
-            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
-
-            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            //curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
 
             char *data = curl_easy_escape(curl1, query.c_str(), strlen(query.c_str()));
@@ -170,7 +148,6 @@ namespace mlutil {
             curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
             curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
 
-            curl_multi_add_handle(curlm, curl1);
             CURLMcode code;
             while (1) {
                 code = curl_multi_perform(curlm, &handle_count);
@@ -183,8 +160,6 @@ namespace mlutil {
             }
             //std::cout << readBuffer << std::endl;
         }
-
-        curl_global_cleanup();
 
         return EXIT_SUCCESS;
 

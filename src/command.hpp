@@ -121,14 +121,17 @@ namespace mlutil {
         Config config;
         struct curl_slist *headers = NULL;
         string readBuffer;
+        CURLM *curlm;
+        CURL *curl1 = NULL;
+        string url;
 
     public:
-        string url;
 
         /*! Command
          *
          */
         Command() {
+
             // set defaults
             loadConfig(config, current.config);
             if (config.user.empty()) {
@@ -155,17 +158,47 @@ namespace mlutil {
             if (config.mllog.empty()) {
                 config.mllog = current.cmllog;
             }
-            setheaders();
+
+            setCurlOpts();
         };
 
         /*! ~Command
          *
          */
         virtual ~Command() {
+            curl_global_cleanup();
             //std::cout << "Default destructor called\n";
         };
 
         virtual int usage(const char *progname) =0;
+
+        virtual void setCurlOpts(){
+            setheaders();
+
+            curlm = curl_multi_init();
+            curl1 = curl_easy_init();
+            curl_multi_add_handle(curlm, curl1);
+
+            curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+            curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+
+            if (current.verbose) {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+            } else {
+                curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+            }
+
+            curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
+            curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+
+            curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
+            curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
+
+        };
 
         virtual CommandLineArgs options(int n_opts, char *opts[]) = 0;
 
@@ -371,7 +404,6 @@ namespace mlutil {
          */
         virtual int execute() {
 
-            CURLM *curlm;
             int handle_count;
             curlm = curl_multi_init();
             curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
