@@ -277,7 +277,7 @@ namespace mlutil {
         } else {
             curl_slist_append(headers, "Content-Type: application/json");
         }
-        setCurlOpts();
+        initCurl();
 
         if (curl1) {
 
@@ -330,14 +330,12 @@ namespace mlutil {
             headers = curl_slist_append(headers, "Content-Type: application/json");
         }
 
-        setCurlOpts();
+        initCurl();
 
         if (curl1) {
             curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, body.c_str());
             curl_easy_setopt(curl1, CURLOPT_POST, 1L);
-
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
-
             curl_multi_add_handle(curlm, curl1);
             CURLMcode code;
             while (1) {

@@ -39,19 +39,19 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        History history;
-        history.setCurrentArgs(history.options(argc, argv));
-        CommandLineArgs current = history.getCurrentArgs();
-        Config config = history.getConfig();
+        History *pHistory = new History();
+        pHistory->setCurrentArgs(pHistory->options(argc, argv));
+        CommandLineArgs current = pHistory->getCurrentArgs();
+        Config config = pHistory->getConfig();
 
         if (current.verbose) {
-            history.displayargs();
-            history.displayconfig();
+            pHistory->displayargs();
+            pHistory->displayconfig();
         }
-        history.setUrl(config.port, config.path, current.resource, "metrics");
-        history.execute();
+        pHistory->setUrl(config.port, config.path, current.resource, "metrics");
+        pHistory->execute();
 
-        string result = history.getReadBuffer();
+        string result = pHistory->getReadBuffer();
 
         string graph_prefix = "graph";
         string output = current.output;
@@ -71,30 +71,32 @@ int main(int argc, char *argv[]) {
                 units = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["units"].GetString();
                 name = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["name"].GetString();
                 const Value &entries = doc[res.c_str()]["metrics-relations"]["database-metrics-list"]["metrics"][0]["master"][0][current.metric]["summary"]["data"]["entry"];
-                history.doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+                pHistory->doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
             } else if (resource.find(string("servers")) != std::string::npos) {
                 res = "server-metrics-list";
                 units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
                 name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
                 const Value &entries = doc[res.c_str()]["metrics-relations"]["server-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-                history.doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+                pHistory->doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
             } else if (resource.find(string("forests")) != std::string::npos) {
                 res = "forest-metrics-list";
                 units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
                 name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
                 const Value &entries = doc[res.c_str()]["metrics-relations"]["forest-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-                history.doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+                pHistory->doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
             } else if (resource.find(string("hosts")) != std::string::npos) {
                 res = "host-metrics-list";
                 units = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["units"].GetString();
                 name = doc[res.c_str()]["metrics-relations"][res.c_str()]["metrics"][0][current.metric]["name"].GetString();
                 const Value &entries = doc[res.c_str()]["metrics-relations"]["host-metrics-list"]["metrics"][0][current.metric]["summary"]["data"]["entry"];
-                history.doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
+                pHistory->doPlot(output, current.gnuplot, units, name, string(current.resource), entries);
             }
         }
 
         if (!current.quiet) {
             if (strcmp(current.output, "csv") == 0) {
+                LOG_S(INFO) << "output csv ";
+
                 Document doc;
                 doc.Parse(result.c_str());
                 string metricslist = "-metrics-list";
@@ -115,11 +117,14 @@ int main(int argc, char *argv[]) {
                     cout << entry["value"].GetDouble() << endl;
                 }
             } else if (strcmp(current.format, "json") == 0) {
+                LOG_S(INFO) << "output json";
                 cout << result << endl;
             } else {
+                LOG_S(INFO) << "output xml";
                 cout << result << endl;
             }
         }
+    delete pHistory;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-hist.";
         return EXIT_FAILURE;

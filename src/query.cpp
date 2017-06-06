@@ -133,18 +133,15 @@ namespace mlutil {
      int Query::executeQueryPost(string type, string query) {
 
         int handle_count;
-        setCurlOpts();
+        initCurl();
 
         if (curl1) {
-            //curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
-
             char *data = curl_easy_escape(curl1, query.c_str(), strlen(query.c_str()));
             string xquery = type + "=" + data;
             curl_easy_setopt(curl1, CURLOPT_POST, 1);
             curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, xquery.c_str());
             curl_easy_setopt(curl1, CURLOPT_NOPROGRESS, 1L);
-
             curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, WriteCallback);
             curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
 
@@ -160,9 +157,6 @@ namespace mlutil {
             }
             //std::cout << readBuffer << std::endl;
         }
-
         return EXIT_SUCCESS;
-
     };
-
 }

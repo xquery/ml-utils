@@ -32,12 +32,19 @@
 #include <vector>
 #include <map>
 #include <cassert>
+#include<dirent.h>
 
 #include "command.hpp"
 
 using namespace std;
 
 namespace mlutil {
+
+    DIR *getDir(string dirname){
+        DIR *dir;
+        dir=opendir (dirname.c_str());
+        return dir;
+    };
 
     class Load : public Command {
     public:
@@ -51,6 +58,10 @@ namespace mlutil {
 
         virtual void setLoadUrl(string port, string root, string uri);
 
-        virtual int executeLoadPost(const char *file, string body);
+        virtual int executeLoadPost(string dirname,string uri);
+
+        virtual int executeLoad(string dirname);
+
+        void* postOneFile(CURLM *cm, int i, vector<string> *v);
     };
 }

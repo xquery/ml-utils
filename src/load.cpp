@@ -23,8 +23,12 @@
 #include <sstream>
 #include <stdexcept>
 #include <map>
-
+#include <stdio.h>
+#include <pthread.h>
+#include<dirent.h>
 #include "load.hpp"
+
+#define MAX 20
 
 namespace mlutil {
 
@@ -32,12 +36,14 @@ namespace mlutil {
      *
      */
     Load::Load() {//std::cout << "load constructor called\n";
+        LOG_S(INFO) << "load constructor called";
     };
 
     /* Load::~Load
      *
      */
     Load::~Load() {//std::cout << "load destructor called\n";
+        LOG_S(INFO) << "load destructor called";
     };
 
     /*! Load::options
@@ -122,18 +128,15 @@ namespace mlutil {
      * @param body
      * @return
      */
-     int Load::executeLoadPost(const char *file, string body) {
+      int Load::executeLoadPost(string filename,string uri) {
 
         FILE *fd;
-
-        fd = fopen(file, "rb"); /* open file to upload */
+        fd = fopen(filename.c_str(), "rb");
+        string url = "http://node1:8000/v1/documents?uri="+uri;
 
         int handle_count;
 
-        setCurlOpts();
-
         if (curl1) {
-
             curl_easy_setopt(curl1, CURLOPT_URL, url.c_str());
             curl_easy_setopt(curl1, CURLOPT_UPLOAD, 1L);
             curl_easy_setopt(curl1, CURLOPT_READDATA, fd);
@@ -147,7 +150,109 @@ namespace mlutil {
                     break;
                 }
             }
+
         }
+        return EXIT_SUCCESS;
+    };
+
+    void* Load::postOneFile(CURLM *cm, int i, vector<string> *v)
+    {
+        CURL *eh = curl_easy_init(); //curl_easy_duphandle(curl1);
+        FILE *fd;
+        fd = fopen(v->at(i).c_str(), "rb");
+        string url = "http://node1:8000/v1/documents?uri="+v->at(i);
+
+        curl_easy_setopt(eh, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+        curl_easy_setopt(eh, CURLOPT_USERNAME, "admin");
+        curl_easy_setopt(eh, CURLOPT_PASSWORD, "admin");
+
+        curl_easy_setopt(eh, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(eh, CURLOPT_UPLOAD, 1L);
+        curl_easy_setopt(eh, CURLOPT_READDATA, fd);
+        curl_easy_setopt(eh, CURLOPT_NOPROGRESS, 1L);
+        curl_multi_add_handle(cm, eh);
+    }
+
+    int Load::executeLoad(string dirname) {
+        struct dirent *ent;
+        vector<string> v;
+
+        DIR *dir = getDir(dirname.c_str());
+
+        while ((ent = readdir (dir)) != NULL) {
+            string filename = ent->d_name;
+            v.push_back(dirname +"/"+ filename);
+        }
+        v.erase(v.begin());
+        v.erase(v.begin() + 1);
+        closedir (dir);
+
+        cout << "uploading #" << v.size() << "documents: " << endl;
+
+        long L;
+        unsigned int C=0;
+        int M, Q, U = -1;
+        fd_set R, W, E;
+        struct timeval T;
+
+        //curl_multi_setopt(cm, CURLMOPT_MAXCONNECTS, (long)MAX);
+        //curl_multi_setopt(cm, CURLMOPT_MAX_TOTAL_CONNECTIONS, 10L);
+
+        // setup
+        for(C = 0; C < v.size(); ++C) {
+            postOneFile(cm, C, &v);
+        }
+
+        while(U) {
+            curl_multi_perform(cm, &U);
+            if(U) {
+                FD_ZERO(&R);
+                FD_ZERO(&W);
+                FD_ZERO(&E);
+
+                if(curl_multi_fdset(cm, &R, &W, &E, &M)) {
+                    fprintf(stderr, "E: curl_multi_fdset\n");
+                    return EXIT_FAILURE;
+                }
+
+                if(curl_multi_timeout(cm, &L)) {
+                    fprintf(stderr, "E: curl_multi_timeout\n");
+                    return EXIT_FAILURE;
+                }
+                if(L == -1)
+                    L = 100;
+
+                if(M == -1) {
+                    sleep((unsigned int)L / 1000);
+                }
+                else {
+                    T.tv_sec = L/1000;
+                    T.tv_usec = (L%1000)*1000;
+
+                    if(0 > select(M+1, &R, &W, &E, &T)) {
+                        fprintf(stderr, "E: select(%i,,,,%li): %i: %s\n",
+                                M+1, L, errno, strerror(errno));
+                        return EXIT_FAILURE;
+                    }
+                }
+            }
+
+            while((msg = curl_multi_info_read(cm, &Q))) {
+                if(msg->msg == CURLMSG_DONE) {
+                    char *url;
+                    CURL *e = msg->easy_handle;
+                    curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &url);
+                    fprintf(stderr, "R: %d - %s <%s>\n",
+                            msg->data.result, curl_easy_strerror(msg->data.result), url);
+                    curl_multi_remove_handle(cm, e);
+                    curl_easy_cleanup(e);
+                }
+                else {
+                    fprintf(stderr, "E: CURLMsg (%d)\n", msg->msg);
+                }
+            }
+        }
+
         return EXIT_SUCCESS;
     };
 }

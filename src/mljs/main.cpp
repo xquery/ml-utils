@@ -35,29 +35,29 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Query query;
-        query.setCurrentArgs(query.options(argc, argv));
-        CommandLineArgs current = query.getCurrentArgs();
-        Config config = query.getConfig();
+        Query *pQuery = new Query();
+        pQuery->setCurrentArgs(pQuery->options(argc, argv));
+        CommandLineArgs current = pQuery->getCurrentArgs();
+        Config config = pQuery->getConfig();
 
         if (current.verbose) {
-            query.displayargs();
-            query.displayconfig();
+            pQuery->displayargs();
+            pQuery->displayconfig();
         }
 
-        query.setQueryUrl(config.port, "/v1/eval", "", "");
+        pQuery->setQueryUrl(config.port, "/v1/eval", "", "");
         if (strcmp(current.js, "") == 0) {
             std::string line, qry;
             while (std::getline(std::cin, line)) {
                 qry.append(line);
             }
-            query.executeQueryPost("javascript", qry);
+            pQuery->executeQueryPost("javascript", qry);
         } else {
-            query.executeQueryPost("javascript", current.js);
+            pQuery->executeQueryPost("javascript", current.js);
         }
 
         if (!current.quiet) {
-            string result = query.getReadBuffer();
+            string result = pQuery->getReadBuffer();
             // count number of lines
             std::stringstream cc(result);
             std::string un;
@@ -67,6 +67,7 @@ int main(int argc, char *argv[]) {
             }
 
             if (strcmp(current.format, "json") == 0) {
+                LOG_S(INFO) << "output json";
                 std::stringstream ss(result);
                 std::string to;
                 if (!result.empty()) {
@@ -79,6 +80,7 @@ int main(int argc, char *argv[]) {
                     }
                 }
             } else {
+                LOG_S(INFO) << "output multipart";
                 std::stringstream ss(result);
                 std::string to;
                 if (!result.empty()) {
@@ -92,6 +94,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+        delete pQuery;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-js.";
         return EXIT_FAILURE;

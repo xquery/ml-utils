@@ -34,15 +34,16 @@ using namespace mlutil;
 
 int main(int argc, char *argv[]) {
     try {
-        Browse browse;
-        browse.setCurrentArgs(browse.options(argc, argv));
-        CommandLineArgs current = browse.getCurrentArgs();
-        Config config = browse.getConfig();
+        Browse *pBrowse= new Browse();
+        pBrowse->setCurrentArgs(pBrowse->options(argc, argv));
+        CommandLineArgs current = pBrowse->getCurrentArgs();
+        Config config = pBrowse->getConfig();
         if (current.verbose) {
-            browse.displayargs();
-            browse.displayconfig();
+            pBrowse->displayargs();
+            pBrowse->displayconfig();
         }
         cout << "not implemented yet" << endl;
+        delete pBrowse;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-browse.";
         return EXIT_FAILURE;

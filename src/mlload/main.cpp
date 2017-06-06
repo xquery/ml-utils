@@ -26,6 +26,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <dirent.h>
 
 #include "../load.cpp"
 
@@ -35,22 +36,36 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Load load;
-        load.setCurrentArgs(load.options(argc, argv));
-        CommandLineArgs current = load.getCurrentArgs();
-        Config config = load.getConfig();
+        Load *pLoad = new Load();
+        pLoad->setCurrentArgs(pLoad->options(argc, argv));
+        CommandLineArgs current = pLoad->getCurrentArgs();
+        Config config = pLoad->getConfig();
         if (current.verbose) {
-            load.displayargs();
-            load.displayconfig();
+            pLoad->displayargs();
+            pLoad->displayconfig();
         }
-        load.setLoadUrl(config.port, "/v1/documents", current.uri);
-        std::string line, body;
+        pLoad->setLoadUrl(config.port, "/v1/documents", current.uri);
         if (!current.filename) {
+            LOG_S(INFO) << "load from stdin single file: "  << current.filename ;
+            std::string line, body;
             while (std::getline(std::cin, line)) {
                 body.append(line);
             }
+        }else{
+            struct stat buffer;
+            string name = current.filename;
+            string uri = current.uri;
+            if (stat (current.filename, &buffer) == 0){
+                pLoad->initCurl();
+                LOG_S(INFO) << "load file: " << current.filename;
+                pLoad->executeLoadPost(name,uri);
+            }else{
+                LOG_S(INFO) << "load directory: " << current.filename;
+                pLoad->executeLoad(name);
+            }
         }
-        load.executeLoadPost(current.filename, body);
+        delete pLoad;
+
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-load.";
         return EXIT_FAILURE;

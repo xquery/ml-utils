@@ -123,7 +123,10 @@ namespace mlutil {
         string readBuffer;
         CURLM *curlm;
         CURL *curl1 = NULL;
+        CURL *curl2 = NULL;
         string url;
+        CURLM *cm;
+        CURLMsg *msg;
 
     public:
 
@@ -131,6 +134,7 @@ namespace mlutil {
          *
          */
         Command() {
+            LOG_S(INFO) << "command constructor called";
 
             // set defaults
             loadConfig(config, current.config);
@@ -159,44 +163,65 @@ namespace mlutil {
                 config.mllog = current.cmllog;
             }
 
-            setCurlOpts();
+            initCurl();
         };
 
         /*! ~Command
          *
          */
         virtual ~Command() {
+            LOG_S(INFO) << "command destructor called";
+            curl_easy_cleanup(curl1);
+            curl_easy_cleanup(curl2);
+            curl_multi_cleanup(curlm);
+            curl_multi_cleanup(cm);
             curl_global_cleanup();
-            //std::cout << "Default destructor called\n";
         };
 
         virtual int usage(const char *progname) =0;
 
-        virtual void setCurlOpts(){
+        virtual void initCurl(){
+
+            curl_global_init(CURL_GLOBAL_ALL);
+
             setheaders();
+
+            cm = curl_multi_init();
 
             curlm = curl_multi_init();
             curl1 = curl_easy_init();
+            curl2 = curl_easy_init();
             curl_multi_add_handle(curlm, curl1);
 
-            curl_multi_setopt(curlm, CURLMOPT_PIPELINING, 0L);
+            curl_multi_setopt(cm, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
+
             curl_easy_setopt(curl1, CURLOPT_USERNAME, config.user.c_str());
             curl_easy_setopt(curl1, CURLOPT_PASSWORD, config.pass.c_str());
+            curl_easy_setopt(curl2, CURLOPT_USERNAME, config.user.c_str());
+            curl_easy_setopt(curl2, CURLOPT_PASSWORD, config.pass.c_str());
 
             if (current.verbose) {
                 curl_easy_setopt(curl1, CURLOPT_VERBOSE, 1L);
+                curl_easy_setopt(curl2, CURLOPT_VERBOSE, 1L);
             } else {
                 curl_easy_setopt(curl1, CURLOPT_VERBOSE, 0L);
+                curl_easy_setopt(curl2, CURLOPT_VERBOSE, 0L);
             }
 
             curl_easy_setopt(curl1, CURLOPT_USERAGENT, "ml-utils via curl");
             curl_easy_setopt(curl1, CURLOPT_FAILONERROR, 1);
+            curl_easy_setopt(curl2, CURLOPT_USERAGENT, "ml-utils via curl");
+            curl_easy_setopt(curl2, CURLOPT_FAILONERROR, 1);
 
             curl_easy_setopt(curl1, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_easy_setopt(curl1, CURLOPT_FOLLOWLOCATION, 1L);
+            curl_easy_setopt(curl2, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_easy_setopt(curl2, CURLOPT_FOLLOWLOCATION, 1L);
 
             curl_easy_setopt(curl1, CURLOPT_HTTPHEADER, headers);
             curl_easy_setopt(curl1, CURLOPT_DEBUGFUNCTION, log_trace);
+            curl_easy_setopt(curl2, CURLOPT_HTTPHEADER, headers);
+            curl_easy_setopt(curl2, CURLOPT_DEBUGFUNCTION, log_trace);
 
         };
 

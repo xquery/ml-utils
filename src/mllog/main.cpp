@@ -35,24 +35,25 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Log log;
-        log.setCurrentArgs(log.options(argc, argv));
-        CommandLineArgs current = log.getCurrentArgs();
-        Config config = log.getConfig();
+        Log *pLog = new Log();
+        pLog->setCurrentArgs(pLog->options(argc, argv));
+        CommandLineArgs current = pLog->getCurrentArgs();
+        Config config = pLog->getConfig();
 
         if (current.verbose) {
-            log.displayargs();
-            log.displayconfig();
+            pLog->displayargs();
+            pLog->displayconfig();
         }
 
-        log.setUrl(config.port, config.path + "/logs", "", "");
-        log.setLogUrl(config.port, config.path + "/logs", current.name, current.start, current.end, current.regex,
+        pLog->setUrl(config.port, config.path + "/logs", "", "");
+        pLog->setLogUrl(config.port, config.path + "/logs", current.name, current.start, current.end, current.regex,
                       current.host, "text");
-        log.execute();
+        pLog->execute();
 
         if (!current.quiet) {
-            cout << log.getReadBuffer() << endl;
+            cout << pLog->getReadBuffer() << endl;
         }
+        delete pLog;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-log.";
         return EXIT_FAILURE;

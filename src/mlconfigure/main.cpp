@@ -35,27 +35,28 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Admin admin;
-        admin.setCurrentArgs(admin.options(argc, argv));
-        CommandLineArgs current = admin.getCurrentArgs();
-        Config config = admin.getConfig();
+        Admin *pAdmin = new Admin();
+        pAdmin->setCurrentArgs(pAdmin->options(argc, argv));
+        CommandLineArgs current = pAdmin->getCurrentArgs();
+        Config config = pAdmin->getConfig();
         if (current.verbose) {
-            admin.displayargs();
-            admin.displayconfig();
+            pAdmin->displayargs();
+            pAdmin->displayconfig();
         }
         string command = current.command;
         string resource = current.resource;
         string name = current.name;
+        LOG_S(INFO) << "perform " << command;
         if (!command.empty()) {
             if (command == "restart") {
-                admin.setResourceUrl(config.port, config.path, "");
-                admin.executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
+                pAdmin->setResourceUrl(config.port, config.path, "");
+                pAdmin->executeResourcePost("{\"operation\":\"restart-local-cluster\"}", "");
             } else if (command == "get") {
-                admin.setUrl(config.port, config.path, current.resource, "default");
-                admin.execute();
+                pAdmin->setUrl(config.port, config.path, current.resource, "default");
+                pAdmin->execute();
             } else if (command == "get-properties") {
-                admin.setUrl(config.port, config.path, resource + "/properties", "default");
-                admin.execute();
+                pAdmin->setUrl(config.port, config.path, resource + "/properties", "default");
+                pAdmin->execute();
             } else if (command == "create") {
                 string line, body;
                 if (name.empty()) {
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]) {
                         body.append(line);
                     }
                 }
-                admin.setResourceUrl(config.port, config.path, resource);
+                pAdmin->setResourceUrl(config.port, config.path, resource);
                 if (body.empty()) {
                     string payload;
                     if (resource == "forests") {
@@ -75,30 +76,33 @@ int main(int argc, char *argv[]) {
                     } else if (resource == "groups") {
                         payload = "{\"group-name\":\"" + name + "\"}";
                     }
-                    admin.executeResourcePost(payload, resource);
+                    pAdmin->executeResourcePost(payload, resource);
                 } else {
-                    admin.executeResourcePost(body, resource);
+                    pAdmin->executeResourcePost(body, resource);
                 }
             } else if (command == "update") {
+                LOG_S(INFO) << "perform update";
                 string line, body;
                 while (getline(std::cin, line)) {
                     body.append(line);
                 }
-                admin.setResourceUrl(config.port, config.path, resource + "/properties");
-                admin.executeResourcePut(body, resource);
+                pAdmin->setResourceUrl(config.port, config.path, resource + "/properties");
+                pAdmin->executeResourcePut(body, resource);
             } else if (command == "install" || command == "reinstall") {
                 string path = config.mlconfig;
                 cout << path << endl;
-                admin.walkInstallConfig(admin, config, path);
+                pAdmin->walkInstallConfig(*pAdmin, config, path);
             } else {
                 LOG_S(ERROR) << "invalid command.";
                 return EXIT_FAILURE;
             }
-            cout << admin.getReadBuffer() << endl;
+            cout << pAdmin->getReadBuffer() << endl;
         } else {
             LOG_S(ERROR) << "no command supplied.";
             return EXIT_FAILURE;
         }
+        
+        delete pAdmin;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "problem with ml-config.";
         return EXIT_FAILURE;

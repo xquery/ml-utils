@@ -38,27 +38,30 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Status status;
-        status.setCurrentArgs(status.options(argc, argv));
-        CommandLineArgs current = status.getCurrentArgs();
-        Config config = status.getConfig();
+        Status *pStatus = new Status();
+        pStatus->setCurrentArgs(pStatus->options(argc, argv));
+        CommandLineArgs current = pStatus->getCurrentArgs();
+        Config config = pStatus->getConfig();
 
         if (current.verbose) {
-            status.displayargs();
-            status.displayconfig();
+            pStatus->displayargs();
+            pStatus->displayconfig();
         }
 
-        status.setUrl(config.port, config.path, current.resource, "status");
-        status.execute();
+        pStatus->setUrl(config.port, config.path, current.resource, "pStatus");
+        pStatus->execute();
 
         if (!current.quiet) {
-            string result = status.getReadBuffer();
+            string result = pStatus->getReadBuffer();
             if (strcmp(current.format, "json") == 0) {
+                LOG_S(INFO) << "output json";
                 cout << result << endl;
             } else {
+                LOG_S(INFO) << "output xml";
                 cout << result << endl;
             }
         }
+        delete pStatus;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-status.";
         return EXIT_FAILURE;

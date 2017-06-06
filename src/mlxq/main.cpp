@@ -35,27 +35,27 @@ using namespace mlutil;
 int main(int argc, char *argv[]) {
 
     try {
-        Query query;
-        query.setCurrentArgs(query.options(argc, argv));
-        CommandLineArgs current = query.getCurrentArgs();
-        Config config = query.getConfig();
+        Query *pQuery = new Query();
+        pQuery->setCurrentArgs(pQuery->options(argc, argv));
+        CommandLineArgs current = pQuery->getCurrentArgs();
+        Config config = pQuery->getConfig();
 
         if (current.verbose) {
-            query.displayargs();
-            query.displayconfig();
+            pQuery->displayargs();
+            pQuery->displayconfig();
         }
 
-        query.setQueryUrl(config.port, "/v1/eval", "", "");
+        pQuery->setQueryUrl(config.port, "/v1/eval", "", "");
         if (strcmp(current.xquery, "") == 0) {
             std::string line, qry;
             while (std::getline(std::cin, line)) {
                 qry.append(line);
             }
-            query.executeQueryPost("xquery", qry);
+            pQuery->executeQueryPost("xquery", qry);
         } else {
-            query.executeQueryPost("xquery", current.xquery);
+            pQuery->executeQueryPost("xquery", current.xquery);
         }
-        string result = query.getReadBuffer();
+        string result = pQuery->getReadBuffer();
 
         // count number of lines
         std::stringstream cc(result);
@@ -83,8 +83,10 @@ int main(int argc, char *argv[]) {
             }
         } else {
             if (current.raw) {
+                LOG_S(INFO) << "normal output";
                 cout << result << endl;
             } else {
+                LOG_S(INFO) << "output multipart";
                 std::stringstream ss(result);
                 std::string to;
                 if (!result.empty()) {
@@ -98,6 +100,7 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+        delete pQuery;
     } catch (std::bad_alloc) {
         LOG_S(ERROR) << "Error with ml-xq.";
         return EXIT_FAILURE;
